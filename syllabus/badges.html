@@ -447,6 +447,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-feedback">Getting Feedback</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deadlines">Deadlines</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-badges">Experience badges</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-and-practice-badges">Review and Practice Badges</a></li>
@@ -454,13 +455,16 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-badges">Build Badges</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-work-and-experience-badges-process">Prepare work and Experience Badges Process</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-and-practice-badge">Review and Practice Badge</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-process">Explore Badges</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-process">Build Badges</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community-badges">Community Badges</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logger-action">Logger Action</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-logging">Manual logging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedures">Procedures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-work-and-experience-badges-process">Prepare work and Experience Badges Process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-and-practice-badge">Review and Practice Badge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-process">Explore Badges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-process">Build Badges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#community-badges">Community Badges</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#logger-action">Logger Action</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-logging">Manual logging</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -494,71 +498,12 @@ document.write(`
 <span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
 <span class="c1"># style note: when I wrote this code, it was not all one cell. I merged the cells</span>
 <span class="c1"># for display on the course website, since Python is not the main outcome of this course</span>
+<span class="c1"># import constants from cspt</span>
+<span class="kn">from</span> <span class="nn">cspt</span> <span class="kn">import</span> <span class="n">CourseDates</span>
 
-<span class="c1"># semester settings</span>
-<span class="n">first_day</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">23</span><span class="p">)</span>
-<span class="n">last_day</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">29</span><span class="p">)</span>
+<span class="n">course_dates</span> <span class="o">=</span> <span class="n">CourseDates</span><span class="p">()</span>
 
-
-<span class="c1"># no_class_ranges = [(date(2023,11,23),date(2023,11,26)),</span>
-<span class="c1">#                     (date(2023,11,13)),</span>
-<span class="c1">#                   (date(2023,10,10))]</span>
-<span class="n">no_class_ranges</span> <span class="o">=</span> <span class="p">[(</span><span class="n">date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">27</span><span class="p">),</span><span class="n">date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span>
-                    <span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">))]</span>
-
-
-<span class="n">meeting_days</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># datetime has 0=Monday</span>
-
-<span class="n">penalty_free_end</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">day_off</span><span class="p">(</span><span class="n">cur_date</span><span class="p">,</span><span class="n">skip_range_list</span><span class="o">=</span><span class="n">no_class_ranges</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    is the current date a day off? </span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    cur_date : datetime.date</span>
-<span class="sd">        date to check</span>
-<span class="sd">    skip_range_list : list of datetime.date objects or 2-tuples of datetime.date</span>
-<span class="sd">        dates where there is no class, either single dates or ranges specified by a tuple</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    day_is_off : bool</span>
-<span class="sd">        True if the day is off, False if the day has class</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1"># default to not a day off</span>
-    <span class="n">day_is_off</span><span class="o">=</span><span class="kc">False</span>
-    <span class="c1"># </span>
-    <span class="k">for</span> <span class="n">skip_range</span> <span class="ow">in</span> <span class="n">skip_range_list</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">skip_range</span><span class="p">)</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">:</span>
-            <span class="c1"># if any of the conditions are true that increments and it will never go down, flase=0, true=1</span>
-            <span class="n">day_is_off</span> <span class="o">+=</span>  <span class="n">skip_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">cur_date</span><span class="o">&lt;=</span><span class="n">skip_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">day_is_off</span> <span class="o">+=</span> <span class="n">skip_range</span> <span class="o">==</span> <span class="n">cur_date</span>
-    <span class="c1"># </span>
-    <span class="k">return</span> <span class="n">day_is_off</span>
-
-
-<span class="c1"># enumerate weeks</span>
-
-<span class="n">mtg_delta</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">meeting_days</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">meeting_days</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">week_delta</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-<span class="n">weeks</span> <span class="o">=</span> <span class="mi">14</span>
-
-
-<span class="n">possible</span> <span class="o">=</span> <span class="p">[(</span><span class="n">first_day</span><span class="o">+</span><span class="n">week_delta</span><span class="o">*</span><span class="n">w</span><span class="p">,</span> <span class="n">first_day</span><span class="o">+</span><span class="n">mtg_delta</span><span class="o">+</span><span class="n">week_delta</span><span class="o">*</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">weeks</span><span class="p">)]</span>
-<span class="n">weekly_meetings</span> <span class="o">=</span> <span class="p">[[</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">]</span> <span class="k">for</span> <span class="n">c1</span><span class="p">,</span><span class="n">c2</span> <span class="ow">in</span> <span class="n">possible</span> <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">day_off</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">no_class_ranges</span><span class="p">))]</span>
-<span class="n">meetings</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">weekly_meetings</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">w</span><span class="p">]</span>
-<span class="n">meetings_string</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">meetings</span><span class="p">]</span>
-<span class="n">weekly_meetings</span>
-
-
-<span class="c1"># possible = [(first_day+week_delta*w, first_day+mtg_delta+week_delta*w) for w in range(weeks)]</span>
-<span class="c1"># weekly_meetings = [[c1,c2] for c1,c2 in possible if not(during_sb(c1))]</span>
-<span class="n">meetings</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">weekly_meetings</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">w</span> <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">day_off</span><span class="p">(</span><span class="n">m</span><span class="p">))]</span>
-
+<span class="n">meetings</span> <span class="o">=</span> <span class="n">course_dates</span><span class="o">.</span><span class="n">class_meeting_strings</span>
 
 <span class="c1"># build a table for the dates</span>
 <span class="n">badge_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;experience&#39;</span><span class="p">,</span> <span class="s1">&#39;review&#39;</span><span class="p">,</span> <span class="s1">&#39;practice&#39;</span><span class="p">]</span>
@@ -636,182 +581,93 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2114/3787553076.py:90: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">31</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="n">complete_deadline</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="c1"># mark eligible experience badges</span>
+<span class="ne">---&gt; </span><span class="mi">31</span> <span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;experience&#39;</span><span class="p">][</span><span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">today</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;eligible&#39;</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="c1"># mark targets, cascading from most recent to oldest to not have to check &lt; and &gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;review_target&#39;</span><span class="p">][</span><span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">today</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;active&#39;</span>
 
-df[&quot;col&quot;][row_indexer] = value
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/pandas/core/ops/common.py:76,</span> in <span class="ni">_unpack_zerodim_and_defer.&lt;locals&gt;.new_method</span><span class="nt">(self, other)</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>             <span class="k">return</span> <span class="bp">NotImplemented</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span> <span class="n">other</span> <span class="o">=</span> <span class="n">item_from_zerodim</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">76</span> <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/pandas/core/arraylike.py:52,</span> in <span class="ni">OpsMixin.__le__</span><span class="nt">(self, other)</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="nd">@unpack_zerodim_and_defer</span><span class="p">(</span><span class="s2">&quot;__le__&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">52</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmp_method</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">le</span><span class="p">)</span>
 
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/pandas/core/series.py:6119,</span> in <span class="ni">Series._cmp_method</span><span class="nt">(self, other, op)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6116</span> <span class="n">lvalues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span>
+<span class="g g-Whitespace">   </span><span class="mi">6117</span> <span class="n">rvalues</span> <span class="o">=</span> <span class="n">extract_array</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">extract_numpy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extract_range</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">6119</span> <span class="n">res_values</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">comparison_op</span><span class="p">(</span><span class="n">lvalues</span><span class="p">,</span> <span class="n">rvalues</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6121</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construct_result</span><span class="p">(</span><span class="n">res_values</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">res_name</span><span class="p">)</span>
 
-  badge_target_df[&#39;experience&#39;][badge_target_df[&#39;date&#39;] &lt;= today] = &#39;eligible&#39;
-/tmp/ipykernel_2114/3787553076.py:92: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/pandas/core/ops/array_ops.py:344,</span> in <span class="ni">comparison_op</span><span class="nt">(left, right, op)</span>
+<span class="g g-Whitespace">    </span><span class="mi">341</span>     <span class="k">return</span> <span class="n">invalid_comparison</span><span class="p">(</span><span class="n">lvalues</span><span class="p">,</span> <span class="n">rvalues</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">343</span> <span class="k">elif</span> <span class="n">lvalues</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">object</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rvalues</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">344</span>     <span class="n">res_values</span> <span class="o">=</span> <span class="n">comp_method_OBJECT_ARRAY</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">lvalues</span><span class="p">,</span> <span class="n">rvalues</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">346</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">347</span>     <span class="n">res_values</span> <span class="o">=</span> <span class="n">_na_arithmetic_op</span><span class="p">(</span><span class="n">lvalues</span><span class="p">,</span> <span class="n">rvalues</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">is_cmp</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-df[&quot;col&quot;][row_indexer] = value
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/pandas/core/ops/array_ops.py:129,</span> in <span class="ni">comp_method_OBJECT_ARRAY</span><span class="nt">(op, x, y)</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">libops</span><span class="o">.</span><span class="n">vec_compare</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">op</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">129</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">libops</span><span class="o">.</span><span class="n">scalar_compare</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">y</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span> <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
+<span class="nn">File ops.pyx:107,</span> in <span class="ni">pandas._libs.ops.scalar_compare</span><span class="nt">()</span>
 
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;review_target&#39;][badge_target_df[&#39;date&#39;] &lt;= today] = &#39;active&#39;
-/tmp/ipykernel_2114/3787553076.py:93: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;practice_target&#39;][badge_target_df[&#39;date&#39;] &lt;= today] = &#39;active&#39;
-/tmp/ipykernel_2114/3787553076.py:94: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;review_target&#39;][badge_target_df[&#39;date&#39;]
-/tmp/ipykernel_2114/3787553076.py:96: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;practice_target&#39;][badge_target_df[&#39;date&#39;]
-/tmp/ipykernel_2114/3787553076.py:98: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;review_target&#39;][badge_target_df[&#39;date&#39;]
-/tmp/ipykernel_2114/3787553076.py:100: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;practice_target&#39;][badge_target_df[&#39;date&#39;]
-/tmp/ipykernel_2114/3787553076.py:103: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;review&#39;][badge_target_df[&#39;date&#39;] &lt;= today] = &#39;active&#39;
-/tmp/ipykernel_2114/3787553076.py:104: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;practice&#39;][badge_target_df[&#39;date&#39;] &lt;= today] = &#39;active&#39;
-/tmp/ipykernel_2114/3787553076.py:105: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;review&#39;][badge_target_df[&#39;date&#39;]
-/tmp/ipykernel_2114/3787553076.py:107: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;practice&#39;][badge_target_df[&#39;date&#39;]
-/tmp/ipykernel_2114/3787553076.py:109: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;review&#39;][badge_target_df[&#39;date&#39;]
-/tmp/ipykernel_2114/3787553076.py:111: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;practice&#39;][badge_target_df[&#39;date&#39;]
-/tmp/ipykernel_2114/3787553076.py:113: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;review&#39;][badge_target_df[&#39;date&#39;]
-/tmp/ipykernel_2114/3787553076.py:115: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
-You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
-A typical example is when you are setting values in a column of a DataFrame, like:
-
-df[&quot;col&quot;][row_indexer] = value
-
-Use `df.loc[row_indexer, &quot;col&quot;] = values` instead, to perform the assignment in a single step and ensure this keeps updating the original `df`.
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-  badge_target_df[&#39;practice&#39;][badge_target_df[&#39;date&#39;]
-/tmp/ipykernel_2114/3787553076.py:120: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option(&#39;future.no_silent_downcasting&#39;, True)`
-  badge_target_df_hm = badge_target_df.replace(status_numbers_hm).set_index(&#39;date&#39;)
+<span class="ne">TypeError</span>: &#39;&lt;=&#39; not supported between instances of &#39;str&#39; and &#39;datetime.date&#39;
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Badge Status as of 2024-09-27&#39;)
-</pre></div>
-</div>
-<img alt="../_images/0f1ae295ff86221ac101a4b98f216f440eb7303ea3b6f7106c403d08b75ad87d.png" src="../_images/0f1ae295ff86221ac101a4b98f216f440eb7303ea3b6f7106c403d08b75ad87d.png" />
 </div>
 </div>
 <p><strong>November 5 above will actually be on November 6</strong></p>
+<section id="getting-feedback">
+<h2>Getting Feedback<a class="headerlink" href="#getting-feedback" title="Link to this heading">#</a></h2>
+<p>Who should you request/assign?</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>course item type</p></td>
+<td><p>issue asignee</p></td>
+<td><p>PR reviewer</p></td>
+</tr>
+<tr class="row-even"><td><p>prepare work</p></td>
+<td><p>not required; can be student</p></td>
+<td><p>none requierd; merge to experience branch</p></td>
+</tr>
+<tr class="row-odd"><td><p>experience badge</p></td>
+<td><p>N/A</p></td>
+<td><p>&#64;VioletVex (will be automatic)</p></td>
+</tr>
+<tr class="row-even"><td><p>practice badge</p></td>
+<td><p>not required; can be student</p></td>
+<td><p>&#64;instuctors (will then convert to 1/3 people)</p></td>
+</tr>
+<tr class="row-odd"><td><p>review badge</p></td>
+<td><p>not required; can be student</p></td>
+<td><p>&#64;instuctors (will then convert to 1/3 people)</p></td>
+</tr>
+<tr class="row-even"><td><p>explore badge</p></td>
+<td><p>proposal, assigned to &#64;brownsarahm (also student optionally)</p></td>
+<td><p>&#64;brownsarahm</p></td>
+</tr>
+<tr class="row-odd"><td><p>build badge</p></td>
+<td><p>proposal, assigned to &#64;brownsarahm (also student optionally)</p></td>
+<td><p>&#64;brownsarahm</p></td>
+</tr>
+<tr class="row-even"><td><p>anything merged pre-emptively in penalty free</p></td>
+<td><p>&#64;brownsarahm</p></td>
+<td><p>clear others</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="deadlines">
 <h2>Deadlines<a class="headerlink" href="#deadlines" title="Link to this heading">#</a></h2>
 <!-- Deadlines are flexible in this course so that you can balance your workload across other courses, and instead the **feedback** schedule is fixed.  Weekly feedback hours will be announced and posted. 
@@ -829,8 +685,7 @@ However, leaving all of the work to the end of the semester is not good for you 
 <span id="rp-status"></span><h3>Review and Practice Badges<a class="headerlink" href="#review-and-practice-badges" title="Link to this heading">#</a></h3>
 <p>These badges have 5 stages:</p>
 <ul class="simple">
-<li><p>posted: tasks are on the course website</p></li>
-<li><p>planned: an <a class="reference internal" href="../resources/glossary.html#term-issue"><span class="xref std std-term">issue</span></a> is created</p></li>
+<li><p>posted: tasks are on the course website and an <a class="reference internal" href="../resources/glossary.html#term-issue"><span class="xref std std-term">issue</span></a> is created</p></li>
 <li><p>started: one task is attempted and a draft PR is open</p></li>
 <li><p>completed: all tasks are attempted PR is ready for review, and a review is requested</p></li>
 <li><p>earned: PR is approved (by instructor or a TA) and work is merged</p></li>
@@ -877,8 +732,10 @@ this includes minor corrections relative to the readme in the template provided
 -->
 </section>
 </section>
+<section id="procedures">
+<h2>Procedures<a class="headerlink" href="#procedures" title="Link to this heading">#</a></h2>
 <section id="prepare-work-and-experience-badges-process">
-<span id="prepare-experience-process"></span><h2>Prepare work and Experience Badges Process<a class="headerlink" href="#prepare-work-and-experience-badges-process" title="Link to this heading">#</a></h2>
+<span id="prepare-experience-process"></span><h3>Prepare work and Experience Badges Process<a class="headerlink" href="#prepare-work-and-experience-badges-process" title="Link to this heading">#</a></h3>
 <p>This is for a single example with specific dates, but it is similar for all future dates</p>
 <p>The columns (and purple boxes) correspond to branches in your KWL repo and the yellow boxes are the things that you have to do. The “critical” box is what you have to wait for us on. The arrows represent PRs (or a local merge for the first one)</p>
 <div class="mermaid">
@@ -917,9 +774,10 @@ this includes minor corrections relative to the readme in the template provided
    merge experience-2023-09-12
         </div><p>You can merge the prepare into the experience with a PR or on the command line, your choice.</p>
 <p>Where the “approved” tag represents and approving reivew on the PR.</p>
+<p>You can, once you know how, do this offline and do the merge with in the CLI instead of with a PR.</p>
 </section>
 <section id="review-and-practice-badge">
-<span id="review-practice-process"></span><h2>Review and Practice Badge<a class="headerlink" href="#review-and-practice-badge" title="Link to this heading">#</a></h2>
+<span id="review-practice-process"></span><h3>Review and Practice Badge<a class="headerlink" href="#review-and-practice-badge" title="Link to this heading">#</a></h3>
 <p>Legend:</p>
 <div class="mermaid">
             flowchart TD
@@ -945,7 +803,7 @@ this includes minor corrections relative to the readme in the template provided
       direction TB
       write[/Dr Brown finalizes tasks after class/]
       post[/Dr. Brown pushes to github/]
-      link[/notes are posted  with badge steps/]
+      link[/notes are posted  with badge steps /]
       posted[[Posted: on badge date]]
       write --&gt;post
       post --&gt;link
@@ -957,11 +815,9 @@ this includes minor corrections relative to the readme in the template provided
       decide{Do you need this badge?}
       close[close the issue]
       branch[create branch]
-      planned[[Planned: on badge date]]
       create --&gt;decide
       decide --&gt;|no| close
       decide --&gt;|yes| branch
-    create --o planned
     end
     subgraph work[Work on the badge]
       direction TB
@@ -1010,7 +866,7 @@ style posted fill:#2cf
 style planned fill:#2cf
         </div></section>
 <section id="explore-process">
-<span id="id1"></span><h2>Explore Badges<a class="headerlink" href="#explore-process" title="Link to this heading">#</a></h2>
+<span id="id1"></span><h3>Explore Badges<a class="headerlink" href="#explore-process" title="Link to this heading">#</a></h3>
 <div class="mermaid">
             flowchart TD
     subgraph proposal[Propose the Topic and Product]
@@ -1071,7 +927,7 @@ style earned fill:#2cf
 
         </div></section>
 <section id="build-process">
-<span id="id2"></span><h2>Build Badges<a class="headerlink" href="#build-process" title="Link to this heading">#</a></h2>
+<span id="id2"></span><h3>Build Badges<a class="headerlink" href="#build-process" title="Link to this heading">#</a></h3>
 <div class="mermaid">
             flowchart TD
     subgraph proposal[Propose the Topic and Product]
@@ -1137,7 +993,7 @@ style earned fill:#2cf
 
         </div></section>
 <section id="community-badges">
-<span id="community-process"></span><h2>Community Badges<a class="headerlink" href="#community-badges" title="Link to this heading">#</a></h2>
+<span id="community-process"></span><h3>Community Badges<a class="headerlink" href="#community-badges" title="Link to this heading">#</a></h3>
 <p>You can log them either manualy via files or with help of an action that a past student contributed!</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -1150,11 +1006,11 @@ style earned fill:#2cf
 </div>
 </aside>
 <section id="logger-action">
-<h3>Logger Action<a class="headerlink" href="#logger-action" title="Link to this heading">#</a></h3>
+<h4>Logger Action<a class="headerlink" href="#logger-action" title="Link to this heading">#</a></h4>
 <p>Your KWL repo has an action called “Community &amp; Explore Badge Logger” that will help you</p>
 </section>
 <section id="manual-logging">
-<h3>Manual logging<a class="headerlink" href="#manual-logging" title="Link to this heading">#</a></h3>
+<h4>Manual logging<a class="headerlink" href="#manual-logging" title="Link to this heading">#</a></h4>
 <p>These are the instructions from your <code class="docutils literal notranslate"><span class="pre">community_contributions.md</span></code> file in your KWL repo:
 For each one:</p>
 <ul class="simple">
@@ -1179,6 +1035,7 @@ For each one:</p>
     merge --o earned
 
         </div></section>
+</section>
 </section>
 </section>
 
@@ -1246,6 +1103,7 @@ For each one:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-feedback">Getting Feedback</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deadlines">Deadlines</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-badges">Experience badges</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-and-practice-badges">Review and Practice Badges</a></li>
@@ -1253,13 +1111,16 @@ For each one:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-badges">Build Badges</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-work-and-experience-badges-process">Prepare work and Experience Badges Process</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-and-practice-badge">Review and Practice Badge</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-process">Explore Badges</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-process">Build Badges</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community-badges">Community Badges</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logger-action">Logger Action</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-logging">Manual logging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedures">Procedures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-work-and-experience-badges-process">Prepare work and Experience Badges Process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-and-practice-badge">Review and Practice Badge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-process">Explore Badges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-process">Build Badges</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#community-badges">Community Badges</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#logger-action">Logger Action</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-logging">Manual logging</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
