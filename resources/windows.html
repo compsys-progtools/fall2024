@@ -449,6 +449,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crlf-warning">CRLF Warning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-book-command-not-found-after-installation">Jupyter Book - Command Not Found After Installation</a></li>
 </ul>
             </nav>
         </div>
@@ -475,6 +476,39 @@ characters will make a mess and make the system interpret your code wrong. To he
 git will automatically, for Windows users, convert <code class="docutils literal notranslate"><span class="pre">CRLF</span></code> to <code class="docutils literal notranslate"><span class="pre">LF</span></code> when it adds
 your work to the index (staging area). Then when you push, it’s the compatible version.</p>
 <p><a class="reference external" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#Formatting-and-Whitespace">git documentation of the feature</a></p>
+</section>
+<section id="jupyter-book-command-not-found-after-installation">
+<h2>Jupyter Book - Command Not Found After Installation<a class="headerlink" href="#jupyter-book-command-not-found-after-installation" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Check Python Installation</strong>:<br />
+Run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">--version</span></code>. If it shows a version, continue. If not, install Python.</p></li>
+<li><p><strong>Install Jupyter Book</strong>:<br />
+Ensure Jupyter Book is installed using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span> <span class="pre">jupyter-book</span></code>. If <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">--version</span></code> returns “command not found,” proceed.</p></li>
+<li><p><strong>Check Installation Errors</strong>:<br />
+If there were no errors during installation, skip to Step 4.<br />
+If there were errors with a path (e.g., missing “Scripts” folder), do the following:</p>
+<ul class="simple">
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">Windows</span> <span class="pre">+</span> <span class="pre">R</span></code>, type <code class="docutils literal notranslate"><span class="pre">sysdm.cpl</span></code>, and press Enter.</p></li>
+<li><p>Go to the <strong>Advanced</strong> tab → <strong>Environment Variables</strong>.</p></li>
+<li><p>Add the path containing the “Scripts” folder to the <code class="docutils literal notranslate"><span class="pre">Path</span></code> variable. Save and exit.</p></li>
+<li><p>Reopen Git Bash and try <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">--version</span></code>. If it works, you’re done!</p></li>
+<li><p>If “Access denied” occurs, try <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">jupyter-book</span> <span class="pre">--version</span></code>. Windows Defender may prompt you to unlock the file. After unlocking, try the command again.</p></li>
+</ul>
+</li>
+<li><p><strong>Check Path</strong>:<br />
+Ensure the following path exists:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="p">[</span><span class="n">YOUR</span> <span class="n">USERNAME</span><span class="p">]</span>\<span class="n">AppData</span>\<span class="n">Roaming</span>\<span class="n">Python</span>\<span class="n">Python312</span>\<span class="n">Scripts</span>
+</pre></div>
+</div>
+<p>If it does:</p>
+<ul class="simple">
+<li><p>Repeat the steps for adding this path to the <code class="docutils literal notranslate"><span class="pre">Path</span></code> variable in <strong>Environment Variables</strong>.</p></li>
+<li><p>Reopen Git Bash and check <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">--version</span></code> again.</p></li>
+</ul>
+</li>
+<li><p><strong>Final Troubleshooting</strong>:<br />
+If issues persist, contact your Professor or TA for help! :)</p></li>
+</ol>
 </section>
 </section>
 
@@ -534,6 +568,7 @@ your work to the index (staging area). Then when you push, it’s the compatible
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crlf-warning">CRLF Warning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-book-command-not-found-after-installation">Jupyter Book - Command Not Found After Installation</a></li>
 </ul>
   </nav></div>
 
