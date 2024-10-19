@@ -204,6 +204,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../notes/2024-09-24.html">6. Patterns in git and bash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/2024-09-26.html">7. Why are these tools like this?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-01.html">8. What <em>is</em> a commit?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-03.html">9. How do programmers communicate about code?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-08.html">10. What <em>is</em> git?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-10.html">11. What is a commit number?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-17.html">12. How does git <em>make</em> a commit?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="nav bd-sidenav">
@@ -520,7 +524,7 @@ document.write(`
 <span class="n">complete_deadline</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
 
 <span class="c1"># mark eligible experience badges</span>
-<span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;experience&#39;</span><span class="p">][</span><span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">today</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;eligible&#39;</span>
+<span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;experience&#39;</span><span class="p">][</span><span class="n">date</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">today</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;eligible&#39;</span>
 <span class="c1"># mark targets, cascading from most recent to oldest to not have to check &lt; and &gt;</span>
 <span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;review_target&#39;</span><span class="p">][</span><span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">today</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;active&#39;</span>
 <span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;practice_target&#39;</span><span class="p">][</span><span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">today</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;active&#39;</span>
@@ -588,42 +592,11 @@ document.write(`
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">31</span>
 <span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="n">complete_deadline</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="c1"># mark eligible experience badges</span>
-<span class="ne">---&gt; </span><span class="mi">31</span> <span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;experience&#39;</span><span class="p">][</span><span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">today</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;eligible&#39;</span>
+<span class="ne">---&gt; </span><span class="mi">31</span> <span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;experience&#39;</span><span class="p">][</span><span class="n">date</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">today</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;eligible&#39;</span>
 <span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="c1"># mark targets, cascading from most recent to oldest to not have to check &lt; and &gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;review_target&#39;</span><span class="p">][</span><span class="n">badge_target_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">today</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;active&#39;</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/pandas/core/ops/common.py:76,</span> in <span class="ni">_unpack_zerodim_and_defer.&lt;locals&gt;.new_method</span><span class="nt">(self, other)</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span>             <span class="k">return</span> <span class="bp">NotImplemented</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span> <span class="n">other</span> <span class="o">=</span> <span class="n">item_from_zerodim</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">76</span> <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/pandas/core/arraylike.py:52,</span> in <span class="ni">OpsMixin.__le__</span><span class="nt">(self, other)</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="nd">@unpack_zerodim_and_defer</span><span class="p">(</span><span class="s2">&quot;__le__&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">52</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmp_method</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">le</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/pandas/core/series.py:6119,</span> in <span class="ni">Series._cmp_method</span><span class="nt">(self, other, op)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6116</span> <span class="n">lvalues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span>
-<span class="g g-Whitespace">   </span><span class="mi">6117</span> <span class="n">rvalues</span> <span class="o">=</span> <span class="n">extract_array</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">extract_numpy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extract_range</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">6119</span> <span class="n">res_values</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">comparison_op</span><span class="p">(</span><span class="n">lvalues</span><span class="p">,</span> <span class="n">rvalues</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6121</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construct_result</span><span class="p">(</span><span class="n">res_values</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">res_name</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/pandas/core/ops/array_ops.py:344,</span> in <span class="ni">comparison_op</span><span class="nt">(left, right, op)</span>
-<span class="g g-Whitespace">    </span><span class="mi">341</span>     <span class="k">return</span> <span class="n">invalid_comparison</span><span class="p">(</span><span class="n">lvalues</span><span class="p">,</span> <span class="n">rvalues</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">343</span> <span class="k">elif</span> <span class="n">lvalues</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">object</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rvalues</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">344</span>     <span class="n">res_values</span> <span class="o">=</span> <span class="n">comp_method_OBJECT_ARRAY</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">lvalues</span><span class="p">,</span> <span class="n">rvalues</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">346</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">347</span>     <span class="n">res_values</span> <span class="o">=</span> <span class="n">_na_arithmetic_op</span><span class="p">(</span><span class="n">lvalues</span><span class="p">,</span> <span class="n">rvalues</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">is_cmp</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/pandas/core/ops/array_ops.py:129,</span> in <span class="ni">comp_method_OBJECT_ARRAY</span><span class="nt">(op, x, y)</span>
-<span class="g g-Whitespace">    </span><span class="mi">127</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">libops</span><span class="o">.</span><span class="n">vec_compare</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">op</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">128</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">129</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">libops</span><span class="o">.</span><span class="n">scalar_compare</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">y</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">130</span> <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="nn">File ops.pyx:107,</span> in <span class="ni">pandas._libs.ops.scalar_compare</span><span class="nt">()</span>
-
-<span class="ne">TypeError</span>: &#39;&lt;=&#39; not supported between instances of &#39;str&#39; and &#39;datetime.date&#39;
+<span class="ne">TypeError</span>: fromisoformat: argument must be str
 </pre></div>
 </div>
 </div>
@@ -1162,6 +1135,9 @@ By Professor Sarah M Brown
   
   <div class="footer-item">
     
+<div class="extra_footer">
+  made with [jupyterbook](https://jupyterbook.org/en/stable/intro.html)
+</div>
   </div>
   
 </div>

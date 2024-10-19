@@ -204,6 +204,10 @@
 <li class="toctree-l1"><a class="reference internal" href="2024-09-24.html">6. Patterns in git and bash</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Why are these tools like this?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2024-10-01.html">8. What <em>is</em> a commit?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-03.html">9. How do programmers communicate about code?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-08.html">10. What <em>is</em> git?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-10.html">11. What is a commit number?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-17.html">12. How does git <em>make</em> a commit?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="nav bd-sidenav">
@@ -450,15 +454,18 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">7.1. Discussion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-we-study-design">7.2. Why should we study design?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-we-studying-developer-tools">7.3. Why are we studying developer tools?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unix-philosophy">7.4. Unix Philosophy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#philosophy-in-practice-using-pipes">7.5. Philosophy in practice, using pipes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-from-source">7.5.1. Installing from source</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-design">7.5.2. Interactive Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design">7.2. Design</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-we-study-design">7.2.1. Why should we study design?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-we-studying-developer-tools">7.2.2. Why are we studying developer tools?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-with-the-pipe">7.6. Now with the pipe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unix-philosophy">7.3. Unix Philosophy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#philosophy-in-practice-using-pipes">7.4. Philosophy in practice, using pipes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-from-source">7.4.1. Installing from source</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-design">7.4.2. Interactive Design</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-with-the-pipe">7.5. Now with the pipe</a></li>
 </ul>
             </nav>
         </div>
@@ -482,6 +489,9 @@ document.write(`
 <li><p>if any, send points you want to share to the whole class</p></li>
 </ul>
 <p>How did the  processes, decisions, and practices that people at your table brought up compare to what you thought of?</p>
+</section>
+<section id="design">
+<h2><span class="section-number">7.2. </span>Design<a class="headerlink" href="#design" title="Link to this heading">#</a></h2>
 <p>In CS we tend to be more implicit about design, but that makes it hard to learn and keep track of.</p>
 <p>Today’s goal is to be more explicit, disucssing some principles and seeing how you have already interacted wit them.</p>
 <p>Today we’re going to do a bit more practical stuff, but we are also going to start to get into the philosophy of how things are organized.</p>
@@ -491,16 +501,15 @@ document.write(`
 <li><p>form reliable hypotheses about how to fix problems you have not seen before</p></li>
 <li><p>help you understand when you should do things as they have always been done and when you should challenge and change things.</p></li>
 </ul>
-</section>
 <section id="why-should-we-study-design">
-<h2><span class="section-number">7.2. </span>Why should we study design?<a class="headerlink" href="#why-should-we-study-design" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">7.2.1. </span>Why should we study design?<a class="headerlink" href="#why-should-we-study-design" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>it is easy to get distracted by implementation, syntax, algorithms</p></li>
 <li><p>but the core <em>principles</em> of design organize ideas into simpler rules</p></li>
 </ul>
 </section>
 <section id="why-are-we-studying-developer-tools">
-<h2><span class="section-number">7.3. </span>Why are we studying developer tools?<a class="headerlink" href="#why-are-we-studying-developer-tools" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">7.2.2. </span>Why are we studying developer tools?<a class="headerlink" href="#why-are-we-studying-developer-tools" title="Link to this heading">#</a></h3>
 <blockquote>
 <div><p>The best way to learn design is to study examples [Schon1984, Petre2016], and some of the best examples of software design come from the tools programmers use in their own work.</p>
 </div></blockquote>
@@ -521,8 +530,9 @@ document.write(`
 <li><p>computing technology has been used in Very Bad ways and in Definitely Good ways</p></li>
 </ul>
 </section>
+</section>
 <section id="unix-philosophy">
-<h2><span class="section-number">7.4. </span>Unix Philosophy<a class="headerlink" href="#unix-philosophy" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.3. </span>Unix Philosophy<a class="headerlink" href="#unix-philosophy" title="Link to this heading">#</a></h2>
 <p>sources:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Unix_philosophy">wiki</a></p></li>
@@ -552,7 +562,7 @@ document.write(`
 </div>
 </section>
 <section id="philosophy-in-practice-using-pipes">
-<h2><span class="section-number">7.5. </span>Philosophy in practice, using pipes<a class="headerlink" href="#philosophy-in-practice-using-pipes" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.4. </span>Philosophy in practice, using pipes<a class="headerlink" href="#philosophy-in-practice-using-pipes" title="Link to this heading">#</a></h2>
 <p>open a codespace on the main branch of your KWL repo</p>
 <p>To check if your <code class="docutils literal notranslate"><span class="pre">gh</span></code> CLI is working:</p>
 <div class="cell tag_skip-execution docutils container">
@@ -723,7 +733,7 @@ document.write(`
 </ul>
 <p>We know that this action is what is used to create badge issues, so this custom code must be what gets information from the course website to get the assignments and prepare them for your badge issues.</p>
 <section id="installing-from-source">
-<h3><span class="section-number">7.5.1. </span>Installing from source<a class="headerlink" href="#installing-from-source" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.4.1. </span>Installing from source<a class="headerlink" href="#installing-from-source" title="Link to this heading">#</a></h3>
 <p>As we saw in the action, we can install python packages from source via git.  let’s install the new version of the code</p>
 <div class="cell tag_skip-execution docutils container">
 <div class="cell_input docutils container">
@@ -908,7 +918,7 @@ the Python library <code class="docutils literal notranslate"><span class="pre">
 </div>
 </section>
 <section id="interactive-design">
-<h3><span class="section-number">7.5.2. </span>Interactive Design<a class="headerlink" href="#interactive-design" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.4.2. </span>Interactive Design<a class="headerlink" href="#interactive-design" title="Link to this heading">#</a></h3>
 <div class="cell tag_skip-execution docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gh</span> <span class="n">issue</span> <span class="n">create</span>
@@ -1005,7 +1015,7 @@ the Python library <code class="docutils literal notranslate"><span class="pre">
 </section>
 </section>
 <section id="now-with-the-pipe">
-<h2><span class="section-number">7.6. </span>Now with the pipe<a class="headerlink" href="#now-with-the-pipe" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.5. </span>Now with the pipe<a class="headerlink" href="#now-with-the-pipe" title="Link to this heading">#</a></h2>
 <div class="cell tag_skip-execution docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cspt</span> <span class="n">getassignment</span> <span class="o">--</span><span class="nb">type</span> <span class="n">prepare</span> <span class="o">--</span><span class="n">date</span> <span class="mi">2024</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">26</span> <span class="o">|</span> <span class="n">gh</span> <span class="n">issue</span> <span class="n">create</span> <span class="o">--</span><span class="n">title</span> <span class="s1">&#39;duplicatee&#39;</span> <span class="o">--</span><span class="n">body</span><span class="o">-</span><span class="n">file</span> <span class="o">-</span>
@@ -1118,18 +1128,15 @@ Review</label><div class="sd-tab-content docutils">
 <li><p>Most real projects partly adhere and at least partly deviate from any major design philosophy or paradigm. Review the open source project you looked at for the <code class="docutils literal notranslate"><span class="pre">software.md</span></code> file from before and decide if it primarily  adheres to or deviates from the unix philosophy. Add a <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">Unix</span> <span class="pre">Philosophy</span> <span class="pre">&lt;Adherance/Deviation&gt;</span></code> section to your <span class="target" id="index-0"></span>software.md, setting the title to indicate your decision and explain your decision in that section (pick one). Provide at least two specific examples supporting your choice, using links to specific lines of code or specific sections in the documentation that support your claims.</p></li>
 </ol>
 </div>
-</div>
-</div>
-<div class="sd-tab-item docutils">
-<p class="sd-tab-label rubric">Practice</p>
-<div class="sd-tab-content docutils">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Practice</label><div class="sd-tab-content docutils">
 <ol class="arabic simple">
 <li><p>Read today’s notes when they are posted. There are imporant tips and explanation to be sure you did and ideas for explore/build badges.</p></li>
 <li><p>Most real projects partly adhere and at least partly deviate from any major design philosophy or paradigm. Add a <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">Unix</span> <span class="pre">Philosophy</span></code> section to your <span class="target" id="index-1"></span>software.md about how that project adheres to and deviates from the unix philosophy. Be specific, using links to specific lines of code or specific sections in the documentation that support your claims. Provide at least one example of both adhering and deviating from the philosophy and three total examples (that is 2 examples for one side and one for the other).  You can see what badge <code class="docutils literal notranslate"><span class="pre">software.md</span></code> was previously assigned in and the original instructions <a class="reference external" href="https://compsys-progtools.github.io/spring2024/genindex.html">on the KWL file list</a>.</p></li>
 </ol>
 </div>
 </div>
-<div class="docutils">
 <h2 class="rubric" id="experience-report-evidence">Experience Report Evidence</h2>
 <h2 class="rubric" id="questions-after-todays-class">Questions After Today’s Class</h2>
 <h3 class="rubric" id="is-there-anything-you-can-do-in-github-that-you-cant-do-locally">Is there anything you can do in Github that you can’t do locally?</h3>
@@ -1222,15 +1229,18 @@ Worst case it gives an error.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">7.1. Discussion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-we-study-design">7.2. Why should we study design?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-we-studying-developer-tools">7.3. Why are we studying developer tools?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unix-philosophy">7.4. Unix Philosophy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#philosophy-in-practice-using-pipes">7.5. Philosophy in practice, using pipes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-from-source">7.5.1. Installing from source</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-design">7.5.2. Interactive Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#design">7.2. Design</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-we-study-design">7.2.1. Why should we study design?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-we-studying-developer-tools">7.2.2. Why are we studying developer tools?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-with-the-pipe">7.6. Now with the pipe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unix-philosophy">7.3. Unix Philosophy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#philosophy-in-practice-using-pipes">7.4. Philosophy in practice, using pipes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-from-source">7.4.1. Installing from source</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-design">7.4.2. Interactive Design</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-with-the-pipe">7.5. Now with the pipe</a></li>
 </ul>
   </nav></div>
 
@@ -1268,6 +1278,9 @@ By Professor Sarah M Brown
   
   <div class="footer-item">
     
+<div class="extra_footer">
+  made with [jupyterbook](https://jupyterbook.org/en/stable/intro.html)
+</div>
   </div>
   
 </div>

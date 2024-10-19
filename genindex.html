@@ -201,6 +201,10 @@
 <li class="toctree-l1"><a class="reference internal" href="notes/2024-09-24.html">6. Patterns in git and bash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/2024-09-26.html">7. Why are these tools like this?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/2024-10-01.html">8. What <em>is</em> a commit?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/2024-10-03.html">9. How do programmers communicate about code?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/2024-10-08.html">10. What <em>is</em> git?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/2024-10-10.html">11. What is a commit number?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/2024-10-17.html">12. How does git <em>make</em> a commit?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="current nav bd-sidenav">
@@ -398,11 +402,14 @@ document.write(`
  | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#X"><strong>X</strong></a>
  | <a href="#Y"><strong>Y</strong></a>
  | <a href="#Z"><strong>Z</strong></a>
  
@@ -454,9 +461,11 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="activities/review.html#index-11">commit-def.md</a>, <a href="activities/review.html#index-9">[1]</a>, <a href="notes/2024-10-01.html#index-1">[2]</a>
 </li>
+      <li><a href="activities/practice.html#index-10">commit-story.md</a>, <a href="activities/practice.html#index-12">[1]</a>, <a href="notes/2024-10-01.html#index-2">[2]</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="activities/practice.html#index-10">commit-story.md</a>, <a href="activities/practice.html#index-12">[1]</a>, <a href="notes/2024-10-01.html#index-2">[2]</a>
+      <li><a href="activities/review.html#index-13">commit_contents.md</a>, <a href="notes/2024-10-08.html#index-2">[1]</a>
 </li>
       <li><a href="resources/glossary.html#term-Compiled-Code"><strong>Compiled Code</strong></a>
 </li>
@@ -480,10 +489,12 @@ document.write(`
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="resources/glossary.html#term-fixed-point-number"><strong>fixed point number</strong></a>
+      <li><a href="activities/review.html#index-12">favorite_git_workflow.md</a>, <a href="notes/2024-10-08.html#index-1">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="resources/glossary.html#term-fixed-point-number"><strong>fixed point number</strong></a>
+</li>
       <li><a href="resources/glossary.html#term-floating-point-number"><strong>floating point number</strong></a>
 </li>
   </ul></td>
@@ -504,19 +515,31 @@ document.write(`
 </li>
       <li><a href="activities/review.html#index-1">gitcommit.md</a>, <a href="activities/review.html#index-3">[1]</a>, <a href="notes/2024-09-12.html#index-1">[2]</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="activities/practice.html#index-1">gitcommit_tips.md</a>, <a href="activities/practice.html#index-3">[1]</a>, <a href="notes/2024-09-12.html#index-3">[2]</a>
 </li>
-      <li><a href="activities/prepare.html#index-1">gitdef.md</a>, <a href="notes/2024-10-03.html#index-0">[1]</a>
+      <li><a href="activities/review.html#index-16">gitcounts.md</a>, <a href="notes/2024-10-10.html#index-2">[1]</a>
+</li>
+      <li><a href="activities/practice.html#index-18">gitcounts_scenarios.md</a>, <a href="notes/2024-10-10.html#index-5">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="activities/prepare.html#index-2">gitdef.md</a>, <a href="notes/2024-10-03.html#index-0">[1]</a>
 </li>
       <li><a href="resources/glossary.html#term-GitHub"><strong>GitHub</strong></a>
+</li>
+      <li><a href="activities/practice.html#index-21">gitislike.md</a>, <a href="notes/2024-10-17.html#index-2">[1]</a>
 </li>
       <li><a href="activities/practice.html#index-11">gitlog-compare.md</a>, <a href="activities/practice.html#index-13">[1]</a>, <a href="activities/practice.html#index-7">[2]</a>, <a href="notes/2024-09-19.html#index-2">[3]</a>, <a href="notes/2024-10-01.html#index-3">[4]</a>
 </li>
       <li><a href="activities/review.html#index-10">gitlog.txt</a>, <a href="activities/review.html#index-8">[1]</a>, <a href="notes/2024-10-01.html#index-0">[2]</a>
 </li>
       <li><a href="activities/practice.html#index-0">gitoffline.md</a>, <a href="activities/practice.html#index-2">[1]</a>, <a href="activities/review.html#index-0">[2]</a>, <a href="activities/review.html#index-2">[3]</a>, <a href="notes/2024-09-12.html#index-0">[4]</a>, <a href="notes/2024-09-12.html#index-2">[5]</a>
+</li>
+      <li><a href="activities/practice.html#index-20">gitplumbingdetail.md</a>, <a href="notes/2024-10-17.html#index-1">[1]</a>
+</li>
+      <li><a href="activities/review.html#index-17">gitplumbingreview.md</a>, <a href="notes/2024-10-17.html#index-0">[1]</a>
+</li>
+      <li><a href="activities/practice.html#index-19">gittransition.md</a>, <a href="notes/2024-10-10.html#index-6">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -525,6 +548,8 @@ document.write(`
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="resources/glossary.html#term-hash-function"><strong>hash function</strong></a>
+</li>
+      <li><a href="activities/prepare.html#index-4">hash_num_prep.md</a>, <a href="notes/2024-10-08.html#index-0">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -540,7 +565,7 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="activities/review.html#index-4">ide_merge_conflict.md</a>, <a href="notes/2024-09-17.html#index-1">[1]</a>
 </li>
-      <li><a href="activities/prepare.html#index-2">idethoughts.md</a>, <a href="notes/2024-10-03.html#index-1">[1]</a>
+      <li><a href="activities/prepare.html#index-3">idethoughts.md</a>, <a href="notes/2024-10-03.html#index-1">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -577,6 +602,14 @@ document.write(`
   </ul></td>
 </tr></table>
 
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="activities/practice.html#index-17">numbers.md</a>, <a href="activities/review.html#index-15">[1]</a>, <a href="notes/2024-10-10.html#index-1">[2]</a>, <a href="notes/2024-10-10.html#index-4">[3]</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -594,7 +627,7 @@ document.write(`
 </li>
       <li><a href="resources/glossary.html#term-PR"><strong>PR</strong></a>
 </li>
-      <li><a href="notes/2024-09-10.html#index-0">prior-knowledge-map</a>
+      <li><a href="activities/prepare.html#index-0">prior-knowledge-map</a>, <a href="notes/2024-09-10.html#index-0">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -638,7 +671,7 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="resources/glossary.html#term-shell"><strong>shell</strong></a>
 </li>
-      <li><a href="activities/practice.html#index-9">software.md</a>, <a href="activities/prepare.html#index-0">[1]</a>, <a href="activities/review.html#index-7">[2]</a>, <a href="notes/2024-09-17.html#index-0">[3]</a>, <a href="notes/2024-09-26.html#index-0">[4]</a>, <a href="notes/2024-09-26.html#index-1">[5]</a>
+      <li><a href="activities/practice.html#index-9">software.md</a>, <a href="activities/prepare.html#index-1">[1]</a>, <a href="activities/review.html#index-7">[2]</a>, <a href="notes/2024-09-17.html#index-0">[3]</a>, <a href="notes/2024-09-26.html#index-0">[4]</a>, <a href="notes/2024-09-26.html#index-1">[5]</a>
 </li>
       <li><a href="resources/glossary.html#term-ssh"><strong>ssh</strong></a>
 </li>
@@ -659,6 +692,22 @@ document.write(`
       <li><a href="activities/review.html#index-6">terminal_review.md</a>, <a href="notes/2024-09-19.html#index-0">[1]</a>
 </li>
       <li><a href="resources/glossary.html#term-tree-objects"><strong>tree objects</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="activities/practice.html#index-14">workflows.md</a>, <a href="activities/practice.html#index-15">[1]</a>, <a href="notes/2024-10-08.html#index-3">[2]</a>, <a href="notes/2024-10-08.html#index-4">[3]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="activities/practice.html#index-16">xorhash.md</a>, <a href="activities/review.html#index-14">[1]</a>, <a href="notes/2024-10-10.html#index-0">[2]</a>, <a href="notes/2024-10-10.html#index-3">[3]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -734,6 +783,9 @@ By Professor Sarah M Brown
   
   <div class="footer-item">
     
+<div class="extra_footer">
+  made with [jupyterbook](https://jupyterbook.org/en/stable/intro.html)
+</div>
   </div>
   
 </div>

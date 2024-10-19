@@ -1,0 +1,1400 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>10. What is git? &#8212; Computer Systems and Programming Tools</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/course_admonitions.css?v=57efbcaa" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2024-10-08';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="11. What is a commit number?" href="2024-10-10.html" />
+    <link rel="prev" title="9. How do programmers communicate about code?" href="2024-10-03.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/systools.png" class="logo__image only-light" alt="Computer Systems and Programming Tools - Home"/>
+    <script>document.write(`<img src="../_static/systools.png" class="logo__image only-dark" alt="Computer Systems and Programming Tools - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About this Site
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Syllabus</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/about.html">Computer Systems and Programming Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/tools.html">Tools and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/badges.html">Badge Deadlines and Procedures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/badge_calc.html">Detailed Grade Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/schedule.html">Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_resources.html">Support Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_statements.html">General Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/communication.html">Office Hours &amp; Communication</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2024-09-05.html">1. Welcome, Introduction, and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-10.html">2. More orientation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-12.html">3. Working Offline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-17.html">4. How do git branches work?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-19.html">5. When do I get an advantage from git and bash?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-24.html">6. Patterns in git and bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-26.html">7. Why are these tools like this?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-01.html">8. What <em>is</em> a commit?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-03.html">9. How do programmers communicate about code?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. What <em>is</em> git?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-10.html">11. What is a commit number?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-17.html">12. How does git <em>make</em> a commit?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../activities/kwl.html">KWL Chart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/team.html">Team Repo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/review.html">Review Badges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/prepare.html">Prepare for the next class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/practice.html">Practice Badges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/explore.html">Explore Badges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/build.html">Build Badges</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../faq/syllabus.html">Syllabus and Grading FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/github.html">Git and GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/tools.html">Other Course Software/tools</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resources/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/tips.html">General Tips and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/learning.html">How to Study in this class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/github.html">GitHub Interface reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/languages.html">Language/Shell Specific References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/gettinghelp.html">Getting Help with Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/organization.html">Getting Organized for class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/more_info_on_cpus.html">More info on cpus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/windows.html">Windows Help &amp; Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://introcompsys.github.io/spring2022/resources/testimonials.html">Advice from Spring 2022 Students</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://introcompsys.github.io/fall2022/resources/testimonials.html">Advice from Fall 2022 Students</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://introcompsys.github.io/spring2023/resources/testimonials.html">Advice from Spring 2023 Students</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://introcompsys.github.io/fall2023/resources/testimonials.html">Advice from Fall 2023 Students</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/compsys-progtools/fall2024" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/compsys-progtools/fall2024/edit/main/notes/2024-10-08.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/compsys-progtools/fall2024/issues/new?title=Issue%20on%20page%20%2Fnotes/2024-10-08.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/2024-10-08.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>What is git?</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-built-files">10.1. Handling Built files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-i-push-a-repo-that-i-made-locally-to-github">10.2. How do I push a repo that I made locally to GitHub?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-git-do-all-these-things">10.3. How does git do all these things?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-variables">10.4. Git Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-objects">10.5. Git Objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-for-next-class">10.6. Prepare for Next Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">10.7. Badges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">10.8. Experience Report Evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">10.9. Questions After Today’s Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-you-clarify-the-difference-between-working-in-local-repos-github-repos-and-github-codespaces-and-how-they-all-integrate">10.9.1. Can you clarify the difference between working in local repos, github repos, and github codespaces and how they all integrate?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-were-the-older-verion-controls-and-what-similar-features-did-it-have-to-git-that-remains-present-in-git-present-day">10.9.2. how were the older verion controls and what similar features did it have to git that remains present in git present day?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-there-a-difference-between-porcealin-and-plumbing-commands-when-they-both-interact-with-the-file-system-and-are-dependent-on-its-contents">10.9.3. why is there a difference between Porcealin and Plumbing commands when they both interact with the file system and are dependent on its contents?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-the-list-of-commit-objects-ever-become-long-enough-to-cause-issues">10.9.4. Can the list of commit (objects) ever become long enough to cause issues?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="what-is-git">
+<h1><span class="section-number">10. </span>What <em>is</em> git?<a class="headerlink" href="#what-is-git" title="Link to this heading">#</a></h1>
+<p>Last week, we learned about what a commit is and then we took a break from how git works, to talk more about how developers communicate about code</p>
+<p>Today we will learn what git is more formally.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We will go in and out of topics at times, in order to provides what is called <em>spaced repetition</em>, repeating material or key concepts with breaks in between.</p>
+<p>Using git correctly is a really important goal of this course because git is an opportunity for you to demonstrate a wide range of both practical and conceptual understanding.</p>
+<p>So, I have elected to interleave other topics with git to give core git ideas some time to simmer and give you time to practice them before we build on them with more depth at git.</p>
+<p>Also, we are both learning git and <em>using</em> git as a motivating example of other key important topics.
+``</p>
+<h2 class="rubric" id="why-so-much-git">Why so much git?</h2>
+<p>Today, we are going to learn <em>what</em> git is and later we will learn more details of how it is implemented.</p>
+<p>Remember we are spending so much time with git for two reasons:</p>
+<ol class="arabic simple">
+<li><p>it is an important developer tool</p></li>
+<li><p>it demonstrates important conceptual ideas that occur in other areas of CS</p></li>
+</ol>
+<p><a class="reference external" href="https://git-scm.com/book/en/v2">git book</a> is the official reference on git.</p>
+<p>this includes other spoken languages as well if that is helpful for you.</p>
+<h2 class="rubric" id="git-definition">git definition</h2>
+<p>From here, we have the full definition of git</p>
+<p><a class="reference external" href="https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain">git is fundamentally a content-addressable filesystem with a VCS user interface written on top of it.</a></p>
+<p>We do not start from that point, because these documents were written for target audience of working developers who are familar with other, old version control systems and learning an <em>additional</em> one.</p>
+<p>Most of you, however, have probably not used another version control system.</p>
+<h2 class="rubric" id="git-is-a-file-system">Git is a File system</h2>
+<p>Content-addressable filesystem means a key-value data store.</p>
+<p>some examples of key-value pairs that you have seen in computer science broadly, and in this course specficially</p>
+<ul class="simple">
+<li><p>python dictionaries</p></li>
+<li><p>pointers (address,content)</p></li>
+<li><p>parameter, passed values</p></li>
+<li><p>yaml files</p></li>
+</ul>
+<p>What this means is that you can insert any kind of content into a Git repository, for which Git will hand you back a unique key you can use later to retrieve that content.</p>
+<h2 class="rubric" id="git-is-a-version-control-system">Git is a Version Control System</h2>
+<p>In the before times</p>
+<p><img alt="PhD comics final.doc comic" src="http://www.phdcomics.com/comics/archive/phd101212s.gif" /></p>
+<p>git stores <strong>snapshots</strong> of your work each time you commit.</p>
+<p><img alt="snapshot of 5 versions of 3 files" src="https://git-scm.com/book/en/v2/images/snapshots.png" /></p>
+<p>it uses 3 stages:</p>
+<p><img alt="3 stages in git" src="https://git-scm.com/book/en/v2/images/areas.png" /></p>
+<p>These three stages are the in relation to your working directory, and potentially remotes.</p>
+<p>So in broader context, the <a class="reference external" href="https://ndpsoftware.com/git-cheatsheet.html#loc=index;">git visual cheatsheet</a> is a more complete picture and has commands overlayed with the concept.</p>
+<h2 class="rubric" id="git-has-two-sets-of-commands">Git has two sets of commands</h2>
+<ul class="simple">
+<li><p>Porcelain: the user friendly VCS</p></li>
+<li><p>Plumbing: the internal workings- a toolkit for a VCS</p></li>
+</ul>
+<p>We have so far used git as a version control system.  A version control system, in general, will have operations like commit, push, pull, clone.  These may work differently under the hood or be called different things, but those are what something needs to have in order to keep track of different versions.</p>
+<p>The plumbing commands reveal the <em>way</em> that git performs version control operations.  This means, they implement the git file system operations for the git version control system.</p>
+<p>You can think of the plumbing vs porcelain commands like public/private methods.  As a user, you only need the public methods (porcelain commands) but those use the private ones to get things done (plumbing commands).  We will use the plumbing commands over the next few classes to examine what git <em>really</em> does when we call the porcelain commands that we will typically use.</p>
+<h2 class="rubric" id="git-is-distributed">Git is distributed</h2>
+<p>What does that mean?</p>
+<p>Git runs locally.  It can run in many places, and has commands to help sync across remotes, but git does not require one copy of the repository to be the “official” copy and the others to be subordinate.  git just sees repositories.</p>
+<p>For human reasons, we like to have one “official” copy and treat the others as local copies, but that is a social choice, not a technological requirement of git. Even though we will typically use it with an offical copy and other copies, having a tool tht does not care, makes the tool more flexible and allows us to create workflows, or networks of copies that have any relationship we want.</p>
+<p>It’s about the workflows, or the ways we socially <em>use</em> the tool.</p>
+<h3 class="rubric" id="subversion-workflow">Subversion  Workflow</h3>
+<p><img alt="subversion workflow" src="https://git-scm.com/images/about/workflow-a&#64;2x.png" /></p>
+<p>subversion is an older VCS</p>
+<h3 class="rubric" id="integration-manager">Integration Manager</h3>
+<p><img alt="integration manager workflow" src="https://git-scm.com/images/about/workflow-b&#64;2x.png" /></p>
+<h3 class="rubric" id="dictator-and-lieutenants">dictator and lieutenants</h3>
+<p><img alt="dictator and lieutenants workflow" src="https://git-scm.com/images/about/workflow-c&#64;2x.png" /></p>
+<h2 class="rubric" id="starting-a-git-repo-locally">Starting a git repo locally</h2>
+<p>We made this folder, but we have not used any git operations on it yet, it is actually not a git repo, which we <em>could</em> tell from the output above, but let’s use git to inspect and get another hint.</p>
+<p>Now we will return to the <code class="docutils literal notranslate"><span class="pre">tiny-book</span></code> folder we made last class.  This is a jupyterbook, meaning the command <code class="docutils literal notranslate"><span class="pre">jupyter-book</span> <span class="pre">build</span> <span class="pre">.</span></code> works in the directory.</p>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">_build			markdown-notebooks.md</span>
+<span class="go">_config.yml		markdown.md</span>
+<span class="go">_toc.yml		notebooks.ipynb</span>
+<span class="go">intro.md		references.bib</span>
+<span class="go">logo.png		requirements.txt</span>
+</pre></div>
+</div>
+<p>we see all fo the files</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">-</span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">.			logo.png</span>
+<span class="go">..			markdown-notebooks.md</span>
+<span class="go">_build			markdown.md</span>
+<span class="go">_config.yml		notebooks.ipynb</span>
+<span class="go">_toc.yml		references.bib</span>
+<span class="go">intro.md		requirements.txt</span>
+</pre></div>
+</div>
+<p>but no .git!</p>
+<p>and if we try a git command</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">fatal: not a git repository (or any of the parent directories): .git</span>
+</pre></div>
+</div>
+<p>This tells us the <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory is missing form the current path and all parent directories.</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pwd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/Users/brownsarahm/Documents/inclass/systems/tiny-book</span>
+</pre></div>
+</div>
+<p>nor is any other fold in this list, since it checks the parents.</p>
+<p>To make it a git repo, we use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> with the path we want to initialize, which currently is <code class="docutils literal notranslate"><span class="pre">.</span></code></p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">init</span> <span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">hint: Using &#39;master&#39; as the name for the initial branch. This default branch name</span>
+<span class="go">hint: is subject to change. To configure the initial branch name to use in all</span>
+<span class="go">hint: of your new repositories, which will suppress this warning, call:</span>
+<span class="go">hint:</span>
+<span class="go">hint: 	git config --global init.defaultBranch &lt;name&gt;</span>
+<span class="go">hint:</span>
+<span class="go">hint: Names commonly chosen instead of &#39;master&#39; are &#39;main&#39;, &#39;trunk&#39; and</span>
+<span class="go">hint: &#39;development&#39;. The just-created branch can be renamed via this command:</span>
+<span class="go">hint:</span>
+<span class="go">hint: 	git branch -m &lt;name&gt;</span>
+<span class="go">Initialized empty Git repository in /Users/brownsarahm/Documents/inclass/systems/tiny-book/.git/</span>
+</pre></div>
+</div>
+<aside class="sidebar">
+<h3 class="rubric" id="retiring-racist-language"><span id="nomaster"></span>Retiring racist language</h3>
+<p>Historically the default branch was called master.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://mail.gnome.org/archives/desktop-devel-list/2019-May/msg00066.html">derived from a master/slave analogy</a> which is not even how git works, but was adopted terminology from other projects</p></li>
+<li><p><a class="reference external" href="https://github.com/github/renaming">GitHub no longer does</a></p></li>
+<li><p><a class="reference external" href="https://sfconservancy.org/news/2020/jun/23/gitbranchname/">the broader community is changing as well</a></p></li>
+<li><p><a class="reference external" href="https://lore.kernel.org/git/pull.656.v4.git.1593009996.gitgitgadget&#64;gmail.com/">git allows you to make your default not be master</a></p></li>
+<li><p><a class="reference external" href="https://twitter.com/xpasky/status/1271477451756056577">literally the person who chose the names “master” and “origin” regrets that choice</a> the name main is a more accurate and not harmful term and the current convention.</p></li>
+</ul>
+</aside>
+<p>we’ll change our default branch to main</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">m</span> <span class="n">main</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and check in with git now</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">On branch main</span>
+
+<span class="go">No commits yet</span>
+
+<span class="go">Untracked files:</span>
+<span class="go">  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+<span class="go">	_build/</span>
+<span class="go">	_config.yml</span>
+<span class="go">	_toc.yml</span>
+<span class="go">	intro.md</span>
+<span class="go">	logo.png</span>
+<span class="go">	markdown-notebooks.md</span>
+<span class="go">	markdown.md</span>
+<span class="go">	notebooks.ipynb</span>
+<span class="go">	references.bib</span>
+<span class="go">	requirements.txt</span>
+
+<span class="go">nothing added to commit but untracked files present (use &quot;git add&quot; to track)</span>
+</pre></div>
+</div>
+<p>this time it works and we see a two important things:</p>
+<ul class="simple">
+<li><p>there are no previous commits</p></li>
+<li><p>all of the files are untracked</p></li>
+</ul>
+<section id="handling-built-files">
+<h2><span class="section-number">10.1. </span>Handling Built files<a class="headerlink" href="#handling-built-files" title="Link to this heading">#</a></h2>
+<p>The built site files are compeltey redundant, content wise, to the original markdown files.</p>
+<p>the build folder is compeltely redundant, we can delete it</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">_build</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>confirm it is gone</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">_config.yml		markdown.md</span>
+<span class="go">_toc.yml		notebooks.ipynb</span>
+<span class="go">intro.md		references.bib</span>
+<span class="go">logo.png		requirements.txt</span>
+<span class="go">markdown-notebooks.md</span>
+</pre></div>
+</div>
+<p>then re-build to replace it</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">build</span> <span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Running Jupyter-Book v1.0.2</span>
+<span class="go">Source Folder: /Users/brownsarahm/Documents/inclass/systems/tiny-book</span>
+<span class="go">Config Path: /Users/brownsarahm/Documents/inclass/systems/tiny-book/_config.yml</span>
+<span class="go">Output Path: /Users/brownsarahm/Documents/inclass/systems/tiny-book/_build/html</span>
+<span class="go">Running Sphinx v7.4.7</span>
+<span class="go">loading translations [en]... done</span>
+<span class="go">making output directory... done</span>
+<span class="go">[etoc] Changing master_doc to &#39;intro&#39;</span>
+<span class="go">checking bibtex cache... out of date</span>
+<span class="go">parsing bibtex file /Users/brownsarahm/Documents/inclass/systems/tiny-book/references.bib... parsed 5 entries</span>
+<span class="go">myst v2.0.0: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions={&#39;substitution&#39;, &#39;tasklist&#39;, &#39;dollarmath&#39;, &#39;linkify&#39;, &#39;colon_fence&#39;}, disable_syntax=[], all_links_external=False, url_schemes=(&#39;mailto&#39;, &#39;http&#39;, &#39;https&#39;), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes=&#39;tex2jax_process|mathjax_process|math|output_area&#39;, enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)</span>
+<span class="go">myst-nb v1.1.1: NbParserConfig(custom_formats={}, metadata_key=&#39;mystnb&#39;, cell_metadata_key=&#39;mystnb&#39;, kernel_rgx_aliases={}, eval_name_regex=&#39;^[a-zA-Z_][a-zA-Z0-9_]*$&#39;, execution_mode=&#39;force&#39;, execution_cache_path=&#39;&#39;, execution_excludepatterns=[], execution_timeout=30, execution_in_temp=False, execution_allow_errors=False, execution_raise_on_error=False, execution_show_tb=False, merge_streams=False, render_plugin=&#39;default&#39;, remove_code_source=False, remove_code_outputs=False, code_prompt_show=&#39;Show code cell {type}&#39;, code_prompt_hide=&#39;Hide code cell {type}&#39;, number_source_lines=False, output_stderr=&#39;show&#39;, render_text_lexer=&#39;myst-ansi&#39;, render_error_lexer=&#39;ipythontb&#39;, render_image_options={}, render_figure_options={}, render_markdown_format=&#39;commonmark&#39;, output_folder=&#39;build&#39;, append_css=True, metadata_to_fm=False)</span>
+<span class="go">Using jupyter-cache at: /Users/brownsarahm/Documents/inclass/systems/tiny-book/_build/.jupyter_cache</span>
+<span class="go">sphinx-multitoc-numbering v0.1.3: Loaded</span>
+<span class="go">building [mo]: targets for 0 po files that are out of date</span>
+<span class="go">writing output... </span>
+<span class="go">building [html]: targets for 4 source files that are out of date</span>
+<span class="go">updating environment: [new config] 4 added, 0 changed, 0 removed</span>
+<span class="go">/Users/brownsarahm/Documents/inclass/systems/tiny-book/markdown-notebooks.md: Executing notebook using local CWD [mystnb]</span>
+<span class="go">/Users/brownsarahm/Documents/inclass/systems/tiny-book/markdown-notebooks.md: Executed notebook in 1.28 seconds [mystnb]</span>
+<span class="go">/Users/brownsarahm/Documents/inclass/systems/tiny-book/notebooks.ipynb: Executing notebook using local CWD [mystnb]</span>
+<span class="go">/Users/brownsarahm/Documents/inclass/systems/tiny-book/notebooks.ipynb: Executed notebook in 2.10 seconds [mystnb]</span>
+
+<span class="go">looking for now-outdated files... none found</span>
+<span class="go">pickling environment... done</span>
+<span class="go">checking consistency... done</span>
+<span class="go">preparing documents... done</span>
+<span class="go">copying assets... </span>
+<span class="go">copying static files... done</span>
+<span class="go">copying extra files... done</span>
+<span class="go">copying assets: done</span>
+<span class="go">writing output... [100%] notebooks</span>
+<span class="go">generating indices... genindex done</span>
+<span class="go">writing additional pages... search done</span>
+<span class="go">copying images... [100%] _build/jupyter_execute/a31e63b1f6ca34376ef17d2b6c277648c6b47bb0a75c5165999735167a988593.png</span>
+<span class="go">dumping search index in English (code: en)... done</span>
+<span class="go">dumping object inventory... done</span>
+<span class="go">[etoc] missing index.html written as redirect to &#39;intro.html&#39;</span>
+<span class="go">build succeeded.</span>
+
+<span class="go">The HTML pages are in _build/html.</span>
+
+<span class="go">===============================================================================</span>
+
+<span class="go">Finished generating HTML for book.</span>
+<span class="go">Your book&#39;s HTML pages are here:</span>
+<span class="go">    _build/html/</span>
+<span class="go">You can look at your book by opening this file in a browser:</span>
+<span class="go">    _build/html/index.html</span>
+<span class="go">Or paste this line directly into your browser bar:</span>
+<span class="go">    file:///Users/brownsarahm/Documents/inclass/systems/tiny-book/_build/html/index.html            </span>
+
+<span class="go">===============================================================================</span>
+</pre></div>
+</div>
+<p>and see it is back, or view the file in our browser</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">_build			markdown-notebooks.md</span>
+<span class="go">_config.yml		markdown.md</span>
+<span class="go">_toc.yml		notebooks.ipynb</span>
+<span class="go">intro.md		references.bib</span>
+<span class="go">logo.png		requirements.txt</span>
+</pre></div>
+</div>
+<p>it contains <em>derived</em> content, not content that a person manually authored</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="n">_build</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">html		jupyter_execute</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="n">_build</span><span class="o">/</span><span class="n">html</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">_images			markdown-notebooks.html</span>
+<span class="go">_sources		markdown.html</span>
+<span class="go">_sphinx_design_static	notebooks.html</span>
+<span class="go">_static			objects.inv</span>
+<span class="go">genindex.html		search.html</span>
+<span class="go">index.html		searchindex.js</span>
+<span class="go">intro.html</span>
+</pre></div>
+</div>
+<p>since they are fully redundant,</p>
+<p>We do not want to keep track of changes for the built files since they are generated from the source files. It’s redundant and makes it less clear where someone should update content.</p>
+<p>Git helps us with this with the .gitignore</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;_build/&quot;</span> <span class="o">&gt;</span> <span class="o">.</span><span class="n">gitignore</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>now it does not show!</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">On branch main</span>
+
+<span class="go">No commits yet</span>
+
+<span class="go">Untracked files:</span>
+<span class="go">  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+<span class="go">	.gitignore</span>
+<span class="go">	_config.yml</span>
+<span class="go">	_toc.yml</span>
+<span class="go">	intro.md</span>
+<span class="go">	logo.png</span>
+<span class="go">	markdown-notebooks.md</span>
+<span class="go">	markdown.md</span>
+<span class="go">	notebooks.ipynb</span>
+<span class="go">	references.bib</span>
+<span class="go">	requirements.txt</span>
+
+<span class="go">nothing added to commit but untracked files present (use &quot;git add&quot; to track)</span>
+</pre></div>
+</div>
+<p>Now, we can add and commit our book!</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">On branch main</span>
+
+<span class="go">No commits yet</span>
+
+<span class="go">Changes to be committed:</span>
+<span class="go">  (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)</span>
+<span class="go">	new file:   .gitignore</span>
+<span class="go">	new file:   _config.yml</span>
+<span class="go">	new file:   _toc.yml</span>
+<span class="go">	new file:   intro.md</span>
+<span class="go">	new file:   logo.png</span>
+<span class="go">	new file:   markdown-notebooks.md</span>
+<span class="go">	new file:   markdown.md</span>
+<span class="go">	new file:   notebooks.ipynb</span>
+<span class="go">	new file:   references.bib</span>
+<span class="go">	new file:   requirements.txt</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;tempatle&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[main (root-commit) eb9ef8e] tempatle</span>
+<span class="go"> 10 files changed, 342 insertions(+)</span>
+<span class="go"> create mode 100644 .gitignore</span>
+<span class="go"> create mode 100644 _config.yml</span>
+<span class="go"> create mode 100644 _toc.yml</span>
+<span class="go"> create mode 100644 intro.md</span>
+<span class="go"> create mode 100644 logo.png</span>
+<span class="go"> create mode 100644 markdown-notebooks.md</span>
+<span class="go"> create mode 100644 markdown.md</span>
+<span class="go"> create mode 100644 notebooks.ipynb</span>
+<span class="go"> create mode 100644 references.bib</span>
+<span class="go"> create mode 100644 requirements.txt</span>
+</pre></div>
+</div>
+</section>
+<section id="how-do-i-push-a-repo-that-i-made-locally-to-github">
+<h2><span class="section-number">10.2. </span>How do I push a repo that I made locally to GitHub?<a class="headerlink" href="#how-do-i-push-a-repo-that-i-made-locally-to-github" title="Link to this heading">#</a></h2>
+<p>Right now, we do not have any remotes, so if we try to push it will fail. Next we will see how to fix that.</p>
+<p>First let’s confirm</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">fatal: No configured push destination.</span>
+<span class="go">Either specify the URL from the command-line or configure a remote repository using</span>
+
+<span class="go">    git remote add &lt;name&gt; &lt;url&gt;</span>
+
+<span class="go">and then push using the remote name</span>
+
+<span class="go">    git push &lt;name&gt;</span>
+</pre></div>
+</div>
+<p>it fails, but it tells us how to fix it.  This is why inspection is so powerful in
+developer tools, that is where we developers give one another hints.</p>
+<p>Right now, we do not have any remotes</p>
+<p>For today, we will create an empty github repo shared with me, by accepting the assignment linked in prismia or ask a TA/instructor if you are making up class.</p>
+<p>More generally, you can <a class="reference external" href="https://docs.github.com/en/get-started/quickstart/create-a-repo">create a repo</a></p>
+<p>That default page for an empty repo if you do not initiate it with any files will give you the instructions for what remote to add.</p>
+<p>Now we add the remote</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">compsys</span><span class="o">-</span><span class="n">progtools</span><span class="o">/</span><span class="n">tiny</span><span class="o">-</span><span class="n">book</span><span class="o">-</span><span class="n">brownsarahm</span><span class="o">-</span><span class="mf">1.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we can push</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">fatal: The current branch main has no upstream branch.</span>
+<span class="go">To push the current branch and set the remote as upstream, use</span>
+
+<span class="go">    git push --set-upstream origin main</span>
+
+<span class="go">To have this happen automatically for branches without a tracking</span>
+<span class="go">upstream, see &#39;push.autoSetupRemote&#39; in &#39;git help config&#39;.</span>
+</pre></div>
+</div>
+<p>once we link the branch</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">To https://github.com/compsys-progtools/tiny-book-brownsarahm-1.git</span>
+<span class="go"> ! [rejected]        main -&gt; main (fetch first)</span>
+<span class="go">error: failed to push some refs to &#39;https://github.com/compsys-progtools/tiny-book-brownsarahm-1.git&#39;</span>
+<span class="go">hint: Updates were rejected because the remote contains work that you do not</span>
+<span class="go">hint: have locally. This is usually caused by another repository pushing to</span>
+<span class="go">hint: the same ref. If you want to integrate the remote changes, use</span>
+<span class="go">hint: &#39;git pull&#39; before pushing again.</span>
+<span class="go">hint: See the &#39;Note about fast-forwards&#39; in &#39;git push --help&#39; for details.</span>
+</pre></div>
+</div>
+<p>except github classroom added a commit, so we have diverged histories</p>
+<p>we can fix this by pulling</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">remote: Enumerating objects: 5, done.</span>
+<span class="go">remote: Counting objects: 100% (5/5), done.</span>
+<span class="go">remote: Compressing objects: 100% (2/2), done.</span>
+<span class="go">remote: Total 5 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)</span>
+<span class="go">Unpacking objects: 100% (5/5), 1.70 KiB | 348.00 KiB/s, done.</span>
+<span class="go">From https://github.com/compsys-progtools/tiny-book-brownsarahm-1</span>
+<span class="go"> * [new branch]      feedback   -&gt; origin/feedback</span>
+<span class="go"> * [new branch]      main       -&gt; origin/main</span>
+<span class="go">There is no tracking information for the current branch.</span>
+<span class="go">Please specify which branch you want to merge with.</span>
+<span class="go">See git-pull(1) for details.</span>
+
+<span class="go">    git pull &lt;remote&gt; &lt;branch&gt;</span>
+
+<span class="go">If you wish to set tracking information for this branch you can do so with:</span>
+
+<span class="go">    git branch --set-upstream-to=origin/&lt;branch&gt; main</span>
+</pre></div>
+</div>
+<p>which requires the branch to be better linked</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">branch</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">upstream</span><span class="o">-</span><span class="n">to</span><span class="o">=</span><span class="n">origin</span><span class="o">/</span><span class="n">main</span> <span class="n">main</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">branch &#39;main&#39; set up to track &#39;origin/main&#39;.</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">hint: You have divergent branches and need to specify how to reconcile them.</span>
+<span class="go">hint: You can do so by running one of the following commands sometime before</span>
+<span class="go">hint: your next pull:</span>
+<span class="go">hint:</span>
+<span class="go">hint:   git config pull.rebase false  # merge</span>
+<span class="go">hint:   git config pull.rebase true   # rebase</span>
+<span class="go">hint:   git config pull.ff only       # fast-forward only</span>
+<span class="go">hint:</span>
+<span class="go">hint: You can replace &quot;git config&quot; with &quot;git config --global&quot; to set a default</span>
+<span class="go">hint: preference for all repositories. You can also pass --rebase, --no-rebase,</span>
+<span class="go">hint: or --ff-only on the command line to override the configured default per</span>
+<span class="go">hint: invocation.</span>
+<span class="go">fatal: Need to specify how to reconcile divergent branches.</span>
+</pre></div>
+</div>
+<p>and we need the option for how to work.  I want our local commits to be the most recent so I will <code class="docutils literal notranslate"><span class="pre">rebase</span></code></p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span> <span class="o">--</span><span class="n">rebase</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Successfully rebased and updated refs/heads/main.</span>
+</pre></div>
+</div>
+<p>We can see that in the log it is as we expected.</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">log</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">commit 60bd457a4c3523eae25be36ac685207d605c9676 (HEAD -&gt; main)</span>
+<span class="go">Author: Sarah M Brown &lt;brownsarahm@uri.edu&gt;</span>
+<span class="go">Date:   Tue Oct 8 12:51:52 2024 -0400</span>
+
+<span class="go">    tempatle</span>
+
+<span class="go">commit d781535217b324d9cb2ce6cb45ae565b54ee786f (origin/main)</span>
+<span class="go">Author: github-classroom[bot] &lt;66690702+github-classroom[bot]@users.noreply.github.com&gt;</span>
+<span class="go">Date:   Tue Oct 8 16:54:12 2024 +0000</span>
+
+<span class="go">    Setting up GitHub Classroom Feedback</span>
+
+<span class="go">commit 72bcbb8cbd2769d21aad3c23c8fbe477d0260ced (origin/feedback)</span>
+<span class="go">Author: github-classroom[bot] &lt;66690702+github-classroom[bot]@users.noreply.github.com&gt;</span>
+<span class="go">Date:   Tue Oct 8 16:54:12 2024 +0000</span>
+
+<span class="go">    GitHub Classroom Feedback</span>
+</pre></div>
+</div>
+<p>Note the commits made more recently <em>in time</em> appear older in the commit history.</p>
+<p>Now we can push!</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Enumerating objects: 13, done.</span>
+<span class="go">Counting objects: 100% (13/13), done.</span>
+<span class="go">Delta compression using up to 8 threads</span>
+<span class="go">Compressing objects: 100% (10/10), done.</span>
+<span class="go">Writing objects: 100% (12/12), 16.33 KiB | 8.17 MiB/s, done.</span>
+<span class="go">Total 12 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)</span>
+<span class="go">To https://github.com/compsys-progtools/tiny-book-brownsarahm-1.git</span>
+<span class="go">   d781535..60bd457  main -&gt; main</span>
+</pre></div>
+</div>
+</section>
+<section id="how-does-git-do-all-these-things">
+<h2><span class="section-number">10.3. </span>How does git do all these things?<a class="headerlink" href="#how-does-git-do-all-these-things" title="Link to this heading">#</a></h2>
+<p>We can use the bash command <code class="docutils literal notranslate"><span class="pre">find</span></code> to search the file <em>system</em> note that this does not search the contents of the files, just the names.</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">find</span> <span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">objects</span><span class="o">/</span> <span class="o">-</span><span class="nb">type</span> <span class="n">f</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">.git/objects//69/fa449dd96e2405945b2e4cff2fd0ab8b102097</span>
+<span class="go">.git/objects//0e/2e3b27f61b5908c4bb75a1ca680ee4053aa992</span>
+<span class="go">.git/objects//60/bd457a4c3523eae25be36ac685207d605c9676</span>
+<span class="go">.git/objects//5f/534f8051f6a94d40e57e58242ef0113fae4fd1</span>
+<span class="go">.git/objects//5f/2d0ff4056de4c043c720fd80db5ff75502d286</span>
+<span class="go">.git/objects//d7/81535217b324d9cb2ce6cb45ae565b54ee786f</span>
+<span class="go">.git/objects//eb/9ef8efc08fa2067507e7af41fcc904a9a11cb5</span>
+<span class="go">.git/objects//fd/b7176c429a73d5335e127b27d530b8aaa07c7d</span>
+<span class="go">.git/objects//29/a422c19251aeaeb907175e9b3219a9bed6c616</span>
+<span class="go">.git/objects//74/d5c7101ed8c8c1a6f87e31debd9445df1f0e71</span>
+<span class="go">.git/objects//7e/821e45db31376729c73f3616fb24db2b655a95</span>
+<span class="go">.git/objects//72/bcbb8cbd2769d21aad3c23c8fbe477d0260ced</span>
+<span class="go">.git/objects//06/d56f40c838b64eb048a63e036125964a069a3a</span>
+<span class="go">.git/objects//a0/57a320dcd595f3f0e0d250c3af4a5653596914</span>
+<span class="go">.git/objects//e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391</span>
+<span class="go">.git/objects//fa/eea606145667f54d220a0c17ffe8d22db07146</span>
+<span class="go">.git/objects//c2/48258b7f940fe3a133a2f317b574821da8bf7b</span>
+<span class="go">.git/objects//f8/cdc73cb2be06824f521837366ec95b73d55ef8</span>
+<span class="go">.git/objects//78/3ec6aa5afe2f0a66087d01a112f543e1ed287e</span>
+</pre></div>
+</div>
+<p>This is a lot of files! It’s more than we have in our working directory.</p>
+<p>This is a consequence of git taking snap shots and tracking both the actual contents of our working directory <strong>and</strong> our commit messages and other meta data about each commit.</p>
+</section>
+<section id="git-variables">
+<h2><span class="section-number">10.4. </span>Git Variables<a class="headerlink" href="#git-variables" title="Link to this heading">#</a></h2>
+<p>the program <code class="docutils literal notranslate"><span class="pre">git</span></code> does not run continously the entire time you are using it for a project.  It runs quick commands each time you tell it to, it’s goal is to manage files, so this makes sense.  This also means that important information that <code class="docutils literal notranslate"><span class="pre">git</span></code> needs is also saved in files.</p>
+<p>We can see the files that it has by listing the directory:</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">AUTO_MERGE	ORIG_HEAD	index		refs</span>
+<span class="go">COMMIT_EDITMSG	config		info</span>
+<span class="go">FETCH_HEAD	description	logs</span>
+<span class="go">HEAD		hooks		objects</span>
+</pre></div>
+</div>
+<p>the files in all caps are like gits variables.</p>
+<p>Lets look at the one called <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> we have interacted with <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> before when resolving merge conflicts.</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">HEAD</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ref: refs/heads/main</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">HEAD</span></code> is a pointer to the currently checked out branch.</p>
+<p>The other files with <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> in their name are similarly pointers to other references, named corresponding to other things.</p>
+</section>
+<section id="git-objects">
+<h2><span class="section-number">10.5. </span>Git Objects<a class="headerlink" href="#git-objects" title="Link to this heading">#</a></h2>
+<p>There are 3 types:</p>
+<ul class="simple">
+<li><p>blob objects: the content of your files (data)</p></li>
+<li><p>tree objects: stores file names and groups files together (organization)</p></li>
+<li><p>Commit Objects: stores information about the sha values of the snapshots</p></li>
+</ul>
+<div class="mermaid">
+            classDiagram
+    class tree{
+    List: 
+      - hash: blob
+      - string: type
+      - string:file name 
+    }
+    class commit{
+        hash: parent
+        hash: tree
+        string: message
+        string: author 
+        string: time
+    }
+    class blob{
+        binary: contents
+    }
+    class object{
+        hash: name
+
+    }
+    object &lt;|-- blob
+    object &lt;|-- tree
+    object &lt;|-- commit
+        </div></section>
+<section id="prepare-for-next-class">
+<h2><span class="section-number">10.6. </span>Prepare for Next Class<a class="headerlink" href="#prepare-for-next-class" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Take a few minutes to think what you know about hashing and numbers. Create <span class="target" id="index-0"></span>hash_num_prep.md with two sections: <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">Hashing</span></code> with a few bullet points summarzing key points about hashing, and <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">Numbers</span></code> with what types of number representations you know.</p></li>
+<li><p>start commenting/expressing interest on build/explore ideas. Next lab will be focused on that.</p></li>
+</ol>
+<ul class="simple">
+<li><p><a class="reference external" href="https://compsys-progtools.github.io/fall2024/activities/build.html#proposal-template">build template</a></p></li>
+<li><p><a class="reference external" href="https://compsys-progtools.github.io/fall2024/activities/explore.html#how-do-i-propose">explore instructions</a></p></li>
+</ul>
+</section>
+<section id="badges">
+<h2><span class="section-number">10.7. </span>Badges<a class="headerlink" href="#badges" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Review</label><div class="sd-tab-content docutils">
+<ol class="arabic simple">
+<li><p>Read about different workflows in git and describe which one you prefer to work with and why in <span class="target" id="index-1"></span>favorite_git_workflow.md in your kwl repo. Two good places to read from are <a class="reference external" href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#ch05-distributed-git">Git Book</a> and the <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows">atlassian Docs</a></p></li>
+<li><p>Update your kwl chart with what you have learned or new questions in the want to know column</p></li>
+<li><p>In <span class="target" id="index-2"></span>commit_contents.md, redirect the content of your most recent commit, its tree, and the contents of one blob. Edit the file or use <code class="docutils literal notranslate"><span class="pre">echo</span></code> to put markdown headings between the different objects. Add a title <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">Complete</span> <span class="pre">Commit</span></code> to the file and at the bottom of the file add <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">Reflection</span></code> subheading with some notes on how, if at all this excercise helps you understand what a commit is.</p></li>
+</ol>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Practice</label><div class="sd-tab-content docutils">
+<ol class="arabic simple">
+<li><p>Read about different workflows in git and add responses to the below in a <span class="target" id="index-3"></span>workflows.md in your kwl repo. Two good places to read from are <a class="reference external" href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#ch05-distributed-git">Git Book</a> and the <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows">atlassian Docs</a></p></li>
+<li><p>Update your kwl chart with what you have learned or new questions in the want to know column</p></li>
+<li><p>Add the hash of the content of your completed <span class="target" id="index-4"></span>workflows.md file and put that in the comment of your badge PR for this badge. <em>Try to do this from your local CLI, but full credit even if you use the website interface</em></p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>## Workflow Reflection
+
+1. Why is it important that git can be used with different workflows?
+1. Which workflow do you think you would like to work with best and why?
+1. Describe a scenario that might make it better for the whole team to use a workflow other than the one you prefer.  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="experience-report-evidence">
+<h2><span class="section-number">10.8. </span>Experience Report Evidence<a class="headerlink" href="#experience-report-evidence" title="Link to this heading">#</a></h2>
+</section>
+<section id="questions-after-todays-class">
+<h2><span class="section-number">10.9. </span>Questions After Today’s Class<a class="headerlink" href="#questions-after-todays-class" title="Link to this heading">#</a></h2>
+<section id="can-you-clarify-the-difference-between-working-in-local-repos-github-repos-and-github-codespaces-and-how-they-all-integrate">
+<h3><span class="section-number">10.9.1. </span>Can you clarify the difference between working in local repos, github repos, and github codespaces and how they all integrate?<a class="headerlink" href="#can-you-clarify-the-difference-between-working-in-local-repos-github-repos-and-github-codespaces-and-how-they-all-integrate" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>a local repo is a folder on your computer</p></li>
+<li><p>a github repo is the copy on the <a class="reference external" href="http://github.com">github.com</a> server that the website interface interacts with</p></li>
+<li><p>a github codespace is a virtual machine on an Azure server that you can use VScode with</p></li>
+<li><p>a codespace is a <em>local</em> copy as far as git is concerned, since you have local access</p></li>
+<li><p>both types of local repos can be pushed and pulled to <a class="reference external" href="http://github.com">github.com</a></p></li>
+</ul>
+</section>
+<section id="how-were-the-older-verion-controls-and-what-similar-features-did-it-have-to-git-that-remains-present-in-git-present-day">
+<h3><span class="section-number">10.9.2. </span>how were the older verion controls and what similar features did it have to git that remains present in git present day?<a class="headerlink" href="#how-were-the-older-verion-controls-and-what-similar-features-did-it-have-to-git-that-remains-present-in-git-present-day" title="Link to this heading">#</a></h3>
+<p>this is a good explore badge topic.</p>
+</section>
+<section id="why-is-there-a-difference-between-porcealin-and-plumbing-commands-when-they-both-interact-with-the-file-system-and-are-dependent-on-its-contents">
+<h3><span class="section-number">10.9.3. </span>why is there a difference between Porcealin and Plumbing commands when they both interact with the file system and are dependent on its contents?<a class="headerlink" href="#why-is-there-a-difference-between-porcealin-and-plumbing-commands-when-they-both-interact-with-the-file-system-and-are-dependent-on-its-contents" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>is it the operatiions that are performed by the commands? Or is it more to do with the level that they interact with the file system.</p>
+</div></blockquote>
+<p>the porcelain commands essentially call the plumbing comamnds. In normal day to day use you only need the porcelain commands, plumbing are the low level details.</p>
+</section>
+<section id="can-the-list-of-commit-objects-ever-become-long-enough-to-cause-issues">
+<h3><span class="section-number">10.9.4. </span>Can the list of commit (objects) ever become long enough to cause issues?<a class="headerlink" href="#can-the-list-of-commit-objects-ever-become-long-enough-to-cause-issues" title="Link to this heading">#</a></h3>
+<p>Technically, yes, practically no. the badges for today will have you investigate this idea.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2024-10-03.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>How do programmers communicate about code?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2024-10-10.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>What is a commit number?</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-built-files">10.1. Handling Built files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-i-push-a-repo-that-i-made-locally-to-github">10.2. How do I push a repo that I made locally to GitHub?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-git-do-all-these-things">10.3. How does git do all these things?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-variables">10.4. Git Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-objects">10.5. Git Objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-for-next-class">10.6. Prepare for Next Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">10.7. Badges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">10.8. Experience Report Evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">10.9. Questions After Today’s Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-you-clarify-the-difference-between-working-in-local-repos-github-repos-and-github-codespaces-and-how-they-all-integrate">10.9.1. Can you clarify the difference between working in local repos, github repos, and github codespaces and how they all integrate?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-were-the-older-verion-controls-and-what-similar-features-did-it-have-to-git-that-remains-present-in-git-present-day">10.9.2. how were the older verion controls and what similar features did it have to git that remains present in git present day?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-there-a-difference-between-porcealin-and-plumbing-commands-when-they-both-interact-with-the-file-system-and-are-dependent-on-its-contents">10.9.3. why is there a difference between Porcealin and Plumbing commands when they both interact with the file system and are dependent on its contents?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-the-list-of-commit-objects-ever-become-long-enough-to-cause-issues">10.9.4. Can the list of commit (objects) ever become long enough to cause issues?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Professor Sarah M Brown
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  made with [jupyterbook](https://jupyterbook.org/en/stable/intro.html)
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

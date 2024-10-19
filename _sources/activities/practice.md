@@ -80,3 +80,24 @@ Activities:
 Activities:
 ```{include} ../_practice/2024-10-03.md
 ```
+## 2024-10-08
+
+[related notes](../notes/2024-10-08)
+
+Activities:
+```{include} ../_practice/2024-10-08.md
+```
+## 2024-10-10
+
+[related notes](../notes/2024-10-10)
+
+Activities:
+```{include} ../_practice/2024-10-10.md
+```
+## 2024-10-17
+
+[related notes](../notes/2024-10-17)
+
+Activities:
+```{include} ../_practice/2024-10-17.md
+```

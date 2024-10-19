@@ -204,6 +204,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../notes/2024-09-24.html">6. Patterns in git and bash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/2024-09-26.html">7. Why are these tools like this?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-01.html">8. What <em>is</em> a commit?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-03.html">9. How do programmers communicate about code?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-08.html">10. What <em>is</em> git?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-10.html">11. What is a commit number?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-17.html">12. How does git <em>make</em> a commit?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="current nav bd-sidenav">
@@ -459,6 +463,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2024-10-01</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2024-10-01</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2024-10-03</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2024-10-08</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2024-10-10</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gittransition">gittransition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2024-10-17</a></li>
 </ul>
             </nav>
         </div>
@@ -597,6 +605,54 @@ the day’s material in a similar, but distinct way. They represent the minimum 
 <li><p>Learn about the documentation ecosystem in another language that you know using at least one official source and additional sources as you find helpful. In <code class="docutils literal notranslate"><span class="pre">docs-practice.md</span></code> include a summary of your findings and compare and contrast it to jupyter book/sphinx.  Include a <a class="reference external" href="https://jupyterbook.org/en/stable/content/citations.html">bibtex based bibliography</a> of the sources you used. You can use <a class="reference external" href="https://url-to-bibtex.vercel.app/">this generator</a> for informal sources and <a class="reference external" href="https://digitalmeasures.oregonstate.edu/training/export-bibtex-google-scholar">google scholar</a> for formal sources (or a reference manager).</p></li>
 </ol>
 </section>
+<section id="id11">
+<h2>2024-10-08<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="../notes/2024-10-08.html"><span class="doc std std-doc">related notes</span></a></p>
+<p>Activities:</p>
+<ol class="arabic simple">
+<li><p>Read about different workflows in git and add responses to the below in a <span class="target" id="index-14"></span>workflows.md in your kwl repo. Two good places to read from are <a class="reference external" href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#ch05-distributed-git">Git Book</a> and the <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows">atlassian Docs</a></p></li>
+<li><p>Update your kwl chart with what you have learned or new questions in the want to know column</p></li>
+<li><p>Add the hash of the content of your completed <span class="target" id="index-15"></span>workflows.md file and put that in the comment of your badge PR for this badge. <em>Try to do this from your local CLI, but full credit even if you use the website interface</em></p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>## Workflow Reflection
+
+1. Why is it important that git can be used with different workflows?
+1. Which workflow do you think you would like to work with best and why?
+1. Describe a scenario that might make it better for the whole team to use a workflow other than the one you prefer.  
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h2>2024-10-10<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="../notes/2024-10-10.html"><span class="doc std std-doc">related notes</span></a></p>
+<p>Activities:</p>
+<ol class="arabic simple" start="3">
+<li><p>Analyze the xor hashing algorithm in the notes to determine which properties of a cryptographic hash are/not met. Include your analysis in <span class="target" id="index-16"></span>xorhash.md</p></li>
+<li><p>find 2 more real world examples of using other number systems (either different bases or different symbols and bases) <strong>not mentioned in class</strong> that are currently used. Describe the number system and its usage in <span class="target" id="index-17"></span>numbers.md. Include links to your sources and be sure that the sources are trustworthy.</p></li>
+<li><p>Calculate the maximum number of git objects that a repo can have without requiring you to use more than the minimum number of characters to refer to any object and include that number in  <span class="target" id="index-18"></span>gitcounts_scenarios.md  with a title <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">Git</span> <span class="pre">counts</span></code>. Describe 3 scenarios that would get you to that number of objects in terms of what types of objects would exist. For example, what is the maximum number of commits you could have without exceeding that number? How could you get to that number of objects in the fewest number of commits? What might be a typical way to get there? Assume normal git use with porcelain commands, not atypical cases with plubming commands. <em>If you get stuck, outline what you know and then request a review.</em></p></li>
+<li><p>Read about the Learn more about the <a class="reference external" href="https://shattered.io/">SHA-1 collision attach</a></p></li>
+<li><p>Learn more about how git is working on changing from SHA-1 to SHA-256 and answer the transition questions below <span class="target" id="index-19"></span>gittransition.md</p></li>
+</ol>
+</section>
+<section id="gittransition">
+<h2>gittransition<a class="headerlink" href="#gittransition" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># transition questions
+
+1. Why make the switch? (in detail, not just *an attack*)
+2. What impact will the switch have on how git works?
+3. Which developers will have the most work to do because of the switch?
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h2>2024-10-17<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="../notes/2024-10-17.html"><span class="doc std std-doc">related notes</span></a></p>
+<p>Activities:</p>
+<ol class="arabic simple">
+<li><p>Read more details about <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Internals-Git-Objects">git internals</a> to review what we did in class in greater detail. Make a file <span class="target" id="index-20"></span>gitplumbingdetail.md and create a a table or mermaid diagram that shows the relationship between at least <strong>three</strong> porcelain commands and their corresponding plumbing commands (generally more than one each).</p></li>
+<li><p>Create <span class="target" id="index-21"></span>gitislike.md and explain main git operations we have seen (add, commit, push) in your own words in a way that will either help you remember or how you would explain it to someone else at a high level. This might be analogies or explanations using other programming concepts or concepts from a hobby.</p></li>
+</ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -673,6 +729,10 @@ the day’s material in a similar, but distinct way. They represent the minimum 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2024-10-01</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2024-10-01</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2024-10-03</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2024-10-08</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2024-10-10</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gittransition">gittransition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2024-10-17</a></li>
 </ul>
   </nav></div>
 
@@ -710,6 +770,9 @@ By Professor Sarah M Brown
   
   <div class="footer-item">
     
+<div class="extra_footer">
+  made with [jupyterbook](https://jupyterbook.org/en/stable/intro.html)
+</div>
   </div>
   
 </div>

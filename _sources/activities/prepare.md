@@ -15,7 +15,7 @@ The correct answer is not as important for these activities as it is to do them 
 ## 2024-09-10
 
 
-```{include} ../_review_/2024-09-10.md
+```{include} ../_review/2024-09-10.md
 ```
 ## 2024-09-17
 
@@ -80,4 +80,25 @@ Activities:
 
 Activities:
 ```{include} ../_prepare/2024-10-08.md
+```
+## 2024-10-10
+
+[related notes](../notes/2024-10-10)
+
+Activities:
+```{include} ../_prepare/2024-10-10.md
+```
+## 2024-10-17
+
+[related notes](../notes/2024-10-17)
+
+Activities:
+```{include} ../_prepare/2024-10-17.md
+```
+## 2024-10-22
+
+[related notes](../notes/2024-10-22)
+
+Activities:
+```{include} ../_prepare/2024-10-22.md
 ```

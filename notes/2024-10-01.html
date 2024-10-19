@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2024-10-01';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="KWL Chart" href="../activities/kwl.html" />
+    <link rel="next" title="9. How do programmers communicate about code?" href="2024-10-03.html" />
     <link rel="prev" title="7. Why are these tools like this?" href="2024-09-26.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -204,6 +204,10 @@
 <li class="toctree-l1"><a class="reference internal" href="2024-09-24.html">6. Patterns in git and bash</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2024-09-26.html">7. Why are these tools like this?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">8. What <em>is</em> a commit?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-03.html">9. How do programmers communicate about code?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-08.html">10. What <em>is</em> git?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-10.html">11. What is a commit number?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-17.html">12. How does git <em>make</em> a commit?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="nav bd-sidenav">
@@ -466,7 +470,14 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-tags-point-to-commits-and-do-not-move">8.7. Git tags point to commits and do not move</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">8.8. Badges</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">8.9. Experience Report Evidence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">8.10. Questions After Today’s Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">8.10. Questions After Today’s Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#besides-a-linked-list-what-other-data-structures-or-algorithms-does-git-use-on-its-inner-workings">8.10.1. Besides a linked list, what other data structures or algorithms does git use on its inner workings?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-did-running-ls-git-objects-had-no-files-even-when-i-have-a-commit-history">8.10.2. Why did running <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">.git/objects</span></code> had no files even when I have a commit history?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-only-reason-i-would-need-to-sign-a-commit-is-to-show-that-i-am-the-one-dispersing-it-so-it-doesnt-seem-like-spam-or-a-virus-or-should-signing-commits-become-a-frequent-practice">8.10.3. Is the only reason I would need to sign a commit is to show that I am the one dispersing it so it doesn’t seem like spam or a virus? or should signing commits become a frequent practice?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-i-entered-git-cat-file-p-39d5-in-the-command-line-the-result-was-file-with-function-with-instructions-for-pip-what-does-this-mean">8.10.4. When I entered “git cat-file -p 39d5” in the command line, the result was “file with function with instructions for pip”. What does this mean?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-reason-for-tags-are-they-means-of-labeling-or-means-of-access">8.10.5. What is the reason for tags? Are they means of labeling? Or means of access?</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -539,6 +550,33 @@ a community badge opportunity</p>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="go">commit 1e2ab9259651a73ad277e826d602514d28969c86 (HEAD -&gt; organization)</span>
+</span><span class="linenos"> 2</span><span class="go">Author: Sarah M Brown &lt;brownsarahm@uri.edu&gt;</span>
+<span class="linenos"> 3</span><span class="go">Date:   Tue Sep 24 13:30:44 2024 -0400</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="go">    include readmen content</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="go">commit 87c72aeca9bd16700fc8fd8ee719136c13e83e01 (origin/organization)</span>
+<span class="linenos"> 8</span><span class="go">Author: Sarah M Brown &lt;brownsarahm@uri.edu&gt;</span>
+<span class="linenos"> 9</span><span class="go">Date:   Tue Sep 24 13:23:36 2024 -0400</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="go">    stop tracking</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="go">commit d2d1fac72642204bfdcebc7703d786615b8de934</span>
+<span class="linenos">14</span><span class="go">Author: Sarah M Brown &lt;brownsarahm@uri.edu&gt;</span>
+<span class="linenos">15</span><span class="go">Date:   Tue Sep 24 13:16:10 2024 -0400</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="go">    organized files into foleders and ignore private</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="go">commit a3904a0a5e7adbcbf9fe439c387fb4dbd7846c51</span>
+<span class="linenos">20</span><span class="go">Author: Sarah M Brown &lt;brownsarahm@uri.edu&gt;</span>
+<span class="linenos">21</span><span class="go">Date:   Tue Sep 24 12:46:19 2024 -0400</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="go">    Revert &quot;start organizing&quot;</span>
+<span class="linenos">24</span><span class="go">    </span>
+<span class="linenos">25</span><span class="go">    This reverts commit 9120d9d88aa587e4ffda1ee9aa8c3dcf8f764f7e.</span>
+</pre></div>
 </div>
 <p>here we see some parts:</p>
 <ul class="simple">
@@ -1076,6 +1114,31 @@ Practice</label><div class="sd-tab-content docutils">
 </section>
 <section id="questions-after-todays-class">
 <h2><span class="section-number">8.10. </span>Questions After Today’s Class<a class="headerlink" href="#questions-after-todays-class" title="Link to this heading">#</a></h2>
+<section id="besides-a-linked-list-what-other-data-structures-or-algorithms-does-git-use-on-its-inner-workings">
+<h3><span class="section-number">8.10.1. </span>Besides a linked list, what other data structures or algorithms does git use on its inner workings?<a class="headerlink" href="#besides-a-linked-list-what-other-data-structures-or-algorithms-does-git-use-on-its-inner-workings" title="Link to this heading">#</a></h3>
+<p>the main algorithm it uses is hashing.</p>
+<p>More detail here is a good explore badge.</p>
+</section>
+<section id="why-did-running-ls-git-objects-had-no-files-even-when-i-have-a-commit-history">
+<h3><span class="section-number">8.10.2. </span>Why did running <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">.git/objects</span></code> had no files even when I have a commit history?<a class="headerlink" href="#why-did-running-ls-git-objects-had-no-files-even-when-i-have-a-commit-history" title="Link to this heading">#</a></h3>
+<p>git compresses content into packfiles at times. This is rare, but can happen.</p>
+</section>
+<section id="is-the-only-reason-i-would-need-to-sign-a-commit-is-to-show-that-i-am-the-one-dispersing-it-so-it-doesnt-seem-like-spam-or-a-virus-or-should-signing-commits-become-a-frequent-practice">
+<h3><span class="section-number">8.10.3. </span>Is the only reason I would need to sign a commit is to show that I am the one dispersing it so it doesn’t seem like spam or a virus? or should signing commits become a frequent practice?<a class="headerlink" href="#is-the-only-reason-i-would-need-to-sign-a-commit-is-to-show-that-i-am-the-one-dispersing-it-so-it-doesnt-seem-like-spam-or-a-virus-or-should-signing-commits-become-a-frequent-practice" title="Link to this heading">#</a></h3>
+<p>the answer is yes to both questions</p>
+</section>
+<section id="when-i-entered-git-cat-file-p-39d5-in-the-command-line-the-result-was-file-with-function-with-instructions-for-pip-what-does-this-mean">
+<h3><span class="section-number">8.10.4. </span>When I entered “git cat-file -p 39d5” in the command line, the result was “file with function with instructions for pip”. What does this mean?<a class="headerlink" href="#when-i-entered-git-cat-file-p-39d5-in-the-command-line-the-result-was-file-with-function-with-instructions-for-pip-what-does-this-mean" title="Link to this heading">#</a></h3>
+<p>your blob object 39d5 is a fil with that contents like:</p>
+<div class="highlight-default notranslate" id="id1"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="k">with</span> <span class="n">function</span> <span class="k">with</span> <span class="n">instructions</span> <span class="k">for</span> <span class="n">pip</span>
+</pre></div>
+</div>
+<p>we do not yet know its filenmae, but that is what this is.</p>
+</section>
+<section id="what-is-the-reason-for-tags-are-they-means-of-labeling-or-means-of-access">
+<h3><span class="section-number">8.10.5. </span>What is the reason for tags? Are they means of labeling? Or means of access?<a class="headerlink" href="#what-is-the-reason-for-tags-are-they-means-of-labeling-or-means-of-access" title="Link to this heading">#</a></h3>
+<p>they are for labeling and for creating fixed “versions” that can be used for a “release”. For example, in calss I use tags to create releases and then those make notifcations, but for software releases are like the times we push to users.</p>
+</section>
 </section>
 </section>
 
@@ -1119,11 +1182,11 @@ Practice</label><div class="sd-tab-content docutils">
       </div>
     </a>
     <a class="right-next"
-       href="../activities/kwl.html"
+       href="2024-10-03.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">KWL Chart</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>How do programmers communicate about code?</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1160,7 +1223,14 @@ Practice</label><div class="sd-tab-content docutils">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-tags-point-to-commits-and-do-not-move">8.7. Git tags point to commits and do not move</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">8.8. Badges</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">8.9. Experience Report Evidence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">8.10. Questions After Today’s Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">8.10. Questions After Today’s Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#besides-a-linked-list-what-other-data-structures-or-algorithms-does-git-use-on-its-inner-workings">8.10.1. Besides a linked list, what other data structures or algorithms does git use on its inner workings?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-did-running-ls-git-objects-had-no-files-even-when-i-have-a-commit-history">8.10.2. Why did running <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">.git/objects</span></code> had no files even when I have a commit history?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-only-reason-i-would-need-to-sign-a-commit-is-to-show-that-i-am-the-one-dispersing-it-so-it-doesnt-seem-like-spam-or-a-virus-or-should-signing-commits-become-a-frequent-practice">8.10.3. Is the only reason I would need to sign a commit is to show that I am the one dispersing it so it doesn’t seem like spam or a virus? or should signing commits become a frequent practice?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-i-entered-git-cat-file-p-39d5-in-the-command-line-the-result-was-file-with-function-with-instructions-for-pip-what-does-this-mean">8.10.4. When I entered “git cat-file -p 39d5” in the command line, the result was “file with function with instructions for pip”. What does this mean?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-reason-for-tags-are-they-means-of-labeling-or-means-of-access">8.10.5. What is the reason for tags? Are they means of labeling? Or means of access?</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -1198,6 +1268,9 @@ By Professor Sarah M Brown
   
   <div class="footer-item">
     
+<div class="extra_footer">
+  made with [jupyterbook](https://jupyterbook.org/en/stable/intro.html)
+</div>
   </div>
   
 </div>
