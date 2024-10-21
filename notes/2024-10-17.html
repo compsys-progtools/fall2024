@@ -457,7 +457,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-the-file-system">12.2. Searching the file system</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-objects">12.3. Git Objects</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-an-object">12.3.1. How to create an object</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashing-a-file">12.3.2. Hashing a file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-git-objects">12.3.2. Viewing git objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashing-a-file">12.3.3. Hashing a file</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-index">12.4. Updating the Index</a><ul class="nav section-nav flex-column">
@@ -810,16 +811,38 @@ document.write(`
 <span class="go">jjsdkf</span>
 </pre></div>
 </div>
+</div>
 <p>Now let’s run it again with a slight modification. <code class="docutils literal notranslate"><span class="pre">-w</span></code> option tells the command to also write that object to the database</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;test content&quot;</span> <span class="o">|</span> <span class="n">git</span> <span class="nb">hash</span><span class="o">-</span><span class="nb">object</span> <span class="o">-</span><span class="n">w</span> <span class="o">--</span><span class="n">stdin</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">d670460b4b4aece5915caf5c68d12f560a9fe3e4</span>
 </pre></div>
 </div>
 <p>and we can check if it wrote to the repository.</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">find</span> <span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">objects</span><span class="o">/</span> <span class="o">-</span><span class="nb">type</span> <span class="n">f</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">.git/objects//d6/70460b4b4aece5915caf5c68d12f560a9fe3e4</span>
 </pre></div>
 </div>
 <p>and we see a file that it was supposed to have!</p>
 <p>We do not have any files or commits though still.</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">status</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">On branch main</span>
 
 <span class="go">No commits yet</span>
@@ -827,21 +850,48 @@ document.write(`
 <span class="go">nothing to commit (create/copy files and use &quot;git add&quot; to track)</span>
 </pre></div>
 </div>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span>
 </pre></div>
 </div>
-<h3 class="rubric" id="viewing-git-objects">Viewing git objects</h3>
+</div>
+</div>
+</section>
+<section id="viewing-git-objects">
+<h3><span class="section-number">12.3.2. </span>Viewing git objects<a class="headerlink" href="#viewing-git-objects" title="Link to this heading">#</a></h3>
 <p>We can try with <code class="docutils literal notranslate"><span class="pre">cat</span></code></p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">.</span><span class="n">git</span><span class="o">/</span><span class="n">objects</span><span class="o">/</span><span class="n">d6</span><span class="o">/</span><span class="mi">70460</span><span class="n">b4b4aece5915caf5c68d12f560a9fe3e4</span> 
+</pre></div>
+</div>
+</div>
+</div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">xK??OR04f(I-.QH??+I?+?K?	</span>
 </pre></div>
 </div>
 <p>This is binary output that we cannot understand.  Fortunately, git provides a utility. We can use <code class="docutils literal notranslate"><span class="pre">cat-file</span></code> to use the object by referencing at least 4 characters that are unique from the full hash, not the file name. (<code class="docutils literal notranslate"><span class="pre">7046</span></code> will not work, but <code class="docutils literal notranslate"><span class="pre">d670</span></code> will)</p>
 <p><code class="docutils literal notranslate"><span class="pre">cat-file</span></code> requires <em>an</em> option <code class="docutils literal notranslate"><span class="pre">-p</span></code> is for pretty print</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">cat</span><span class="o">-</span><span class="n">file</span> <span class="o">-</span><span class="n">p</span> <span class="n">d670</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">test content</span>
 </pre></div>
 </div>
 <p>where we see the content we put in to the hashing function</p>
 <p>and <code class="docutils literal notranslate"><span class="pre">-t</span></code> is for type</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">cat</span><span class="o">-</span><span class="n">file</span> <span class="o">-</span><span class="n">t</span> <span class="n">d670</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">blob</span>
 </pre></div>
 </div>
@@ -849,7 +899,6 @@ document.write(`
 <p class="admonition-title">Hint</p>
 <p>You can always use the <code class="docutils literal notranslate"><span class="pre">--help</span></code> on any <code class="docutils literal notranslate"><span class="pre">git</span></code> command to
 learn more about its options</p>
-</div>
 </div>
 <p>These options cannot be stacked</p>
 <div class="cell tag_skip-execution docutils container">
@@ -868,7 +917,7 @@ both asks for 2 different types of content which would then not be usable in a b
 pipe so it would be bad design in terms of the unix philosophy to do that.</p>
 </section>
 <section id="hashing-a-file">
-<h3><span class="section-number">12.3.2. </span>Hashing a file<a class="headerlink" href="#hashing-a-file" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">12.3.3. </span>Hashing a file<a class="headerlink" href="#hashing-a-file" title="Link to this heading">#</a></h3>
 <p>let’s create a file</p>
 <div class="cell tag_skip-execution docutils container">
 <div class="cell_input docutils container">
@@ -1630,7 +1679,8 @@ changes to the files between the snapshots at those two commits.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-the-file-system">12.2. Searching the file system</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-objects">12.3. Git Objects</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-an-object">12.3.1. How to create an object</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashing-a-file">12.3.2. Hashing a file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-git-objects">12.3.2. Viewing git objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hashing-a-file">12.3.3. Hashing a file</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-index">12.4. Updating the Index</a><ul class="nav section-nav flex-column">
