@@ -199,6 +199,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-17.html">12. How does git <em>make</em> a commit?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-22.html">13. How can I automate things with bash?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-24.html">14. How can I work on a remote server?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/2024-10-29.html">15. What happens when I build code in C?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="current nav bd-sidenav">
@@ -453,6 +454,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2024-10-22</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-idea">Explore idea</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2024-10-24</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2024-10-29</a></li>
 </ul>
             </nav>
         </div>
@@ -668,6 +670,17 @@ the day’s material in a similar, but distinct way. They represent the minimum 
 </li>
 </ol>
 </section>
+<section id="id16">
+<h2>2024-10-29<a class="headerlink" href="#id16" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="../notes/2024-10-29.html"><span class="doc std std-doc">related notes</span></a></p>
+<p>Activities:</p>
+<ol class="arabic simple">
+<li><p>On Seawulf, modfiy <span class="target" id="index-23"></span>main.c from class to accept the integer as a command line argument instead of via input while running the program. <a class="reference external" href="http://crasseux.com/books/ctutorial/argc-and-argv.html">See this tutorial for an example</a>.</p></li>
+<li><p>Write a bash script <span class="target" id="index-24"></span>demo_test.sh that runs your compiled program for each integer from 10 to 30 (syntax for a range is <code class="docutils literal notranslate"><span class="pre">{start..end}</span></code> so this would be <code class="docutils literal notranslate"><span class="pre">{10..30}</span></code>)</p></li>
+<li><p>Write an sbatch script, <span class="target" id="index-25"></span>batchrun.sh to run your script  on a compute node and save the output to a file. The sbatch script should compile and link the program and then call the script. <a class="reference external" href="https://web.uri.edu/hpc-research-computing/using-seawulf/#sbatch">see the options</a></p></li>
+<li><p>use <a class="reference external" href="https://www2.stat.duke.edu/comp/security/scp_man.html">scp</a> to download your modified main, script files, and output to your local computer and include them in your kwl repo.</p></li>
+</ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -752,6 +765,7 @@ the day’s material in a similar, but distinct way. They represent the minimum 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2024-10-22</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-idea">Explore idea</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2024-10-24</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2024-10-29</a></li>
 </ul>
   </nav></div>
 

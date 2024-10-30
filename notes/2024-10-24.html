@@ -66,7 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2024-10-24';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="KWL Chart" href="../activities/kwl.html" />
+    <link rel="next" title="15. What happens when I build code in C?" href="2024-10-29.html" />
     <link rel="prev" title="13. How can I automate things with bash?" href="2024-10-22.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -199,6 +199,7 @@
 <li class="toctree-l1"><a class="reference internal" href="2024-10-17.html">12. How does git <em>make</em> a commit?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2024-10-22.html">13. How can I automate things with bash?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">14. How can I work on a remote server?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-29.html">15. What happens when I build code in C?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="nav bd-sidenav">
@@ -450,7 +451,12 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-for-next-class">14.8. Prepare for Next Class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">14.9. Badges</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">14.10. Experience Report Evidence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">14.11. Questions After Today’s Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">14.11. Questions After Today’s Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-going-on-behind-the-scenes-to-get-our-gitbash-terminal-access-to-seawulf-via-our-uri-account">14.11.1. What is going on behind the scenes to get our GitBash terminal access to seawulf via our uri account?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-we-were-working-in-the-terminal-how-were-we-not-connected-to-the-uri-wifi-what-wifi-were-we-connected-to-why-was-it-so-much-faster">14.11.2. When we were working in the terminal, how were we not connected to the URI wifi? what wifi were we connected to? Why was it so much faster?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-future-of-hpc-cloud-based">14.11.3. Is the future of HPC cloud based?</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -1316,6 +1322,22 @@ Practice</label><div class="sd-tab-content docutils">
 </section>
 <section id="questions-after-todays-class">
 <h2><span class="section-number">14.11. </span>Questions After Today’s Class<a class="headerlink" href="#questions-after-todays-class" title="Link to this heading">#</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can learn more about working on a server for an explore badge. For example connecting via ssh to AWS, google cloud, or similar, or doing more work on seawulf.</p>
+</div>
+<section id="what-is-going-on-behind-the-scenes-to-get-our-gitbash-terminal-access-to-seawulf-via-our-uri-account">
+<h3><span class="section-number">14.11.1. </span>What is going on behind the scenes to get our GitBash terminal access to seawulf via our uri account?<a class="headerlink" href="#what-is-going-on-behind-the-scenes-to-get-our-gitbash-terminal-access-to-seawulf-via-our-uri-account" title="Link to this heading">#</a></h3>
+<p>Your local terminal opens a secure shell (ssh) connection and then that serves as the interface to the shell on the remove server.</p>
+</section>
+<section id="when-we-were-working-in-the-terminal-how-were-we-not-connected-to-the-uri-wifi-what-wifi-were-we-connected-to-why-was-it-so-much-faster">
+<h3><span class="section-number">14.11.2. </span>When we were working in the terminal, how were we not connected to the URI wifi? what wifi were we connected to? Why was it so much faster?<a class="headerlink" href="#when-we-were-working-in-the-terminal-how-were-we-not-connected-to-the-uri-wifi-what-wifi-were-we-connected-to-why-was-it-so-much-faster" title="Link to this heading">#</a></h3>
+<p>Our laptops were using the URI wifi to talk to the server, but then when we downloaded the file, the <em>server</em> used the hardwired faster connection to the internet</p>
+</section>
+<section id="is-the-future-of-hpc-cloud-based">
+<h3><span class="section-number">14.11.3. </span>Is the future of HPC cloud based?<a class="headerlink" href="#is-the-future-of-hpc-cloud-based" title="Link to this heading">#</a></h3>
+<p>Comparing and contrasting these is a good explore topic.</p>
+</section>
 </section>
 </section>
 
@@ -1359,11 +1381,11 @@ Practice</label><div class="sd-tab-content docutils">
       </div>
     </a>
     <a class="right-next"
-       href="../activities/kwl.html"
+       href="2024-10-29.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">KWL Chart</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>What happens when I build code in C?</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1398,7 +1420,12 @@ Practice</label><div class="sd-tab-content docutils">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-for-next-class">14.8. Prepare for Next Class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">14.9. Badges</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">14.10. Experience Report Evidence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">14.11. Questions After Today’s Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">14.11. Questions After Today’s Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-going-on-behind-the-scenes-to-get-our-gitbash-terminal-access-to-seawulf-via-our-uri-account">14.11.1. What is going on behind the scenes to get our GitBash terminal access to seawulf via our uri account?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-we-were-working-in-the-terminal-how-were-we-not-connected-to-the-uri-wifi-what-wifi-were-we-connected-to-why-was-it-so-much-faster">14.11.2. When we were working in the terminal, how were we not connected to the URI wifi? what wifi were we connected to? Why was it so much faster?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-future-of-hpc-cloud-based">14.11.3. Is the future of HPC cloud based?</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
