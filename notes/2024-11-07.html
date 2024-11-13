@@ -68,7 +68,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2024-11-07';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="KWL Chart" href="../activities/kwl.html" />
+    <link rel="next" title="19. How can we use logical operations?" href="2024-11-12.html" />
     <link rel="prev" title="17. What happens when we run code?" href="2024-11-06.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -205,6 +205,7 @@
 <li class="toctree-l1"><a class="reference internal" href="2024-10-31.html">16. What <em>is</em> an IDE?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2024-11-06.html">17. What happens when we run code?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">18. How does a computer represent non integer quantities?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-12.html">19. How can we use logical operations?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="nav bd-sidenav">
@@ -468,42 +469,12 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <ol class="arabic simple">
-<li><p>In <span class="target" id="index-0"></span>fractionalbinary.md use 8 bits to represent the following numbers by using 4 bits as usual (8,4,2,1) and the other 4 bits are 1/2, 1/4, 1/8, 1/16th:</p></li>
-</ol>
-<ul class="simple">
-<li><p>1.5</p></li>
-</ul>
-<blockquote>
-<div><p>0001.1000</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>12.75</p></li>
-</ul>
-<blockquote>
-<div><p>1100.1100</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>7.5625</p></li>
-</ul>
-<blockquote>
-<div><p>0111.1001</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>15.9375</p></li>
-</ul>
-<blockquote>
-<div><p>1111.1111</p>
-</div></blockquote>
-<ol class="arabic simple">
-<li><p>Add to your file some notes about the limitations of representing non integer values this way. How much would using more bits help with, what limitations are not resolved by adding more bits. For example, how could you represent .1?</p></li>
-</ol>
-<section class="tex2jax_ignore mathjax_ignore" id="how-does-a-computer-represent-non-integer-quantities">
+  <section class="tex2jax_ignore mathjax_ignore" id="how-does-a-computer-represent-non-integer-quantities">
 <h1><span class="section-number">18. </span>How does a computer represent non integer quantities?<a class="headerlink" href="#how-does-a-computer-represent-non-integer-quantities" title="Link to this heading">#</a></h1>
 <section id="prepare-work">
 <h2><span class="section-number">18.1. </span>prepare work<a class="headerlink" href="#prepare-work" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>In <span class="target" id="index-1"></span>fractionalbinary.md use 8 bits to represent the following numbers by using 4 bits as usual (8,4,2,1) and the other 4 bits are 1/2, 1/4, 1/8, 1/16th:</p></li>
+<li><p>In <span class="target" id="index-0"></span>fractionalbinary.md use 8 bits to represent the following numbers by using 4 bits as usual (8,4,2,1) and the other 4 bits are 1/2, 1/4, 1/8, 1/16th:</p></li>
 </ol>
 <ul class="simple">
 <li><p>1.5</p></li>
@@ -579,8 +550,7 @@
 <!-- ![]() -->
 <!-- drawing on fixed/flaot -->
 <!-- ![]() -->
-<!-- drawing on fixed/flaot -->
-<p>would be</p>
+<!-- drawing on fixed/flaot --><p>would be</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="o">-</span><span class="mi">1000</span><span class="o">-</span><span class="mi">001</span>
 </pre></div>
 </div>
@@ -639,6 +609,18 @@ Even rounding does not make it work.</p>
 <p>This matters because we cannot rely on equality tests for floats</p>
 </div>
 <p>Instead, we use subtraction and a tolerance:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mf">.1</span><span class="o">+</span><span class="mf">.1</span><span class="o">+</span><span class="mf">.1</span> <span class="o">-</span> <span class="mf">.3</span><span class="p">)</span><span class="o">&lt;</span> <span class="mf">.0001</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">round</span><span class="p">(</span><span class="mf">.1</span> <span class="o">+</span> <span class="mf">.1</span><span class="o">+</span> <span class="mf">.1</span> <span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -697,8 +679,7 @@ is what basically everyone uses, but it is technically a choice hardware manufac
 <p>following the equation, we get:</p>
 <div class="math notranslate nohighlight">
 \[ (-1)*0 + \left(1 + 0\cdot 2^{-1} + 1\cdot 2^{-2} + 0\cdot 2^{-3}  + \ldots  + 0\cdot 2^{-51} + 0\cdot 2^{-52} \right) \times 2^{1023-1023} = 0 + (1 + \frac{1}{4}) \times 2^0  = 1.25 \times 1 =  1.25 \]</div>
-<!-- #endregion -->
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mb">0b01111111111</span>
+<!-- #endregion --><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mb">0b01111111111</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">float</span><span class="o">.</span><span class="n">hex</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
@@ -710,6 +691,18 @@ is what basically everyone uses, but it is technically a choice hardware manufac
 </section>
 <section id="why-use-e-1023-for-the-exponent">
 <h3><span class="section-number">18.7.2. </span>Why use e-1023 for the exponent?<a class="headerlink" href="#why-use-e-1023-for-the-exponent" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="o">**</span><span class="mi">11</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2048
+</pre></div>
+</div>
+</div>
+</div>
 <p>so 1023 is half -1, this means that we split the possible range of numbers that we can represent in the exponent to positive and negative, meaning the whole expression <span class="math notranslate nohighlight">\(2^{e-1023}\)</span> ranges from large(<span class="math notranslate nohighlight">\(2^{1025}\)</span>) to small(<span class="math notranslate nohighlight">\(2^{-1023}\)</span>)</p>
 </section>
 <section id="how-do-we-get-numbers-into-this-form">
@@ -719,8 +712,7 @@ is what basically everyone uses, but it is technically a choice hardware manufac
 <p>Let’s take the equation we had from the standard:</p>
 <div class="math notranslate nohighlight">
 \[  \left(1 + \sum_{i=1}^{52} b_{52-i} 2^{-i}\right) \times 2^{e-1023}\]</div>
-<!-- #endregion -->
-<p>If we think about the fraction and how we add fractions, by reaching a common denominator. Since they’re all powers of two, we can use the last one.</p>
+<!-- #endregion --><p>If we think about the fraction and how we add fractions, by reaching a common denominator. Since they’re all powers of two, we can use the last one.</p>
 <div class="math notranslate nohighlight">
 \[  \left(1 + \sum_{i=1}^{52} b_{52-i} 2^{-i}\right) \times 2^{e-1023}\]</div>
 <p>and we can expand the sum to a different notation for visual clarity</p>
@@ -760,6 +752,18 @@ $<span class="math notranslate nohighlight">\( \frac{2^N }{2^4} &lt; \frac{2^N }
 \[ 2^{52} &lt;= \frac{2^N }{10} &lt; 2^{53} \]</div>
 <p>then best <span class="math notranslate nohighlight">\(N\)</span> is 56,.</p>
 <p>We can confirm this in a calculator</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="o">**</span><span class="mi">52</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">46</span><span class="o">/</span><span class="mi">10</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">53</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
 <p>Now we can get the number we will use for <span class="math notranslate nohighlight">\(J\)</span>. We want to get as close to .1 with our fraction as possible, so
 we get the quotient and remainder, the quotient will be the number we use, but we use the remainder to see if we round up or not</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">q</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">56</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
@@ -776,6 +780,23 @@ we get the quotient and remainder, the quotient will be the number we use, but w
 <p>then we can check the length in bits of that number</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">q</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">-</span><span class="mi">2</span>
 </pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">q</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span><span class="o">-</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">len</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">q</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span><span class="o">-</span><span class="mi">2</span>
+
+<span class="ne">NameError</span>: name &#39;q&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">bin</span><span class="p">(</span><span class="n">q</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -844,11 +865,11 @@ we get the quotient and remainder, the quotient will be the number we use, but w
       </div>
     </a>
     <a class="right-next"
-       href="../activities/kwl.html"
+       href="2024-11-12.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">KWL Chart</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>How can we use logical operations?</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
