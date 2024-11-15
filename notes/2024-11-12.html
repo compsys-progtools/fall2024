@@ -68,7 +68,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2024-11-12';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="KWL Chart" href="../activities/kwl.html" />
+    <link rel="next" title="20. What is a computer?" href="2024-11-14.html" />
     <link rel="prev" title="18. How does a computer represent non integer quantities?" href="2024-11-07.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -206,6 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="2024-11-06.html">17. What happens when we run code?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2024-11-07.html">18. How does a computer represent non integer quantities?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">19. How can we use logical operations?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-14.html">20. What <em>is</em> a computer?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="nav bd-sidenav">
@@ -451,6 +452,15 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-this">19.4. Why do this?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">19.5. Experience Report Evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">19.6. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-a-computer-relate-this-process-to-decimals-negative-numbers-basically-things-that-arent-just-integers">19.6.1. How does a computer relate this process to decimals/negative numbers; basically things that aren’t just integers?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-a-full-adder-be-cascaded-to-add-numbers-larger-than-three-bits">19.6.2. Can a full adder be cascaded to add numbers larger than three bits?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-the-alignment-of-logic-gates-whether-series-parallel-impact-performance-as-in-other-electrical-components-like-resistors-transistors-etc-alignment-does-matter">19.6.3. Does the alignment of logic gates whether series/parallel impact performance, as in other electrical components like resistors, transistors, etc, alignment does matter?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-did-we-learn-temp-varialbe-swap">19.6.4. Why did we learn temp varialbe swap?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-will-physical-limitations-of-computing-be-reached">19.6.5. When will physical limitations of computing be reached?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-doing-64-bits-just-the-same-expanded">19.6.6. is doing 64 bits just the same expanded?</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -733,9 +743,40 @@ that get used in interviews, not that you should memorize all of the puzzle ques
 </div>
 </div>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>An explore idea on this topic is to work with a hardware descriptvie language like verilog or vhdl</p>
+</div>
 </section>
 <section id="experience-report-evidence">
 <h2><span class="section-number">19.5. </span>Experience Report Evidence<a class="headerlink" href="#experience-report-evidence" title="Link to this heading">#</a></h2>
+</section>
+<section id="questions-after-class">
+<h2><span class="section-number">19.6. </span>Questions after class<a class="headerlink" href="#questions-after-class" title="Link to this heading">#</a></h2>
+<section id="how-does-a-computer-relate-this-process-to-decimals-negative-numbers-basically-things-that-arent-just-integers">
+<h3><span class="section-number">19.6.1. </span>How does a computer relate this process to decimals/negative numbers; basically things that aren’t just integers?<a class="headerlink" href="#how-does-a-computer-relate-this-process-to-decimals-negative-numbers-basically-things-that-arent-just-integers" title="Link to this heading">#</a></h3>
+<p>We saw floats last week, it’s also a place based even in floating point, so it still works.</p>
+</section>
+<section id="can-a-full-adder-be-cascaded-to-add-numbers-larger-than-three-bits">
+<h3><span class="section-number">19.6.2. </span>Can a full adder be cascaded to add numbers larger than three bits?<a class="headerlink" href="#can-a-full-adder-be-cascaded-to-add-numbers-larger-than-three-bits" title="Link to this heading">#</a></h3>
+<p>A full adder adds, 3 1-bit numbers, and yess it can be cascaed to add more than one bit.</p>
+</section>
+<section id="does-the-alignment-of-logic-gates-whether-series-parallel-impact-performance-as-in-other-electrical-components-like-resistors-transistors-etc-alignment-does-matter">
+<h3><span class="section-number">19.6.3. </span>Does the alignment of logic gates whether series/parallel impact performance, as in other electrical components like resistors, transistors, etc, alignment does matter?<a class="headerlink" href="#does-the-alignment-of-logic-gates-whether-series-parallel-impact-performance-as-in-other-electrical-components-like-resistors-transistors-etc-alignment-does-matter" title="Link to this heading">#</a></h3>
+<p>They need to be organized in the right way to execute the operation that you want.</p>
+</section>
+<section id="why-did-we-learn-temp-varialbe-swap">
+<h3><span class="section-number">19.6.4. </span>Why did we learn temp varialbe swap?<a class="headerlink" href="#why-did-we-learn-temp-varialbe-swap" title="Link to this heading">#</a></h3>
+<p>That requires less contextual knowledge, like xor, in some way and less math.  It also helps teach the concept of variables, which is the main thing we want people to learn in intro classes.</p>
+</section>
+<section id="when-will-physical-limitations-of-computing-be-reached">
+<h3><span class="section-number">19.6.5. </span>When will physical limitations of computing be reached?<a class="headerlink" href="#when-will-physical-limitations-of-computing-be-reached" title="Link to this heading">#</a></h3>
+<p>This is a good explore topic.</p>
+</section>
+<section id="is-doing-64-bits-just-the-same-expanded">
+<h3><span class="section-number">19.6.6. </span>is doing 64 bits just the same expanded?<a class="headerlink" href="#is-doing-64-bits-just-the-same-expanded" title="Link to this heading">#</a></h3>
+<p>Yes, we only looked at up to 8 bits because it is tractable to look at.</p>
+</section>
 </section>
 </section>
 
@@ -779,11 +820,11 @@ that get used in interviews, not that you should memorize all of the puzzle ques
       </div>
     </a>
     <a class="right-next"
-       href="../activities/kwl.html"
+       href="2024-11-14.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">KWL Chart</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>What <em>is</em> a computer?</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -812,6 +853,15 @@ that get used in interviews, not that you should memorize all of the puzzle ques
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-this">19.4. Why do this?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">19.5. Experience Report Evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">19.6. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-a-computer-relate-this-process-to-decimals-negative-numbers-basically-things-that-arent-just-integers">19.6.1. How does a computer relate this process to decimals/negative numbers; basically things that aren’t just integers?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-a-full-adder-be-cascaded-to-add-numbers-larger-than-three-bits">19.6.2. Can a full adder be cascaded to add numbers larger than three bits?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-the-alignment-of-logic-gates-whether-series-parallel-impact-performance-as-in-other-electrical-components-like-resistors-transistors-etc-alignment-does-matter">19.6.3. Does the alignment of logic gates whether series/parallel impact performance, as in other electrical components like resistors, transistors, etc, alignment does matter?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-did-we-learn-temp-varialbe-swap">19.6.4. Why did we learn temp varialbe swap?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-will-physical-limitations-of-computing-be-reached">19.6.5. When will physical limitations of computing be reached?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-doing-64-bits-just-the-same-expanded">19.6.6. is doing 64 bits just the same expanded?</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

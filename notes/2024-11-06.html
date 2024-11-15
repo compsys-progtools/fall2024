@@ -204,6 +204,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">17. What happens when we run code?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2024-11-07.html">18. How does a computer represent non integer quantities?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2024-11-12.html">19. How can we use logical operations?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-14.html">20. What <em>is</em> a computer?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="nav bd-sidenav">
@@ -448,7 +449,16 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-for-next-class">17.5. Prepare for Next Class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">17.6. Badges</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">17.7. Experience Report Evidence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">17.8. Questions After Today’s Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">17.8. Questions After Today’s Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-assembly-code-look-like-for-a-computer-with-a-good-memory-management-system-not-being-able-to-access-0-or-1-without-checks-that-things-exist-there-of-the-correct-type">17.8.1. What would assembly code look like for a computer with a good memory management system (not being able to access @0 or @1 without checks that things exist there of the correct type)?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-able-to-use-old-memory-after-we-over-write-it">17.8.2. Are we able to use old memory after we over write it?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-should-i-understand-when-simulating-as-i-was-not-grasping-the-concepts">17.8.3. What should I understand when simulating as I was not grasping the concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-prevelent-is-this-in-the-working-world">17.8.4. How prevelent is this in the working world ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-different-assembly-instructions-interact-with-each-component-in-more-complex-programs">17.8.5. How do different assembly instructions interact with each component in more complex programs?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-purposes-of-efficiency-when-the-developers-are-writing-built-in-libraries-for-their-languages-do-they-write-these-in-assembly">17.8.6. For purposes of efficiency, when the developers are writing built in libraries for their languages, do they write these in assembly?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-it-likely-we-have-to-write-in-assembly-in-our-future-jobs">17.8.7. is it likely we have to write in assembly in our future jobs</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -598,6 +608,40 @@ Practice</label><div class="sd-tab-content docutils">
 </section>
 <section id="questions-after-todays-class">
 <h2><span class="section-number">17.8. </span>Questions After Today’s Class<a class="headerlink" href="#questions-after-todays-class" title="Link to this heading">#</a></h2>
+<section id="what-would-assembly-code-look-like-for-a-computer-with-a-good-memory-management-system-not-being-able-to-access-0-or-1-without-checks-that-things-exist-there-of-the-correct-type">
+<h3><span class="section-number">17.8.1. </span>What would assembly code look like for a computer with a good memory management system (not being able to access &#64;0 or &#64;1 without checks that things exist there of the correct type)?<a class="headerlink" href="#what-would-assembly-code-look-like-for-a-computer-with-a-good-memory-management-system-not-being-able-to-access-0-or-1-without-checks-that-things-exist-there-of-the-correct-type" title="Link to this heading">#</a></h3>
+<p>That does not exist, the high level language does that and passes it to assembly already corrected.  This is one of the reasons we <em>have</em> high level languages, to abstract away these details so that we do not have to think about the low level details of the computer all the time.</p>
+</section>
+<section id="are-we-able-to-use-old-memory-after-we-over-write-it">
+<h3><span class="section-number">17.8.2. </span>Are we able to use old memory after we over write it?<a class="headerlink" href="#are-we-able-to-use-old-memory-after-we-over-write-it" title="Link to this heading">#</a></h3>
+<p>Yes!</p>
+</section>
+<section id="what-should-i-understand-when-simulating-as-i-was-not-grasping-the-concepts">
+<h3><span class="section-number">17.8.3. </span>What should I understand when simulating as I was not grasping the concepts<a class="headerlink" href="#what-should-i-understand-when-simulating-as-i-was-not-grasping-the-concepts" title="Link to this heading">#</a></h3>
+<p>Apply your tracing skills, follow what the steps are. Try to answer the following questions:</p>
+<ul class="simple">
+<li><p>How does information flow through the computer?</p></li>
+<li><p>How does the assembly compare to a high level programming language?</p></li>
+</ul>
+</section>
+<section id="how-prevelent-is-this-in-the-working-world">
+<h3><span class="section-number">17.8.4. </span>How prevelent is this in the working world ?<a class="headerlink" href="#how-prevelent-is-this-in-the-working-world" title="Link to this heading">#</a></h3>
+<p>A more complex version of this this happens every time any code is executed.  If the question is how many jobs work at this level, any jobs working at the hardware interface, building new devices woudl work with these ideas directly.</p>
+<p>However even higher level things like optimizing your own code, even with the assistance of an optimizer relies on you understanding <em>that</em> all fo this happens.  This simplified version is enough for you get ideas and look up details later.</p>
+</section>
+<section id="how-do-different-assembly-instructions-interact-with-each-component-in-more-complex-programs">
+<h3><span class="section-number">17.8.5. </span>How do different assembly instructions interact with each component in more complex programs?<a class="headerlink" href="#how-do-different-assembly-instructions-interact-with-each-component-in-more-complex-programs" title="Link to this heading">#</a></h3>
+<p>A more complex program would compile into a longer assembly instruction list.</p>
+</section>
+<section id="for-purposes-of-efficiency-when-the-developers-are-writing-built-in-libraries-for-their-languages-do-they-write-these-in-assembly">
+<h3><span class="section-number">17.8.6. </span>For purposes of efficiency, when the developers are writing built in libraries for their languages, do they write these in assembly?<a class="headerlink" href="#for-purposes-of-efficiency-when-the-developers-are-writing-built-in-libraries-for-their-languages-do-they-write-these-in-assembly" title="Link to this heading">#</a></h3>
+<p>Typically, no, you still write it in at least a C or Rust type high level language and then use an optimized copmiler to distribute it optimized.  People who work most with assembly would be those writing compilers.</p>
+</section>
+<section id="is-it-likely-we-have-to-write-in-assembly-in-our-future-jobs">
+<h3><span class="section-number">17.8.7. </span>is it likely we have to write in assembly in our future jobs<a class="headerlink" href="#is-it-likely-we-have-to-write-in-assembly-in-our-future-jobs" title="Link to this heading">#</a></h3>
+<p>No, the goal here is that you should <em>know</em> that your code will be expanded into more steps and what the types of operations that the computer can actual execute are so that you can make good choices.</p>
+<p>For example, even if using an AI to write code you might use a tool like <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=copilot-arena.copilot-arena">copilot arena</a> to get multiple options from LLMs and then you need to choose which one is best. The more you understand about what the computer does the better you will be at choosing a good one, or knowing when to reject what the AI gave you and ask it for something better.</p>
+</section>
 </section>
 </section>
 
@@ -673,7 +717,16 @@ Practice</label><div class="sd-tab-content docutils">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-for-next-class">17.5. Prepare for Next Class</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">17.6. Badges</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">17.7. Experience Report Evidence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">17.8. Questions After Today’s Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">17.8. Questions After Today’s Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-assembly-code-look-like-for-a-computer-with-a-good-memory-management-system-not-being-able-to-access-0-or-1-without-checks-that-things-exist-there-of-the-correct-type">17.8.1. What would assembly code look like for a computer with a good memory management system (not being able to access @0 or @1 without checks that things exist there of the correct type)?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-able-to-use-old-memory-after-we-over-write-it">17.8.2. Are we able to use old memory after we over write it?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-should-i-understand-when-simulating-as-i-was-not-grasping-the-concepts">17.8.3. What should I understand when simulating as I was not grasping the concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-prevelent-is-this-in-the-working-world">17.8.4. How prevelent is this in the working world ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-different-assembly-instructions-interact-with-each-component-in-more-complex-programs">17.8.5. How do different assembly instructions interact with each component in more complex programs?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-purposes-of-efficiency-when-the-developers-are-writing-built-in-libraries-for-their-languages-do-they-write-these-in-assembly">17.8.6. For purposes of efficiency, when the developers are writing built in libraries for their languages, do they write these in assembly?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-it-likely-we-have-to-write-in-assembly-in-our-future-jobs">17.8.7. is it likely we have to write in assembly in our future jobs</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

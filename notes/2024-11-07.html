@@ -206,6 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="2024-11-06.html">17. What happens when we run code?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">18. How does a computer represent non integer quantities?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2024-11-12.html">19. How can we use logical operations?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-14.html">20. What <em>is</em> a computer?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="nav bd-sidenav">
@@ -456,6 +457,15 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-read-a-number-like-this">18.7.1. How do we read a number like this?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-e-1023-for-the-exponent">18.7.2. Why use e-1023 for the exponent?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-get-numbers-into-this-form">18.7.3. How do we get numbers into this form?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">18.8. Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-did-they-find-the-equation-for-the-floating-point-standard">18.8.1. How did they find the equation for the floating point standard?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#did-we-guess-and-checkt-o-finnd-the-56">18.8.2. Did we guess and checkt o finnd the 56?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-there-different-formats-for-the-binary-floating-point-ieee-standard-again">18.8.3. Why is there different formats for the binary floating point IEEE standard again?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference-between-float-and-double">18.8.4. What is the difference between float and double?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-can-i-learn-more">18.8.5. Where can I learn more?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-are-legacy-systems-able-to-interact-with-current-ones-in-some-cases-even-if-they-may-use-fewer-bits">18.8.6. How are legacy systems able to interact with current ones in some cases, even if they may use fewer bits?</a></li>
 </ul>
 </li>
 </ul>
@@ -737,20 +747,25 @@ is what basically everyone uses, but it is technically a choice hardware manufac
 <p>Since we want to use exactly 53 bits to represent <span class="math notranslate nohighlight">\(J\)</span>, we want <span class="math notranslate nohighlight">\(\frac{2^N }{10}\)</span> to be greater than or equal to <span class="math notranslate nohighlight">\(2^{52}\)</span> and less than <span class="math notranslate nohighlight">\(2^{53}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[ 2^{52} &lt;= \frac{2^N }{10} &lt; 2^{53} \]</div>
-<p>Since <span class="math notranslate nohighlight">\(8&lt;10&lt;16\)</span> we can say <span class="math notranslate nohighlight">\(2^3&lt;10&lt;2^4\)</span></p>
-<p>and  we can also say that</p>
+<p>To figure out the <span class="math notranslate nohighlight">\(N\)</span> above, let’s focus on the center and then 10.  First we will note that the center is not, but the bounds are both powers of two.  So we find the powers of two that are just aboe and just below 10:</p>
+<div class="math notranslate nohighlight">
+\[8&lt;10&lt;16\]</div>
+<p>which can be re-written:
+<span class="math notranslate nohighlight">\(2^3&lt;10&lt;2^4\)</span></p>
+<p>and and again we can invert, to rewrite that:</p>
 <div class="math notranslate nohighlight">
 \[ \frac{1 }{2^4} &lt; \frac{1 }{10} &lt; \frac{1 }{2^3} \]</div>
 <p>(larger denominators is smaller numbers if the numerators are the same)</p>
-<p>We can put any numerator that is the same across all :
-$<span class="math notranslate nohighlight">\( \frac{2^N }{2^4} &lt; \frac{2^N }{10} &lt; \frac{2^N }{2^3} \)</span>$</p>
+<p>We can then multiply all three parts by <span class="math notranslate nohighlight">\(2^N\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{2^N }{2^4} &lt; \frac{2^N }{10} &lt; \frac{2^N }{2^3} \]</div>
 <p>and simplify the outer ones to only have a single exponent</p>
 <div class="math notranslate nohighlight">
 \[ 2^{N-4} &lt;  \frac{2^N }{10} &lt; 2^{N-3} \]</div>
-<p>so if we want:</p>
+<p>so, returning to our original goal:</p>
 <div class="math notranslate nohighlight">
 \[ 2^{52} &lt;= \frac{2^N }{10} &lt; 2^{53} \]</div>
-<p>then best <span class="math notranslate nohighlight">\(N\)</span> is 56,.</p>
+<p>and combining it with the above, we can say <span class="math notranslate nohighlight">\(2^{52}=2^{N-4}\)</span> and that <span class="math notranslate nohighlight">\(2^{N-3}=2^{53}\)</span> and since both of these work out to <span class="math notranslate nohighlight">\(N=56\)</span> that is the best <span class="math notranslate nohighlight">\(N\)</span></p>
 <p>We can confirm this in a calculator</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -821,6 +836,35 @@ we get the quotient and remainder, the quotient will be the number we use, but w
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="mf">.1</span><span class="p">,</span> <span class="s1">&#39;.17f&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+</section>
+<section id="questions">
+<h2><span class="section-number">18.8. </span>Questions<a class="headerlink" href="#questions" title="Link to this heading">#</a></h2>
+<section id="how-did-they-find-the-equation-for-the-floating-point-standard">
+<h3><span class="section-number">18.8.1. </span>How did they find the equation for the floating point standard?<a class="headerlink" href="#how-did-they-find-the-equation-for-the-floating-point-standard" title="Link to this heading">#</a></h3>
+<p>Over time, people tried differnt thigns and this one stuck.</p>
+<p>More detail on the development could be a good explore topic.</p>
+</section>
+<section id="did-we-guess-and-checkt-o-finnd-the-56">
+<h3><span class="section-number">18.8.2. </span>Did we guess and checkt o finnd the 56?<a class="headerlink" href="#did-we-guess-and-checkt-o-finnd-the-56" title="Link to this heading">#</a></h3>
+<p>No, we derived it.  I added some extra detail on the steps above.</p>
+</section>
+<section id="why-is-there-different-formats-for-the-binary-floating-point-ieee-standard-again">
+<h3><span class="section-number">18.8.3. </span>Why is there different formats for the binary floating point IEEE standard again?<a class="headerlink" href="#why-is-there-different-formats-for-the-binary-floating-point-ieee-standard-again" title="Link to this heading">#</a></h3>
+<p>Standards are typically followed, there are generally multiple ways to do something.</p>
+<p>IBM mainframes use another format, more is a good explore topic</p>
+</section>
+<section id="what-is-the-difference-between-float-and-double">
+<h3><span class="section-number">18.8.4. </span>What is the difference between float and double?<a class="headerlink" href="#what-is-the-difference-between-float-and-double" title="Link to this heading">#</a></h3>
+<p>Both are the same standard, float historically was 32 and double was 64, but now that computers have mostly 64 bit processing, this distinction is ambiguous.</p>
+</section>
+<section id="where-can-i-learn-more">
+<h3><span class="section-number">18.8.5. </span>Where can I learn more?<a class="headerlink" href="#where-can-i-learn-more" title="Link to this heading">#</a></h3>
+<p>The wikipedia on <a class="reference external" href="https://en.wikipedia.org/wiki/IEEE_754">floating point</a> is a good place to start, and then  its references</p>
+</section>
+<section id="how-are-legacy-systems-able-to-interact-with-current-ones-in-some-cases-even-if-they-may-use-fewer-bits">
+<h3><span class="section-number">18.8.6. </span>How are legacy systems able to interact with current ones in some cases, even if they may use fewer bits?<a class="headerlink" href="#how-are-legacy-systems-able-to-interact-with-current-ones-in-some-cases-even-if-they-may-use-fewer-bits" title="Link to this heading">#</a></h3>
+<p>Data gets lost and not all are actually compatible.</p>
 </section>
 </section>
 </section>
@@ -903,6 +947,15 @@ we get the quotient and remainder, the quotient will be the number we use, but w
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-read-a-number-like-this">18.7.1. How do we read a number like this?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-e-1023-for-the-exponent">18.7.2. Why use e-1023 for the exponent?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-get-numbers-into-this-form">18.7.3. How do we get numbers into this form?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">18.8. Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-did-they-find-the-equation-for-the-floating-point-standard">18.8.1. How did they find the equation for the floating point standard?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#did-we-guess-and-checkt-o-finnd-the-56">18.8.2. Did we guess and checkt o finnd the 56?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-there-different-formats-for-the-binary-floating-point-ieee-standard-again">18.8.3. Why is there different formats for the binary floating point IEEE standard again?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference-between-float-and-double">18.8.4. What is the difference between float and double?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-can-i-learn-more">18.8.5. Where can I learn more?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-are-legacy-systems-able-to-interact-with-current-ones-in-some-cases-even-if-they-may-use-fewer-bits">18.8.6. How are legacy systems able to interact with current ones in some cases, even if they may use fewer bits?</a></li>
 </ul>
 </li>
 </ul>
