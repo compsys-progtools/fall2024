@@ -670,7 +670,7 @@ is what basically everyone uses, but it is technically a choice hardware manufac
 <p>if the sign bit is <span class="math notranslate nohighlight">\(s\)</span> and the number represented by the exponent bits is <span class="math notranslate nohighlight">\(e\)</span> and the 52 bits are number from right most is 0 and the last one is 52.</p>
 <div class="math notranslate nohighlight">
 \[
-(-1)s + \left(1 + \sum_{i=1}^{52} b_{52-i} 2^{-i}\right) \times 2^{e-1023}
+(-1)s \times \left(1 + \sum_{i=1}^{52} b_{52-i} 2^{-i}\right) \times 2^{e-1023}
 \]</div>
 <p>Note that this is <span class="math notranslate nohighlight">\(2^{-1}\)</span> so we are working with <em>fractions</em> instead of integers in the sum.</p>
 <p>So if we had:</p>
