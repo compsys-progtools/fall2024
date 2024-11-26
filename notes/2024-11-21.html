@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>27. How to store a value &#8212; Computer Systems and Programming Tools</title>
+    <title>22. How to store a value &#8212; Computer Systems and Programming Tools</title>
   
   
   
@@ -66,8 +66,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2024-11-21';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="33. How do I choose a Programming Language for a project?" href="2024-11-26.html" />
-    <link rel="prev" title="21. Why do we need to know about this?" href="2024-11-19.html" />
+    <link rel="next" title="23. How do I choose a Programming Language for a project?" href="2024-11-26.html" />
+    <link rel="prev" title="21. Abstraction and connecting ideas" href="2024-11-19.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -205,19 +205,9 @@
 <li class="toctree-l1"><a class="reference internal" href="2024-11-07.html">18. How does a computer represent non integer quantities?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2024-11-12.html">19. How can we use logical operations?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2024-11-14.html">20. What <em>is</em> a computer?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2024-11-19.html">21. Why do we need to know about this?</a></li>
-
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">27. How to store a value</a></li>
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="2024-11-26.html">33. How do I choose a Programming Language for a project?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-19.html">21. Abstraction and connecting ideas</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">22. How to store a value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-26.html">23. How do I choose a Programming Language for a project?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
 <ul class="nav bd-sidenav">
@@ -455,14 +445,12 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">27. How to store a value</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#another-way-to-physically-store-a-value">28. another way to physically store a value</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-for-next-class">29. Prepare for Next Class</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">30. Badges</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">31. Experience Report Evidence</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">32. Questions After Today’s Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-way-to-physically-store-a-value">22.1. another way to physically store a value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-for-next-class">22.2. Prepare for Next Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">22.3. Badges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">22.4. Experience Report Evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">22.5. Questions After Today’s Class</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -473,8 +461,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="how-to-store-a-value">
-<h1><span class="section-number">27. </span>How to store a value<a class="headerlink" href="#how-to-store-a-value" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="how-to-store-a-value">
+<h1><span class="section-number">22. </span>How to store a value<a class="headerlink" href="#how-to-store-a-value" title="Link to this heading">#</a></h1>
 <p>We need a few more components:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://lodev.org/logicemu/#id=mux">mux</a> select one of two values</p></li>
@@ -483,9 +471,8 @@
 <p><a class="reference external" href="https://lodev.org/logicemu/#id=register">register</a></p>
 <p>this gives us SRAM which can hold a value as long as the system has power
 (1963)</p>
-</section>
 <section id="another-way-to-physically-store-a-value">
-<h1><span class="section-number">28. </span>another way to physically store a value<a class="headerlink" href="#another-way-to-physically-store-a-value" title="Link to this heading">#</a></h1>
+<h2><span class="section-number">22.1. </span>another way to physically store a value<a class="headerlink" href="#another-way-to-physically-store-a-value" title="Link to this heading">#</a></h2>
 <p>DRAM uses one transistor and one capacitor. (SRAM uses 4-6 transistors)</p>
 <p>a capacitor holds a charge for a time, but gradually fades, so it has to be refreshed</p>
 <p>ROM is a diode matrix traditionally</p>
@@ -532,11 +519,11 @@
 </ul>
 </section>
 <section id="prepare-for-next-class">
-<h1><span class="section-number">29. </span>Prepare for Next Class<a class="headerlink" href="#prepare-for-next-class" title="Link to this heading">#</a></h1>
+<h2><span class="section-number">22.2. </span>Prepare for Next Class<a class="headerlink" href="#prepare-for-next-class" title="Link to this heading">#</a></h2>
 <p>Preview the <a class="reference external" href="https://survey.stackoverflow.co/2023/#technology">Stack Overflow Developer Survey</a> Technology section parts that are about tools. Create <span class="target" id="index-0"></span>dev_insights.md with 3-5 bullet points for discussion.  These can be facts you found most interesting or questions you have based on the results (it can be clarifying or deeper questions)</p>
 </section>
 <section id="badges">
-<h1><span class="section-number">30. </span>Badges<a class="headerlink" href="#badges" title="Link to this heading">#</a></h1>
+<h2><span class="section-number">22.3. </span>Badges<a class="headerlink" href="#badges" title="Link to this heading">#</a></h2>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-0">
@@ -560,10 +547,11 @@ Practice</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="experience-report-evidence">
-<h1><span class="section-number">31. </span>Experience Report Evidence<a class="headerlink" href="#experience-report-evidence" title="Link to this heading">#</a></h1>
+<h2><span class="section-number">22.4. </span>Experience Report Evidence<a class="headerlink" href="#experience-report-evidence" title="Link to this heading">#</a></h2>
 </section>
 <section id="questions-after-todays-class">
-<h1><span class="section-number">32. </span>Questions After Today’s Class<a class="headerlink" href="#questions-after-todays-class" title="Link to this heading">#</a></h1>
+<h2><span class="section-number">22.5. </span>Questions After Today’s Class<a class="headerlink" href="#questions-after-todays-class" title="Link to this heading">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -602,7 +590,7 @@ Practice</label><div class="sd-tab-content docutils">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">21. </span>Why do we need to know about this?</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>Abstraction and connecting ideas</p>
       </div>
     </a>
     <a class="right-next"
@@ -610,7 +598,7 @@ Practice</label><div class="sd-tab-content docutils">
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">33. </span>How do I choose a Programming Language for a project?</p>
+        <p class="prev-next-title"><span class="section-number">23. </span>How do I choose a Programming Language for a project?</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -631,14 +619,12 @@ Practice</label><div class="sd-tab-content docutils">
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">27. How to store a value</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#another-way-to-physically-store-a-value">28. another way to physically store a value</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-for-next-class">29. Prepare for Next Class</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">30. Badges</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">31. Experience Report Evidence</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">32. Questions After Today’s Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-way-to-physically-store-a-value">22.1. another way to physically store a value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-for-next-class">22.2. Prepare for Next Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">22.3. Badges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">22.4. Experience Report Evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">22.5. Questions After Today’s Class</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
