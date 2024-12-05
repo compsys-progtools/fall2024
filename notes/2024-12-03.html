@@ -1,0 +1,1675 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>24. how does timing work &#8212; Computer Systems and Programming Tools</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/course_admonitions.css?v=57efbcaa" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2024-12-03';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="KWL Chart" href="../activities/kwl.html" />
+    <link rel="prev" title="23. How do I choose a Programming Language for a project?" href="2024-11-26.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/systools.png" class="logo__image only-light" alt="Computer Systems and Programming Tools - Home"/>
+    <img src="../_static/systools.png" class="logo__image only-dark pst-js-only" alt="Computer Systems and Programming Tools - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About this Site
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Syllabus</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/about.html">Computer Systems and Programming Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/tools.html">Tools and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/badges.html">Badge Deadlines and Procedures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/badge_calc.html">Detailed Grade Calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/schedule.html">Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_resources.html">Support Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_statements.html">General Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/communication.html">Office Hours &amp; Communication</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2024-09-05.html">1. Welcome, Introduction, and Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-10.html">2. More orientation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-12.html">3. Working Offline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-17.html">4. How do git branches work?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-19.html">5. When do I get an advantage from git and bash?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-24.html">6. Patterns in git and bash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-09-26.html">7. Why are these tools like this?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-01.html">8. What <em>is</em> a commit?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-03.html">9. How do programmers communicate about code?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-08.html">10. What <em>is</em> git?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-10.html">11. What is a commit number?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-17.html">12. How does git <em>make</em> a commit?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-22.html">13. How can I automate things with bash?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-24.html">14. How can I work on a remote server?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-29.html">15. What happens when I build code in C?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-10-31.html">16. What <em>is</em> an IDE?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-06.html">17. What happens when we run code?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-07.html">18. How does a computer represent non integer quantities?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-12.html">19. How can we use logical operations?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-14.html">20. What <em>is</em> a computer?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-19.html">21. Abstraction and connecting ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-21.html">22. How to store a value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2024-11-26.html">23. How do I choose a Programming Language for a project?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">24. how does timing work</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Activities</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../activities/kwl.html">KWL Chart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/team.html">Team Repo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/review.html">Review Badges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/prepare.html">Prepare for the next class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/practice.html">Practice Badges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/explore.html">Explore Badges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../activities/build.html">Build Badges</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../faq/syllabus.html">Syllabus and Grading FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/github.html">Git and GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/tools.html">Other Course Software/tools</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resources/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/tips.html">General Tips and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/learning.html">How to Study in this class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/github.html">GitHub Interface reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/languages.html">Language/Shell Specific References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/gettinghelp.html">Getting Help with Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/organization.html">Getting Organized for class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/more_info_on_cpus.html">More info on cpus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/windows.html">Windows Help &amp; Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://introcompsys.github.io/spring2022/resources/testimonials.html">Advice from Spring 2022 Students</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://introcompsys.github.io/fall2022/resources/testimonials.html">Advice from Fall 2022 Students</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://introcompsys.github.io/spring2023/resources/testimonials.html">Advice from Spring 2023 Students</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://introcompsys.github.io/fall2023/resources/testimonials.html">Advice from Fall 2023 Students</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/compsys-progtools/fall2024" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/compsys-progtools/fall2024/edit/main/notes/2024-12-03.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/compsys-progtools/fall2024/issues/new?title=Issue%20on%20page%20%2Fnotes/2024-12-03.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/2024-12-03.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>how does timing work</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">24.1. Badges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">24.2. Experience Report Evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">24.3. Questions After Today’s Class</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="how-does-timing-work">
+<h1><span class="section-number">24. </span>how does timing work<a class="headerlink" href="#how-does-timing-work" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>this will be filled in later, because I am sick</p>
+<p>View versions from past semesters if you need:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://compsys-progtools.github.io/spring2024/notes/2024-04-16.html">spring24</a></p></li>
+</ul>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">Documents</span><span class="o">/</span><span class="n">inclass</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">fall24-brownsarahm	greet.py		test</span>
+<span class="go">gh-inclass-brownsarahm	nand2tetris		tiny-book</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gh</span> <span class="n">repo</span> <span class="n">clone</span> <span class="n">compsys</span><span class="o">-</span><span class="n">progtools</span><span class="o">/</span><span class="n">fall2024</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Cloning into &#39;fall2024&#39;...</span>
+<span class="go">remote: Enumerating objects: 2511, done.</span>
+<span class="go">remote: Counting objects: 100% (538/538), done.</span>
+<span class="go">remote: Compressing objects: 100% (108/108), done.</span>
+<span class="go">remote: Total 2511 (delta 433), reused 531 (delta 430), pack-reused 1973 (from 1)</span>
+<span class="go">Receiving objects: 100% (2511/2511), 85.97 MiB | 5.15 MiB/s, done.</span>
+<span class="go">Resolving deltas: 100% (1777/1777), done.</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">fall2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">-bash: cd: fall2: No such file or directory</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">fall24</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">-bash: cd: fall24: No such file or directory</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">fall2024</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="n">_pr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">_practice/ _prepare/  </span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="n">_practice</span><span class="o">/</span><span class="mi">2024</span><span class="o">-</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">2024-09-05.md  2024-09-19.md  2024-10-03.md  2024-10-22.md  2024-11-06.md  2024-11-19.md</span>
+<span class="go">2024-09-10.md  2024-09-24.md  2024-10-08.md  2024-10-24.md  2024-11-07.md  2024-11-21.md</span>
+<span class="go">2024-09-12.md  2024-09-26.md  2024-10-10.md  2024-10-29.md  2024-11-12.md  2024-11-26.md</span>
+<span class="go">2024-09-17.md  2024-10-01.md  2024-10-17.md  2024-10-31.md  2024-11-14.md  </span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="n">_practice</span><span class="o">/</span><span class="mi">2024</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mf">26.</span><span class="n">md</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">1. Describe a type of project where it would be worth it for you to learn a language you have never used before in {index}`newlanguage.md` This should be based in what types of features for the language your project would require and/or what would contribute to the long term health of the project. Your justifiction must come from sources used in class and be based in factual evidence about the language. </span>
+<span class="go">2. Learn about one of the following languages that you have not used before: [R](https://www.r-project.org/), [Julia](https://julialang.org/), [Clojure](https://clojure.org/guides/getting_started), [Zig](https://ziglang.org/), [Go](https://go.dev/), [erlang](https://www.erlang.org/), [Elixir](https://elixir-lang.org/) or another language you are curious about that appeared in the Developer survey. For example you might be interest in the [top paying languages](https://survey.stackoverflow.co/2023/#technology-top-paying-technologies). Use the official documentation.  Answer the following questions in {index}`languagelearning.md`:</span>
+
+<span class="go">    ```</span>
+<span class="go">    1. What is this language designed for?</span>
+<span class="go">    2. What Programming paradigm(s) does it support?</span>
+<span class="go">    3. Give at least 1 example of a programming language that experience in would make it **easy** to learn this language and explain why. </span>
+<span class="go">    4. Give at least 1 example of a programming language that experience in would make it **hard** to learn this language and explain why. </span>
+<span class="go">    5. What is its most unique feature(s)?</span>
+<span class="go">    ```</span>
+
+<span class="go">hint: for questions 3 &amp; 4, for example learning Python first does not make it easy to learn C++, but learning C makes it very easy to learn C++ (but I have not filled in explanations). </span>
+
+<span class="gp">#</span><span class="c1"># Explore badge option </span>
+
+<span class="go">Actually try out one of the langauges above in a new repo created from [this asssignment](https://classroom.github.com/a/BXneBgx8). </span>
+
+<span class="go">**work on a branch and commit after each step**</span>
+
+<span class="go">1. Setup the devcontainer to provide the compiler/interpreter for the language of your choice. See [features](https://containers.dev/features)</span>
+<span class="go">2. Add top extensions related to the language to the devcontainer. </span>
+<span class="go">3. Add a [gitignore](https://github.com/github/gitignore) file for that language</span>
+<span class="go">4. Write a hello world type program in the language and make sure it runs. </span>
+<span class="go">5. Use the official documentation to figure out a common task in the language and write an example program that completes something typical for that language (eg a sort data analysis in R). You may use GitHub Co-pilot in the code space to help write the code, but you should justify the task you ask it to do. Commit any generated code immediately with the message &quot;code from copilot via &lt;prompt&gt;&quot; and your prompt filled in.  </span>
+<span class="go">6. Test your understanding of the code by trying to modify it, and make commits describing what you changed and why. </span>
+<span class="go">7. Fill in the prompts in the README (follow the comments) and Answer the questions in the README of the template repo.```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">gh repo view --web</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Opening github.com/compsys-progtools/fall2024 in your browser.</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="n">grep</span> <span class="s2">&quot;index&quot;</span> <span class="n">_practice</span><span class="o">/*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">_practice/2024-09-10.md:1. read Chapter 1, &quot;Decoding your confusion while coding&quot; in [The Programmer&#39;s Brain](https://www.manning.com/books/the-programmers-brain#toc) add a file called {index}`brain.md` to your kwl repo that summarizes your thoughts on the chapter. Do you think this information will help you approach learning more effectively? why or why not? How, if at all, does it changes how you think about debugging and learning to program? Give examples of how you have encountered the different types of confusion in your prior programming experiences. (to help you get good strategies and prime for things we will see in the next few weeks)</span>
+<span class="go">_practice/2024-09-10.md:3. map out your computing knowledge and add it to your kwl chart repo in a file called {index}`prior-knowledge-map.md`. Use [mermaid](https://mermaid-js.github.io/mermaid/#/) syntax, to draw your map. GitHub can render it for you including while you work using the preview button. (what we will learn will connect a lot of ideas, mapping out where you start, sets you up for success)</span>
+<span class="go">_practice/2024-09-12.md:3. Try using setting up git using your favorite IDE or GitHub Desktop. Make a file {index}`gitoffline.md` and include some notes of how it went. Was it hard? easy? what did you figure out or get stuck on? Is the terminology consistent or does it use different terms?</span>
+<span class="go">_practice/2024-09-12.md:2. **lab** Explore the difference between git add and git commit: try committing and pushing without adding, then add and push without committing. Describe what happens in each case in a file called {index}`gitcommit_tips.md`. Compare what happens based on what you can see on GitHub and what you can see with git status. Write a scenario with examples of how a person might make mistakes with git add and commit and what to look for to get unstuck. </span>
+<span class="go">_practice/2024-09-17.md:1. Create a merge conflict in your KWL repo on the branch for this issue and resolve it using your favorite IDE, then create one and resolve it on GitHub in browser (this requires the merge conflict to occur on a PR). Describe how you created it, show the files, and describe how your IDE helps or does not help in {index}`merge_conflict_comparison.md`. Give advice for when you think someone should resolve a merge conflict in GitHub vs using an IDE. (if you do not regulary use an, IDE, try VSCode) *You can put content in the file for this step for the purpose of making the merge conflicts for this exercise.* </span>
+<span class="go">_practice/2024-09-17.md:3. In {index}`branches-forks.md` in your KWL repo, compare and contrast branches and forks; be specific about their relationship. You may use mermaid diagrams if that helps you think through or communicate the ideas. If you use other resources, include them in your file as markdown links.</span>
+<span class="go">_practice/2024-09-19.md:2. Get set up so that you can contribute to the course website repo from your local system. Note: you can pull from the `compsys-progtools/fall2024` repo, but you do not not have push permission, so there is more to do than clone.  Append the commands used and the contents of your `fll2024/.git/config`to a {index}`git-remote-practice.md`. Then, using a text editor (or IDE), wrap each log with three backticks to make them [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) and add headings to the sections. </span>
+<span class="go">_practice/2024-09-19.md:3.  [learn about options for how git can display commit history](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).  Try out a few different options.  Choose two, write them both to a file (from the command line, not copy&amp;paste), {index}`gitlog-compare.md`. Then, using a text editor (or IDE), wrap each log with three backticks to make them [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks)  and then add text to the file describing a use case where that format in particular would be helpful.</span>
+<span class="go">_practice/2024-09-24.md:4.  Organize a folder on your computer ( good candidate may be  desktop or downloads folder), using only a terminal to make new directories, move files, check what&#39;s inside them, etc. Answer reflection questions in a new file, {index}`terminal_organization_adv.md` in your kwl repo. Tip: Start with a file explorer open, but then try to close it, and use only command line tools to explore and make your choices. If you get stuck, look up additional commands to do acomplish your goals.  </span>
+<span class="go">_practice/2024-09-26.md:1. Most real projects partly adhere and at least partly deviate from any major design philosophy or paradigm. Add a `## Unix Philosophy` section to your {index}`software.md` about how that project adheres to and deviates from the unix philosophy. Be specific, using links to specific lines of code or specific sections in the documentation that support your claims. Provide at least one example of both adhering and deviating from the philosophy and three total examples (that is 2 examples for one side and one for the other).  You can see what badge `software.md` was previously assigned in and the original instructions [on the KWL file list](https://compsys-progtools.github.io/spring2024/genindex.html).</span>
+<span class="go">_practice/2024-10-01.md:1. Explore the [tools for conventional commits](https://www.conventionalcommits.org/en/about/#tooling-for-conventional-commits) and then pick one to try out. Work on the branch for this badge and use one of the tools that helps making conventional commits (eg in VSCode or a CLI for it)for a series of commits adding &quot;features&quot; and &quot;bug fixes&quot; telling the story of a code project in a file called {index}`commit-story.md`.  For each edit, add short phrases like &#39;new feature 1&#39;, or &#39;next bug fix&#39; to the single file each time, but use conventional commits for each commit. In total make at least 5 different types of changes (types per conventional commits standard) including 2 breaking changes and at least 10 total commits to the file. </span>
+<span class="go">_practice/2024-10-01.md:2.  [learn about options for how git can display commit history](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).  Try out a few different options.  Choose two, write them both to a file, {index}`gitlog-compare.md`. Using a text editor, wrap each log with three backticks to make them &quot;code blocks&quot;  and then add text to the file describing a use case where that format in particular would be helpful. **do this after the above so that your git log examples include your conventional commits**</span>
+<span class="go">_practice/2024-10-08.md:1. Read about different workflows in git and add responses to the below in a {index}`workflows.md` in your kwl repo. Two good places to read from are [Git Book](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#ch05-distributed-git) and the [atlassian Docs](https://www.atlassian.com/git/tutorials/comparing-workflows)</span>
+<span class="go">_practice/2024-10-08.md:3. Add the hash of the content of your completed {index}`workflows.md` file and put that in the comment of your badge PR for this badge. *Try to do this from your local CLI, but full credit even if you use the website interface*</span>
+<span class="go">_practice/2024-10-10.md:3. Analyze the xor hashing algorithm in the notes to determine which properties of a cryptographic hash are/not met. Include your analysis in {index}`xorhash.md`</span>
+<span class="go">_practice/2024-10-10.md:4. find 2 more real world examples of using other number systems (either different bases or different symbols and bases) **not mentioned in class** that are currently used. Describe the number system and its usage in {index}`numbers.md`. Include links to your sources and be sure that the sources are trustworthy. </span>
+<span class="go">_practice/2024-10-10.md:5. Calculate the maximum number of git objects that a repo can have without requiring you to use more than the minimum number of characters to refer to any object and include that number in  {index}`gitcounts_scenarios.md`  with a title `# Git counts`. Describe 3 scenarios that would get you to that number of objects in terms of what types of objects would exist. For example, what is the maximum number of commits you could have without exceeding that number? How could you get to that number of objects in the fewest number of commits? What might be a typical way to get there? Assume normal git use with porcelain commands, not atypical cases with plubming commands. *If you get stuck, outline what you know and then request a review.* </span>
+<span class="go">_practice/2024-10-10.md:7. Learn more about how git is working on changing from SHA-1 to SHA-256 and answer the transition questions below {index}`gittransition.md`</span>
+<span class="go">_practice/2024-10-17.md:1. Read more details about [git internals](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) to review what we did in class in greater detail. Make a file {index}`gitplumbingdetail.md` and create a a table or mermaid diagram that shows the relationship between at least **three** porcelain commands and their corresponding plumbing commands (generally more than one each). </span>
+<span class="go">_practice/2024-10-17.md:2. Create {index}`gitislike.md` and explain main git operations we have seen (add, commit, push) in your own words in a way that will either help you remember or how you would explain it to someone else at a high level. This might be analogies or explanations using other programming concepts or concepts from a hobby.</span>
+<span class="go">_practice/2024-10-24.md:1. Answer the following in {index}`hpc.md` of your KWL repo:  (to think about how the design of the system we used in class impacts programming and connect it to other ideas taught in CS)</span>
+<span class="go">_practice/2024-10-29.md:1. On Seawulf, modfiy {index}`main.c` from class to accept the integer as a command line argument instead of via input while running the program. [See this tutorial for an example](http://crasseux.com/books/ctutorial/argc-and-argv.html). </span>
+<span class="go">_practice/2024-10-29.md:2. Write a bash script {index}`demo_test.sh` that runs your compiled program for each integer from 10 to 30 (syntax for a range is `{start..end}` so this would be `{10..30}`)</span>
+<span class="go">_practice/2024-10-29.md:3. Write an sbatch script, {index}`batchrun.sh` to run your script  on a compute node and save the output to a file. The sbatch script should compile and link the program and then call the script. [see the options](https://web.uri.edu/hpc-research-computing/using-seawulf/#sbatch)</span>
+<span class="go">_practice/2024-10-31.md:1. In {index}`bestide.md`, compare two IDEs using your group&#39;s table from class, to evaluate each of them.  Your review should have an introduction that justifies the ranking and defines the criteria, a section describing each IDE with respect to all of the criteria and your overall experience with that IDE, and a conclusion that explains which of the 3 is the best based on your evaluation. </span>
+<span class="go">_practice/2024-10-31.md:2. Configure your VS Code preferences to your github account. add {index}`settingssync.md` with a description of what settings you customized and synced and reflect on why this is an important feature and what prerequisites to it might be.</span>
+<span class="go">_practice/2024-11-06.md:1. Run and examine how rect.hack and max.hack in the `nand2tetris/projects/05/` folder work. Make notes and answer the questions below in {index}`assemblyexplore.md`.</span>
+<span class="go">_practice/2024-11-07.md:1. Write a C program to compare values as doubles and as float (single precision/32bit) to see that this comparison issue is related to the IEEE standard and is not language specific.  Make notes and comparison around its behavior and include the program in a code cell in  {index}`cdouble.md`</span>
+<span class="go">_practice/2024-11-07.md:2. In {index}`floatexpt.md` design an experiment using the `fractions.Fraction` class in Python that helps illustrate why `.1*3 == .3` evaluates to `False` but `.1*4 ==.4` evaluates to `True`. Your file must include both code and interpretation of the results.</span>
+<span class="go">_practice/2024-11-12.md:1. While we saw many types of gates today, but we actually could get all of the operations needed using only NAND gates. Work out how to use NAND gates to implement a half adder and describe it in {index}`nandhalf.md`</span>
+<span class="go">_practice/2024-11-12.md:2. In {index}`addertypes.md` compare ripple adders and lookahead adders.</span>
+<span class="go">_practice/2024-11-14.md:2. Read about [systems abstractions](https://cacm.acm.org/opinion/articles/259395-systems-abstractions/fulltext) in CACM and answer reflection questions below in {index}`systemsabstractions.md` based on the systems abstraction reading:</span>
+<span class="go">_practice/2024-11-26.md:1. Describe a type of project where it would be worth it for you to learn a language you have never used before in {index}`newlanguage.md` This should be based in what types of features for the language your project would require and/or what would contribute to the long term health of the project. Your justifiction must come from sources used in class and be based in factual evidence about the language. </span>
+<span class="go">_practice/2024-11-26.md:2. Learn about one of the following languages that you have not used before: [R](https://www.r-project.org/), [Julia](https://julialang.org/), [Clojure](https://clojure.org/guides/getting_started), [Zig](https://ziglang.org/), [Go](https://go.dev/), [erlang](https://www.erlang.org/), [Elixir](https://elixir-lang.org/) or another language you are curious about that appeared in the Developer survey. For example you might be interest in the [top paying languages](https://survey.stackoverflow.co/2023/#technology-top-paying-technologies). Use the official documentation.  Answer the following questions in {index}`languagelearning.md`:</span>
+
+<span class="go">real	0m0.024s</span>
+<span class="go">user	0m0.003s</span>
+<span class="go">sys	0m0.010s</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="n">grep</span> <span class="s2">&quot;index&quot;</span> <span class="n">_practice</span><span class="o">/*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">_practice/2024-09-10.md:1. read Chapter 1, &quot;Decoding your confusion while coding&quot; in [The Programmer&#39;s Brain](https://www.manning.com/books/the-programmers-brain#toc) add a file called {index}`brain.md` to your kwl repo that summarizes your thoughts on the chapter. Do you think this information will help you approach learning more effectively? why or why not? How, if at all, does it changes how you think about debugging and learning to program? Give examples of how you have encountered the different types of confusion in your prior programming experiences. (to help you get good strategies and prime for things we will see in the next few weeks)</span>
+<span class="go">_practice/2024-09-10.md:3. map out your computing knowledge and add it to your kwl chart repo in a file called {index}`prior-knowledge-map.md`. Use [mermaid](https://mermaid-js.github.io/mermaid/#/) syntax, to draw your map. GitHub can render it for you including while you work using the preview button. (what we will learn will connect a lot of ideas, mapping out where you start, sets you up for success)</span>
+<span class="go">_practice/2024-09-12.md:3. Try using setting up git using your favorite IDE or GitHub Desktop. Make a file {index}`gitoffline.md` and include some notes of how it went. Was it hard? easy? what did you figure out or get stuck on? Is the terminology consistent or does it use different terms?</span>
+<span class="go">_practice/2024-09-12.md:2. **lab** Explore the difference between git add and git commit: try committing and pushing without adding, then add and push without committing. Describe what happens in each case in a file called {index}`gitcommit_tips.md`. Compare what happens based on what you can see on GitHub and what you can see with git status. Write a scenario with examples of how a person might make mistakes with git add and commit and what to look for to get unstuck. </span>
+<span class="go">_practice/2024-09-17.md:1. Create a merge conflict in your KWL repo on the branch for this issue and resolve it using your favorite IDE, then create one and resolve it on GitHub in browser (this requires the merge conflict to occur on a PR). Describe how you created it, show the files, and describe how your IDE helps or does not help in {index}`merge_conflict_comparison.md`. Give advice for when you think someone should resolve a merge conflict in GitHub vs using an IDE. (if you do not regulary use an, IDE, try VSCode) *You can put content in the file for this step for the purpose of making the merge conflicts for this exercise.* </span>
+<span class="go">_practice/2024-09-17.md:3. In {index}`branches-forks.md` in your KWL repo, compare and contrast branches and forks; be specific about their relationship. You may use mermaid diagrams if that helps you think through or communicate the ideas. If you use other resources, include them in your file as markdown links.</span>
+<span class="go">_practice/2024-09-19.md:2. Get set up so that you can contribute to the course website repo from your local system. Note: you can pull from the `compsys-progtools/fall2024` repo, but you do not not have push permission, so there is more to do than clone.  Append the commands used and the contents of your `fll2024/.git/config`to a {index}`git-remote-practice.md`. Then, using a text editor (or IDE), wrap each log with three backticks to make them [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) and add headings to the sections. </span>
+<span class="go">_practice/2024-09-19.md:3.  [learn about options for how git can display commit history](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).  Try out a few different options.  Choose two, write them both to a file (from the command line, not copy&amp;paste), {index}`gitlog-compare.md`. Then, using a text editor (or IDE), wrap each log with three backticks to make them [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks)  and then add text to the file describing a use case where that format in particular would be helpful.</span>
+<span class="go">_practice/2024-09-24.md:4.  Organize a folder on your computer ( good candidate may be  desktop or downloads folder), using only a terminal to make new directories, move files, check what&#39;s inside them, etc. Answer reflection questions in a new file, {index}`terminal_organization_adv.md` in your kwl repo. Tip: Start with a file explorer open, but then try to close it, and use only command line tools to explore and make your choices. If you get stuck, look up additional commands to do acomplish your goals.  </span>
+<span class="go">_practice/2024-09-26.md:1. Most real projects partly adhere and at least partly deviate from any major design philosophy or paradigm. Add a `## Unix Philosophy` section to your {index}`software.md` about how that project adheres to and deviates from the unix philosophy. Be specific, using links to specific lines of code or specific sections in the documentation that support your claims. Provide at least one example of both adhering and deviating from the philosophy and three total examples (that is 2 examples for one side and one for the other).  You can see what badge `software.md` was previously assigned in and the original instructions [on the KWL file list](https://compsys-progtools.github.io/spring2024/genindex.html).</span>
+<span class="go">_practice/2024-10-01.md:1. Explore the [tools for conventional commits](https://www.conventionalcommits.org/en/about/#tooling-for-conventional-commits) and then pick one to try out. Work on the branch for this badge and use one of the tools that helps making conventional commits (eg in VSCode or a CLI for it)for a series of commits adding &quot;features&quot; and &quot;bug fixes&quot; telling the story of a code project in a file called {index}`commit-story.md`.  For each edit, add short phrases like &#39;new feature 1&#39;, or &#39;next bug fix&#39; to the single file each time, but use conventional commits for each commit. In total make at least 5 different types of changes (types per conventional commits standard) including 2 breaking changes and at least 10 total commits to the file. </span>
+<span class="go">_practice/2024-10-01.md:2.  [learn about options for how git can display commit history](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).  Try out a few different options.  Choose two, write them both to a file, {index}`gitlog-compare.md`. Using a text editor, wrap each log with three backticks to make them &quot;code blocks&quot;  and then add text to the file describing a use case where that format in particular would be helpful. **do this after the above so that your git log examples include your conventional commits**</span>
+<span class="go">_practice/2024-10-08.md:1. Read about different workflows in git and add responses to the below in a {index}`workflows.md` in your kwl repo. Two good places to read from are [Git Book](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#ch05-distributed-git) and the [atlassian Docs](https://www.atlassian.com/git/tutorials/comparing-workflows)</span>
+<span class="go">_practice/2024-10-08.md:3. Add the hash of the content of your completed {index}`workflows.md` file and put that in the comment of your badge PR for this badge. *Try to do this from your local CLI, but full credit even if you use the website interface*</span>
+<span class="go">_practice/2024-10-10.md:3. Analyze the xor hashing algorithm in the notes to determine which properties of a cryptographic hash are/not met. Include your analysis in {index}`xorhash.md`</span>
+<span class="go">_practice/2024-10-10.md:4. find 2 more real world examples of using other number systems (either different bases or different symbols and bases) **not mentioned in class** that are currently used. Describe the number system and its usage in {index}`numbers.md`. Include links to your sources and be sure that the sources are trustworthy. </span>
+<span class="go">_practice/2024-10-10.md:5. Calculate the maximum number of git objects that a repo can have without requiring you to use more than the minimum number of characters to refer to any object and include that number in  {index}`gitcounts_scenarios.md`  with a title `# Git counts`. Describe 3 scenarios that would get you to that number of objects in terms of what types of objects would exist. For example, what is the maximum number of commits you could have without exceeding that number? How could you get to that number of objects in the fewest number of commits? What might be a typical way to get there? Assume normal git use with porcelain commands, not atypical cases with plubming commands. *If you get stuck, outline what you know and then request a review.* </span>
+<span class="go">_practice/2024-10-10.md:7. Learn more about how git is working on changing from SHA-1 to SHA-256 and answer the transition questions below {index}`gittransition.md`</span>
+<span class="go">_practice/2024-10-17.md:1. Read more details about [git internals](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) to review what we did in class in greater detail. Make a file {index}`gitplumbingdetail.md` and create a a table or mermaid diagram that shows the relationship between at least **three** porcelain commands and their corresponding plumbing commands (generally more than one each). </span>
+<span class="go">_practice/2024-10-17.md:2. Create {index}`gitislike.md` and explain main git operations we have seen (add, commit, push) in your own words in a way that will either help you remember or how you would explain it to someone else at a high level. This might be analogies or explanations using other programming concepts or concepts from a hobby.</span>
+<span class="go">_practice/2024-10-24.md:1. Answer the following in {index}`hpc.md` of your KWL repo:  (to think about how the design of the system we used in class impacts programming and connect it to other ideas taught in CS)</span>
+<span class="go">_practice/2024-10-29.md:1. On Seawulf, modfiy {index}`main.c` from class to accept the integer as a command line argument instead of via input while running the program. [See this tutorial for an example](http://crasseux.com/books/ctutorial/argc-and-argv.html). </span>
+<span class="go">_practice/2024-10-29.md:2. Write a bash script {index}`demo_test.sh` that runs your compiled program for each integer from 10 to 30 (syntax for a range is `{start..end}` so this would be `{10..30}`)</span>
+<span class="go">_practice/2024-10-29.md:3. Write an sbatch script, {index}`batchrun.sh` to run your script  on a compute node and save the output to a file. The sbatch script should compile and link the program and then call the script. [see the options](https://web.uri.edu/hpc-research-computing/using-seawulf/#sbatch)</span>
+<span class="go">_practice/2024-10-31.md:1. In {index}`bestide.md`, compare two IDEs using your group&#39;s table from class, to evaluate each of them.  Your review should have an introduction that justifies the ranking and defines the criteria, a section describing each IDE with respect to all of the criteria and your overall experience with that IDE, and a conclusion that explains which of the 3 is the best based on your evaluation. </span>
+<span class="go">_practice/2024-10-31.md:2. Configure your VS Code preferences to your github account. add {index}`settingssync.md` with a description of what settings you customized and synced and reflect on why this is an important feature and what prerequisites to it might be.</span>
+<span class="go">_practice/2024-11-06.md:1. Run and examine how rect.hack and max.hack in the `nand2tetris/projects/05/` folder work. Make notes and answer the questions below in {index}`assemblyexplore.md`.</span>
+<span class="go">_practice/2024-11-07.md:1. Write a C program to compare values as doubles and as float (single precision/32bit) to see that this comparison issue is related to the IEEE standard and is not language specific.  Make notes and comparison around its behavior and include the program in a code cell in  {index}`cdouble.md`</span>
+<span class="go">_practice/2024-11-07.md:2. In {index}`floatexpt.md` design an experiment using the `fractions.Fraction` class in Python that helps illustrate why `.1*3 == .3` evaluates to `False` but `.1*4 ==.4` evaluates to `True`. Your file must include both code and interpretation of the results.</span>
+<span class="go">_practice/2024-11-12.md:1. While we saw many types of gates today, but we actually could get all of the operations needed using only NAND gates. Work out how to use NAND gates to implement a half adder and describe it in {index}`nandhalf.md`</span>
+<span class="go">_practice/2024-11-12.md:2. In {index}`addertypes.md` compare ripple adders and lookahead adders.</span>
+<span class="go">_practice/2024-11-14.md:2. Read about [systems abstractions](https://cacm.acm.org/opinion/articles/259395-systems-abstractions/fulltext) in CACM and answer reflection questions below in {index}`systemsabstractions.md` based on the systems abstraction reading:</span>
+<span class="go">_practice/2024-11-26.md:1. Describe a type of project where it would be worth it for you to learn a language you have never used before in {index}`newlanguage.md` This should be based in what types of features for the language your project would require and/or what would contribute to the long term health of the project. Your justifiction must come from sources used in class and be based in factual evidence about the language. </span>
+<span class="go">_practice/2024-11-26.md:2. Learn about one of the following languages that you have not used before: [R](https://www.r-project.org/), [Julia](https://julialang.org/), [Clojure](https://clojure.org/guides/getting_started), [Zig](https://ziglang.org/), [Go](https://go.dev/), [erlang](https://www.erlang.org/), [Elixir](https://elixir-lang.org/) or another language you are curious about that appeared in the Developer survey. For example you might be interest in the [top paying languages](https://survey.stackoverflow.co/2023/#technology-top-paying-technologies). Use the official documentation.  Answer the following questions in {index}`languagelearning.md`:</span>
+
+<span class="go">real	0m0.012s</span>
+<span class="go">user	0m0.003s</span>
+<span class="go">sys	0m0.007s</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="n">grep</span> <span class="s2">&quot;index&quot;</span> <span class="n">_practice</span><span class="o">/*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">_practice/2024-09-10.md:1. read Chapter 1, &quot;Decoding your confusion while coding&quot; in [The Programmer&#39;s Brain](https://www.manning.com/books/the-programmers-brain#toc) add a file called {index}`brain.md` to your kwl repo that summarizes your thoughts on the chapter. Do you think this information will help you approach learning more effectively? why or why not? How, if at all, does it changes how you think about debugging and learning to program? Give examples of how you have encountered the different types of confusion in your prior programming experiences. (to help you get good strategies and prime for things we will see in the next few weeks)</span>
+<span class="go">_practice/2024-09-10.md:3. map out your computing knowledge and add it to your kwl chart repo in a file called {index}`prior-knowledge-map.md`. Use [mermaid](https://mermaid-js.github.io/mermaid/#/) syntax, to draw your map. GitHub can render it for you including while you work using the preview button. (what we will learn will connect a lot of ideas, mapping out where you start, sets you up for success)</span>
+<span class="go">_practice/2024-09-12.md:3. Try using setting up git using your favorite IDE or GitHub Desktop. Make a file {index}`gitoffline.md` and include some notes of how it went. Was it hard? easy? what did you figure out or get stuck on? Is the terminology consistent or does it use different terms?</span>
+<span class="go">_practice/2024-09-12.md:2. **lab** Explore the difference between git add and git commit: try committing and pushing without adding, then add and push without committing. Describe what happens in each case in a file called {index}`gitcommit_tips.md`. Compare what happens based on what you can see on GitHub and what you can see with git status. Write a scenario with examples of how a person might make mistakes with git add and commit and what to look for to get unstuck. </span>
+<span class="go">_practice/2024-09-17.md:1. Create a merge conflict in your KWL repo on the branch for this issue and resolve it using your favorite IDE, then create one and resolve it on GitHub in browser (this requires the merge conflict to occur on a PR). Describe how you created it, show the files, and describe how your IDE helps or does not help in {index}`merge_conflict_comparison.md`. Give advice for when you think someone should resolve a merge conflict in GitHub vs using an IDE. (if you do not regulary use an, IDE, try VSCode) *You can put content in the file for this step for the purpose of making the merge conflicts for this exercise.* </span>
+<span class="go">_practice/2024-09-17.md:3. In {index}`branches-forks.md` in your KWL repo, compare and contrast branches and forks; be specific about their relationship. You may use mermaid diagrams if that helps you think through or communicate the ideas. If you use other resources, include them in your file as markdown links.</span>
+<span class="go">_practice/2024-09-19.md:2. Get set up so that you can contribute to the course website repo from your local system. Note: you can pull from the `compsys-progtools/fall2024` repo, but you do not not have push permission, so there is more to do than clone.  Append the commands used and the contents of your `fll2024/.git/config`to a {index}`git-remote-practice.md`. Then, using a text editor (or IDE), wrap each log with three backticks to make them [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) and add headings to the sections. </span>
+<span class="go">_practice/2024-09-19.md:3.  [learn about options for how git can display commit history](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).  Try out a few different options.  Choose two, write them both to a file (from the command line, not copy&amp;paste), {index}`gitlog-compare.md`. Then, using a text editor (or IDE), wrap each log with three backticks to make them [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks)  and then add text to the file describing a use case where that format in particular would be helpful.</span>
+<span class="go">_practice/2024-09-24.md:4.  Organize a folder on your computer ( good candidate may be  desktop or downloads folder), using only a terminal to make new directories, move files, check what&#39;s inside them, etc. Answer reflection questions in a new file, {index}`terminal_organization_adv.md` in your kwl repo. Tip: Start with a file explorer open, but then try to close it, and use only command line tools to explore and make your choices. If you get stuck, look up additional commands to do acomplish your goals.  </span>
+<span class="go">_practice/2024-09-26.md:1. Most real projects partly adhere and at least partly deviate from any major design philosophy or paradigm. Add a `## Unix Philosophy` section to your {index}`software.md` about how that project adheres to and deviates from the unix philosophy. Be specific, using links to specific lines of code or specific sections in the documentation that support your claims. Provide at least one example of both adhering and deviating from the philosophy and three total examples (that is 2 examples for one side and one for the other).  You can see what badge `software.md` was previously assigned in and the original instructions [on the KWL file list](https://compsys-progtools.github.io/spring2024/genindex.html).</span>
+<span class="go">_practice/2024-10-01.md:1. Explore the [tools for conventional commits](https://www.conventionalcommits.org/en/about/#tooling-for-conventional-commits) and then pick one to try out. Work on the branch for this badge and use one of the tools that helps making conventional commits (eg in VSCode or a CLI for it)for a series of commits adding &quot;features&quot; and &quot;bug fixes&quot; telling the story of a code project in a file called {index}`commit-story.md`.  For each edit, add short phrases like &#39;new feature 1&#39;, or &#39;next bug fix&#39; to the single file each time, but use conventional commits for each commit. In total make at least 5 different types of changes (types per conventional commits standard) including 2 breaking changes and at least 10 total commits to the file. </span>
+<span class="go">_practice/2024-10-01.md:2.  [learn about options for how git can display commit history](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).  Try out a few different options.  Choose two, write them both to a file, {index}`gitlog-compare.md`. Using a text editor, wrap each log with three backticks to make them &quot;code blocks&quot;  and then add text to the file describing a use case where that format in particular would be helpful. **do this after the above so that your git log examples include your conventional commits**</span>
+<span class="go">_practice/2024-10-08.md:1. Read about different workflows in git and add responses to the below in a {index}`workflows.md` in your kwl repo. Two good places to read from are [Git Book](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#ch05-distributed-git) and the [atlassian Docs](https://www.atlassian.com/git/tutorials/comparing-workflows)</span>
+<span class="go">_practice/2024-10-08.md:3. Add the hash of the content of your completed {index}`workflows.md` file and put that in the comment of your badge PR for this badge. *Try to do this from your local CLI, but full credit even if you use the website interface*</span>
+<span class="go">_practice/2024-10-10.md:3. Analyze the xor hashing algorithm in the notes to determine which properties of a cryptographic hash are/not met. Include your analysis in {index}`xorhash.md`</span>
+<span class="go">_practice/2024-10-10.md:4. find 2 more real world examples of using other number systems (either different bases or different symbols and bases) **not mentioned in class** that are currently used. Describe the number system and its usage in {index}`numbers.md`. Include links to your sources and be sure that the sources are trustworthy. </span>
+<span class="go">_practice/2024-10-10.md:5. Calculate the maximum number of git objects that a repo can have without requiring you to use more than the minimum number of characters to refer to any object and include that number in  {index}`gitcounts_scenarios.md`  with a title `# Git counts`. Describe 3 scenarios that would get you to that number of objects in terms of what types of objects would exist. For example, what is the maximum number of commits you could have without exceeding that number? How could you get to that number of objects in the fewest number of commits? What might be a typical way to get there? Assume normal git use with porcelain commands, not atypical cases with plubming commands. *If you get stuck, outline what you know and then request a review.* </span>
+<span class="go">_practice/2024-10-10.md:7. Learn more about how git is working on changing from SHA-1 to SHA-256 and answer the transition questions below {index}`gittransition.md`</span>
+<span class="go">_practice/2024-10-17.md:1. Read more details about [git internals](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) to review what we did in class in greater detail. Make a file {index}`gitplumbingdetail.md` and create a a table or mermaid diagram that shows the relationship between at least **three** porcelain commands and their corresponding plumbing commands (generally more than one each). </span>
+<span class="go">_practice/2024-10-17.md:2. Create {index}`gitislike.md` and explain main git operations we have seen (add, commit, push) in your own words in a way that will either help you remember or how you would explain it to someone else at a high level. This might be analogies or explanations using other programming concepts or concepts from a hobby.</span>
+<span class="go">_practice/2024-10-24.md:1. Answer the following in {index}`hpc.md` of your KWL repo:  (to think about how the design of the system we used in class impacts programming and connect it to other ideas taught in CS)</span>
+<span class="go">_practice/2024-10-29.md:1. On Seawulf, modfiy {index}`main.c` from class to accept the integer as a command line argument instead of via input while running the program. [See this tutorial for an example](http://crasseux.com/books/ctutorial/argc-and-argv.html). </span>
+<span class="go">_practice/2024-10-29.md:2. Write a bash script {index}`demo_test.sh` that runs your compiled program for each integer from 10 to 30 (syntax for a range is `{start..end}` so this would be `{10..30}`)</span>
+<span class="go">_practice/2024-10-29.md:3. Write an sbatch script, {index}`batchrun.sh` to run your script  on a compute node and save the output to a file. The sbatch script should compile and link the program and then call the script. [see the options](https://web.uri.edu/hpc-research-computing/using-seawulf/#sbatch)</span>
+<span class="go">_practice/2024-10-31.md:1. In {index}`bestide.md`, compare two IDEs using your group&#39;s table from class, to evaluate each of them.  Your review should have an introduction that justifies the ranking and defines the criteria, a section describing each IDE with respect to all of the criteria and your overall experience with that IDE, and a conclusion that explains which of the 3 is the best based on your evaluation. </span>
+<span class="go">_practice/2024-10-31.md:2. Configure your VS Code preferences to your github account. add {index}`settingssync.md` with a description of what settings you customized and synced and reflect on why this is an important feature and what prerequisites to it might be.</span>
+<span class="go">_practice/2024-11-06.md:1. Run and examine how rect.hack and max.hack in the `nand2tetris/projects/05/` folder work. Make notes and answer the questions below in {index}`assemblyexplore.md`.</span>
+<span class="go">_practice/2024-11-07.md:1. Write a C program to compare values as doubles and as float (single precision/32bit) to see that this comparison issue is related to the IEEE standard and is not language specific.  Make notes and comparison around its behavior and include the program in a code cell in  {index}`cdouble.md`</span>
+<span class="go">_practice/2024-11-07.md:2. In {index}`floatexpt.md` design an experiment using the `fractions.Fraction` class in Python that helps illustrate why `.1*3 == .3` evaluates to `False` but `.1*4 ==.4` evaluates to `True`. Your file must include both code and interpretation of the results.</span>
+<span class="go">_practice/2024-11-12.md:1. While we saw many types of gates today, but we actually could get all of the operations needed using only NAND gates. Work out how to use NAND gates to implement a half adder and describe it in {index}`nandhalf.md`</span>
+<span class="go">_practice/2024-11-12.md:2. In {index}`addertypes.md` compare ripple adders and lookahead adders.</span>
+<span class="go">_practice/2024-11-14.md:2. Read about [systems abstractions](https://cacm.acm.org/opinion/articles/259395-systems-abstractions/fulltext) in CACM and answer reflection questions below in {index}`systemsabstractions.md` based on the systems abstraction reading:</span>
+<span class="go">_practice/2024-11-26.md:1. Describe a type of project where it would be worth it for you to learn a language you have never used before in {index}`newlanguage.md` This should be based in what types of features for the language your project would require and/or what would contribute to the long term health of the project. Your justifiction must come from sources used in class and be based in factual evidence about the language. </span>
+<span class="go">_practice/2024-11-26.md:2. Learn about one of the following languages that you have not used before: [R](https://www.r-project.org/), [Julia](https://julialang.org/), [Clojure](https://clojure.org/guides/getting_started), [Zig](https://ziglang.org/), [Go](https://go.dev/), [erlang](https://www.erlang.org/), [Elixir](https://elixir-lang.org/) or another language you are curious about that appeared in the Developer survey. For example you might be interest in the [top paying languages](https://survey.stackoverflow.co/2023/#technology-top-paying-technologies). Use the official documentation.  Answer the following questions in {index}`languagelearning.md`:</span>
+
+<span class="go">real	0m0.012s</span>
+<span class="go">user	0m0.004s</span>
+<span class="go">sys	0m0.007s</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="n">grep</span> <span class="s2">&quot;index&quot;</span> <span class="n">_practice</span><span class="o">/*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">_practice/2024-09-10.md:1. read Chapter 1, &quot;Decoding your confusion while coding&quot; in [The Programmer&#39;s Brain](https://www.manning.com/books/the-programmers-brain#toc) add a file called {index}`brain.md` to your kwl repo that summarizes your thoughts on the chapter. Do you think this information will help you approach learning more effectively? why or why not? How, if at all, does it changes how you think about debugging and learning to program? Give examples of how you have encountered the different types of confusion in your prior programming experiences. (to help you get good strategies and prime for things we will see in the next few weeks)</span>
+<span class="go">_practice/2024-09-10.md:3. map out your computing knowledge and add it to your kwl chart repo in a file called {index}`prior-knowledge-map.md`. Use [mermaid](https://mermaid-js.github.io/mermaid/#/) syntax, to draw your map. GitHub can render it for you including while you work using the preview button. (what we will learn will connect a lot of ideas, mapping out where you start, sets you up for success)</span>
+<span class="go">_practice/2024-09-12.md:3. Try using setting up git using your favorite IDE or GitHub Desktop. Make a file {index}`gitoffline.md` and include some notes of how it went. Was it hard? easy? what did you figure out or get stuck on? Is the terminology consistent or does it use different terms?</span>
+<span class="go">_practice/2024-09-12.md:2. **lab** Explore the difference between git add and git commit: try committing and pushing without adding, then add and push without committing. Describe what happens in each case in a file called {index}`gitcommit_tips.md`. Compare what happens based on what you can see on GitHub and what you can see with git status. Write a scenario with examples of how a person might make mistakes with git add and commit and what to look for to get unstuck. </span>
+<span class="go">_practice/2024-09-17.md:1. Create a merge conflict in your KWL repo on the branch for this issue and resolve it using your favorite IDE, then create one and resolve it on GitHub in browser (this requires the merge conflict to occur on a PR). Describe how you created it, show the files, and describe how your IDE helps or does not help in {index}`merge_conflict_comparison.md`. Give advice for when you think someone should resolve a merge conflict in GitHub vs using an IDE. (if you do not regulary use an, IDE, try VSCode) *You can put content in the file for this step for the purpose of making the merge conflicts for this exercise.* </span>
+<span class="go">_practice/2024-09-17.md:3. In {index}`branches-forks.md` in your KWL repo, compare and contrast branches and forks; be specific about their relationship. You may use mermaid diagrams if that helps you think through or communicate the ideas. If you use other resources, include them in your file as markdown links.</span>
+<span class="go">_practice/2024-09-19.md:2. Get set up so that you can contribute to the course website repo from your local system. Note: you can pull from the `compsys-progtools/fall2024` repo, but you do not not have push permission, so there is more to do than clone.  Append the commands used and the contents of your `fll2024/.git/config`to a {index}`git-remote-practice.md`. Then, using a text editor (or IDE), wrap each log with three backticks to make them [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) and add headings to the sections. </span>
+<span class="go">_practice/2024-09-19.md:3.  [learn about options for how git can display commit history](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).  Try out a few different options.  Choose two, write them both to a file (from the command line, not copy&amp;paste), {index}`gitlog-compare.md`. Then, using a text editor (or IDE), wrap each log with three backticks to make them [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks)  and then add text to the file describing a use case where that format in particular would be helpful.</span>
+<span class="go">_practice/2024-09-24.md:4.  Organize a folder on your computer ( good candidate may be  desktop or downloads folder), using only a terminal to make new directories, move files, check what&#39;s inside them, etc. Answer reflection questions in a new file, {index}`terminal_organization_adv.md` in your kwl repo. Tip: Start with a file explorer open, but then try to close it, and use only command line tools to explore and make your choices. If you get stuck, look up additional commands to do acomplish your goals.  </span>
+<span class="go">_practice/2024-09-26.md:1. Most real projects partly adhere and at least partly deviate from any major design philosophy or paradigm. Add a `## Unix Philosophy` section to your {index}`software.md` about how that project adheres to and deviates from the unix philosophy. Be specific, using links to specific lines of code or specific sections in the documentation that support your claims. Provide at least one example of both adhering and deviating from the philosophy and three total examples (that is 2 examples for one side and one for the other).  You can see what badge `software.md` was previously assigned in and the original instructions [on the KWL file list](https://compsys-progtools.github.io/spring2024/genindex.html).</span>
+<span class="go">_practice/2024-10-01.md:1. Explore the [tools for conventional commits](https://www.conventionalcommits.org/en/about/#tooling-for-conventional-commits) and then pick one to try out. Work on the branch for this badge and use one of the tools that helps making conventional commits (eg in VSCode or a CLI for it)for a series of commits adding &quot;features&quot; and &quot;bug fixes&quot; telling the story of a code project in a file called {index}`commit-story.md`.  For each edit, add short phrases like &#39;new feature 1&#39;, or &#39;next bug fix&#39; to the single file each time, but use conventional commits for each commit. In total make at least 5 different types of changes (types per conventional commits standard) including 2 breaking changes and at least 10 total commits to the file. </span>
+<span class="go">_practice/2024-10-01.md:2.  [learn about options for how git can display commit history](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).  Try out a few different options.  Choose two, write them both to a file, {index}`gitlog-compare.md`. Using a text editor, wrap each log with three backticks to make them &quot;code blocks&quot;  and then add text to the file describing a use case where that format in particular would be helpful. **do this after the above so that your git log examples include your conventional commits**</span>
+<span class="go">_practice/2024-10-08.md:1. Read about different workflows in git and add responses to the below in a {index}`workflows.md` in your kwl repo. Two good places to read from are [Git Book](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#ch05-distributed-git) and the [atlassian Docs](https://www.atlassian.com/git/tutorials/comparing-workflows)</span>
+<span class="go">_practice/2024-10-08.md:3. Add the hash of the content of your completed {index}`workflows.md` file and put that in the comment of your badge PR for this badge. *Try to do this from your local CLI, but full credit even if you use the website interface*</span>
+<span class="go">_practice/2024-10-10.md:3. Analyze the xor hashing algorithm in the notes to determine which properties of a cryptographic hash are/not met. Include your analysis in {index}`xorhash.md`</span>
+<span class="go">_practice/2024-10-10.md:4. find 2 more real world examples of using other number systems (either different bases or different symbols and bases) **not mentioned in class** that are currently used. Describe the number system and its usage in {index}`numbers.md`. Include links to your sources and be sure that the sources are trustworthy. </span>
+<span class="go">_practice/2024-10-10.md:5. Calculate the maximum number of git objects that a repo can have without requiring you to use more than the minimum number of characters to refer to any object and include that number in  {index}`gitcounts_scenarios.md`  with a title `# Git counts`. Describe 3 scenarios that would get you to that number of objects in terms of what types of objects would exist. For example, what is the maximum number of commits you could have without exceeding that number? How could you get to that number of objects in the fewest number of commits? What might be a typical way to get there? Assume normal git use with porcelain commands, not atypical cases with plubming commands. *If you get stuck, outline what you know and then request a review.* </span>
+<span class="go">_practice/2024-10-10.md:7. Learn more about how git is working on changing from SHA-1 to SHA-256 and answer the transition questions below {index}`gittransition.md`</span>
+<span class="go">_practice/2024-10-17.md:1. Read more details about [git internals](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) to review what we did in class in greater detail. Make a file {index}`gitplumbingdetail.md` and create a a table or mermaid diagram that shows the relationship between at least **three** porcelain commands and their corresponding plumbing commands (generally more than one each). </span>
+<span class="go">_practice/2024-10-17.md:2. Create {index}`gitislike.md` and explain main git operations we have seen (add, commit, push) in your own words in a way that will either help you remember or how you would explain it to someone else at a high level. This might be analogies or explanations using other programming concepts or concepts from a hobby.</span>
+<span class="go">_practice/2024-10-24.md:1. Answer the following in {index}`hpc.md` of your KWL repo:  (to think about how the design of the system we used in class impacts programming and connect it to other ideas taught in CS)</span>
+<span class="go">_practice/2024-10-29.md:1. On Seawulf, modfiy {index}`main.c` from class to accept the integer as a command line argument instead of via input while running the program. [See this tutorial for an example](http://crasseux.com/books/ctutorial/argc-and-argv.html). </span>
+<span class="go">_practice/2024-10-29.md:2. Write a bash script {index}`demo_test.sh` that runs your compiled program for each integer from 10 to 30 (syntax for a range is `{start..end}` so this would be `{10..30}`)</span>
+<span class="go">_practice/2024-10-29.md:3. Write an sbatch script, {index}`batchrun.sh` to run your script  on a compute node and save the output to a file. The sbatch script should compile and link the program and then call the script. [see the options](https://web.uri.edu/hpc-research-computing/using-seawulf/#sbatch)</span>
+<span class="go">_practice/2024-10-31.md:1. In {index}`bestide.md`, compare two IDEs using your group&#39;s table from class, to evaluate each of them.  Your review should have an introduction that justifies the ranking and defines the criteria, a section describing each IDE with respect to all of the criteria and your overall experience with that IDE, and a conclusion that explains which of the 3 is the best based on your evaluation. </span>
+<span class="go">_practice/2024-10-31.md:2. Configure your VS Code preferences to your github account. add {index}`settingssync.md` with a description of what settings you customized and synced and reflect on why this is an important feature and what prerequisites to it might be.</span>
+<span class="go">_practice/2024-11-06.md:1. Run and examine how rect.hack and max.hack in the `nand2tetris/projects/05/` folder work. Make notes and answer the questions below in {index}`assemblyexplore.md`.</span>
+<span class="go">_practice/2024-11-07.md:1. Write a C program to compare values as doubles and as float (single precision/32bit) to see that this comparison issue is related to the IEEE standard and is not language specific.  Make notes and comparison around its behavior and include the program in a code cell in  {index}`cdouble.md`</span>
+<span class="go">_practice/2024-11-07.md:2. In {index}`floatexpt.md` design an experiment using the `fractions.Fraction` class in Python that helps illustrate why `.1*3 == .3` evaluates to `False` but `.1*4 ==.4` evaluates to `True`. Your file must include both code and interpretation of the results.</span>
+<span class="go">_practice/2024-11-12.md:1. While we saw many types of gates today, but we actually could get all of the operations needed using only NAND gates. Work out how to use NAND gates to implement a half adder and describe it in {index}`nandhalf.md`</span>
+<span class="go">_practice/2024-11-12.md:2. In {index}`addertypes.md` compare ripple adders and lookahead adders.</span>
+<span class="go">_practice/2024-11-14.md:2. Read about [systems abstractions](https://cacm.acm.org/opinion/articles/259395-systems-abstractions/fulltext) in CACM and answer reflection questions below in {index}`systemsabstractions.md` based on the systems abstraction reading:</span>
+<span class="go">_practice/2024-11-26.md:1. Describe a type of project where it would be worth it for you to learn a language you have never used before in {index}`newlanguage.md` This should be based in what types of features for the language your project would require and/or what would contribute to the long term health of the project. Your justifiction must come from sources used in class and be based in factual evidence about the language. </span>
+<span class="go">_practice/2024-11-26.md:2. Learn about one of the following languages that you have not used before: [R](https://www.r-project.org/), [Julia](https://julialang.org/), [Clojure](https://clojure.org/guides/getting_started), [Zig](https://ziglang.org/), [Go](https://go.dev/), [erlang](https://www.erlang.org/), [Elixir](https://elixir-lang.org/) or another language you are curious about that appeared in the Developer survey. For example you might be interest in the [top paying languages](https://survey.stackoverflow.co/2023/#technology-top-paying-technologies). Use the official documentation.  Answer the following questions in {index}`languagelearning.md`:</span>
+
+<span class="go">real	0m0.012s</span>
+<span class="go">user	0m0.004s</span>
+<span class="go">sys	0m0.007s</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="n">grep</span> <span class="s2">&quot;index&quot;</span> <span class="n">_practice</span><span class="o">/*</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">_practice/2024-09-10.md:1. read Chapter 1, &quot;Decoding your confusion while coding&quot; in [The Programmer&#39;s Brain](https://www.manning.com/books/the-programmers-brain#toc) add a file called {index}`brain.md` to your kwl repo that summarizes your thoughts on the chapter. Do you think this information will help you approach learning more effectively? why or why not? How, if at all, does it changes how you think about debugging and learning to program? Give examples of how you have encountered the different types of confusion in your prior programming experiences. (to help you get good strategies and prime for things we will see in the next few weeks)</span>
+<span class="go">_practice/2024-09-10.md:3. map out your computing knowledge and add it to your kwl chart repo in a file called {index}`prior-knowledge-map.md`. Use [mermaid](https://mermaid-js.github.io/mermaid/#/) syntax, to draw your map. GitHub can render it for you including while you work using the preview button. (what we will learn will connect a lot of ideas, mapping out where you start, sets you up for success)</span>
+<span class="go">_practice/2024-09-12.md:3. Try using setting up git using your favorite IDE or GitHub Desktop. Make a file {index}`gitoffline.md` and include some notes of how it went. Was it hard? easy? what did you figure out or get stuck on? Is the terminology consistent or does it use different terms?</span>
+<span class="go">_practice/2024-09-12.md:2. **lab** Explore the difference between git add and git commit: try committing and pushing without adding, then add and push without committing. Describe what happens in each case in a file called {index}`gitcommit_tips.md`. Compare what happens based on what you can see on GitHub and what you can see with git status. Write a scenario with examples of how a person might make mistakes with git add and commit and what to look for to get unstuck. </span>
+<span class="go">_practice/2024-09-17.md:1. Create a merge conflict in your KWL repo on the branch for this issue and resolve it using your favorite IDE, then create one and resolve it on GitHub in browser (this requires the merge conflict to occur on a PR). Describe how you created it, show the files, and describe how your IDE helps or does not help in {index}`merge_conflict_comparison.md`. Give advice for when you think someone should resolve a merge conflict in GitHub vs using an IDE. (if you do not regulary use an, IDE, try VSCode) *You can put content in the file for this step for the purpose of making the merge conflicts for this exercise.* </span>
+<span class="go">_practice/2024-09-17.md:3. In {index}`branches-forks.md` in your KWL repo, compare and contrast branches and forks; be specific about their relationship. You may use mermaid diagrams if that helps you think through or communicate the ideas. If you use other resources, include them in your file as markdown links.</span>
+<span class="go">_practice/2024-09-19.md:2. Get set up so that you can contribute to the course website repo from your local system. Note: you can pull from the `compsys-progtools/fall2024` repo, but you do not not have push permission, so there is more to do than clone.  Append the commands used and the contents of your `fll2024/.git/config`to a {index}`git-remote-practice.md`. Then, using a text editor (or IDE), wrap each log with three backticks to make them [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) and add headings to the sections. </span>
+<span class="go">_practice/2024-09-19.md:3.  [learn about options for how git can display commit history](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).  Try out a few different options.  Choose two, write them both to a file (from the command line, not copy&amp;paste), {index}`gitlog-compare.md`. Then, using a text editor (or IDE), wrap each log with three backticks to make them [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks)  and then add text to the file describing a use case where that format in particular would be helpful.</span>
+<span class="go">_practice/2024-09-24.md:4.  Organize a folder on your computer ( good candidate may be  desktop or downloads folder), using only a terminal to make new directories, move files, check what&#39;s inside them, etc. Answer reflection questions in a new file, {index}`terminal_organization_adv.md` in your kwl repo. Tip: Start with a file explorer open, but then try to close it, and use only command line tools to explore and make your choices. If you get stuck, look up additional commands to do acomplish your goals.  </span>
+<span class="go">_practice/2024-09-26.md:1. Most real projects partly adhere and at least partly deviate from any major design philosophy or paradigm. Add a `## Unix Philosophy` section to your {index}`software.md` about how that project adheres to and deviates from the unix philosophy. Be specific, using links to specific lines of code or specific sections in the documentation that support your claims. Provide at least one example of both adhering and deviating from the philosophy and three total examples (that is 2 examples for one side and one for the other).  You can see what badge `software.md` was previously assigned in and the original instructions [on the KWL file list](https://compsys-progtools.github.io/spring2024/genindex.html).</span>
+<span class="go">_practice/2024-10-01.md:1. Explore the [tools for conventional commits](https://www.conventionalcommits.org/en/about/#tooling-for-conventional-commits) and then pick one to try out. Work on the branch for this badge and use one of the tools that helps making conventional commits (eg in VSCode or a CLI for it)for a series of commits adding &quot;features&quot; and &quot;bug fixes&quot; telling the story of a code project in a file called {index}`commit-story.md`.  For each edit, add short phrases like &#39;new feature 1&#39;, or &#39;next bug fix&#39; to the single file each time, but use conventional commits for each commit. In total make at least 5 different types of changes (types per conventional commits standard) including 2 breaking changes and at least 10 total commits to the file. </span>
+<span class="go">_practice/2024-10-01.md:2.  [learn about options for how git can display commit history](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History).  Try out a few different options.  Choose two, write them both to a file, {index}`gitlog-compare.md`. Using a text editor, wrap each log with three backticks to make them &quot;code blocks&quot;  and then add text to the file describing a use case where that format in particular would be helpful. **do this after the above so that your git log examples include your conventional commits**</span>
+<span class="go">_practice/2024-10-08.md:1. Read about different workflows in git and add responses to the below in a {index}`workflows.md` in your kwl repo. Two good places to read from are [Git Book](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows#ch05-distributed-git) and the [atlassian Docs](https://www.atlassian.com/git/tutorials/comparing-workflows)</span>
+<span class="go">_practice/2024-10-08.md:3. Add the hash of the content of your completed {index}`workflows.md` file and put that in the comment of your badge PR for this badge. *Try to do this from your local CLI, but full credit even if you use the website interface*</span>
+<span class="go">_practice/2024-10-10.md:3. Analyze the xor hashing algorithm in the notes to determine which properties of a cryptographic hash are/not met. Include your analysis in {index}`xorhash.md`</span>
+<span class="go">_practice/2024-10-10.md:4. find 2 more real world examples of using other number systems (either different bases or different symbols and bases) **not mentioned in class** that are currently used. Describe the number system and its usage in {index}`numbers.md`. Include links to your sources and be sure that the sources are trustworthy. </span>
+<span class="go">_practice/2024-10-10.md:5. Calculate the maximum number of git objects that a repo can have without requiring you to use more than the minimum number of characters to refer to any object and include that number in  {index}`gitcounts_scenarios.md`  with a title `# Git counts`. Describe 3 scenarios that would get you to that number of objects in terms of what types of objects would exist. For example, what is the maximum number of commits you could have without exceeding that number? How could you get to that number of objects in the fewest number of commits? What might be a typical way to get there? Assume normal git use with porcelain commands, not atypical cases with plubming commands. *If you get stuck, outline what you know and then request a review.* </span>
+<span class="go">_practice/2024-10-10.md:7. Learn more about how git is working on changing from SHA-1 to SHA-256 and answer the transition questions below {index}`gittransition.md`</span>
+<span class="go">_practice/2024-10-17.md:1. Read more details about [git internals](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects) to review what we did in class in greater detail. Make a file {index}`gitplumbingdetail.md` and create a a table or mermaid diagram that shows the relationship between at least **three** porcelain commands and their corresponding plumbing commands (generally more than one each). </span>
+<span class="go">_practice/2024-10-17.md:2. Create {index}`gitislike.md` and explain main git operations we have seen (add, commit, push) in your own words in a way that will either help you remember or how you would explain it to someone else at a high level. This might be analogies or explanations using other programming concepts or concepts from a hobby.</span>
+<span class="go">_practice/2024-10-24.md:1. Answer the following in {index}`hpc.md` of your KWL repo:  (to think about how the design of the system we used in class impacts programming and connect it to other ideas taught in CS)</span>
+<span class="go">_practice/2024-10-29.md:1. On Seawulf, modfiy {index}`main.c` from class to accept the integer as a command line argument instead of via input while running the program. [See this tutorial for an example](http://crasseux.com/books/ctutorial/argc-and-argv.html). </span>
+<span class="go">_practice/2024-10-29.md:2. Write a bash script {index}`demo_test.sh` that runs your compiled program for each integer from 10 to 30 (syntax for a range is `{start..end}` so this would be `{10..30}`)</span>
+<span class="go">_practice/2024-10-29.md:3. Write an sbatch script, {index}`batchrun.sh` to run your script  on a compute node and save the output to a file. The sbatch script should compile and link the program and then call the script. [see the options](https://web.uri.edu/hpc-research-computing/using-seawulf/#sbatch)</span>
+<span class="go">_practice/2024-10-31.md:1. In {index}`bestide.md`, compare two IDEs using your group&#39;s table from class, to evaluate each of them.  Your review should have an introduction that justifies the ranking and defines the criteria, a section describing each IDE with respect to all of the criteria and your overall experience with that IDE, and a conclusion that explains which of the 3 is the best based on your evaluation. </span>
+<span class="go">_practice/2024-10-31.md:2. Configure your VS Code preferences to your github account. add {index}`settingssync.md` with a description of what settings you customized and synced and reflect on why this is an important feature and what prerequisites to it might be.</span>
+<span class="go">_practice/2024-11-06.md:1. Run and examine how rect.hack and max.hack in the `nand2tetris/projects/05/` folder work. Make notes and answer the questions below in {index}`assemblyexplore.md`.</span>
+<span class="go">_practice/2024-11-07.md:1. Write a C program to compare values as doubles and as float (single precision/32bit) to see that this comparison issue is related to the IEEE standard and is not language specific.  Make notes and comparison around its behavior and include the program in a code cell in  {index}`cdouble.md`</span>
+<span class="go">_practice/2024-11-07.md:2. In {index}`floatexpt.md` design an experiment using the `fractions.Fraction` class in Python that helps illustrate why `.1*3 == .3` evaluates to `False` but `.1*4 ==.4` evaluates to `True`. Your file must include both code and interpretation of the results.</span>
+<span class="go">_practice/2024-11-12.md:1. While we saw many types of gates today, but we actually could get all of the operations needed using only NAND gates. Work out how to use NAND gates to implement a half adder and describe it in {index}`nandhalf.md`</span>
+<span class="go">_practice/2024-11-12.md:2. In {index}`addertypes.md` compare ripple adders and lookahead adders.</span>
+<span class="go">_practice/2024-11-14.md:2. Read about [systems abstractions](https://cacm.acm.org/opinion/articles/259395-systems-abstractions/fulltext) in CACM and answer reflection questions below in {index}`systemsabstractions.md` based on the systems abstraction reading:</span>
+<span class="go">_practice/2024-11-26.md:1. Describe a type of project where it would be worth it for you to learn a language you have never used before in {index}`newlanguage.md` This should be based in what types of features for the language your project would require and/or what would contribute to the long term health of the project. Your justifiction must come from sources used in class and be based in factual evidence about the language. </span>
+<span class="go">_practice/2024-11-26.md:2. Learn about one of the following languages that you have not used before: [R](https://www.r-project.org/), [Julia](https://julialang.org/), [Clojure](https://clojure.org/guides/getting_started), [Zig](https://ziglang.org/), [Go](https://go.dev/), [erlang](https://www.erlang.org/), [Elixir](https://elixir-lang.org/) or another language you are curious about that appeared in the Developer survey. For example you might be interest in the [top paying languages](https://survey.stackoverflow.co/2023/#technology-top-paying-technologies). Use the official documentation.  Answer the following questions in {index}`languagelearning.md`:</span>
+
+<span class="go">real	0m0.012s</span>
+<span class="go">user	0m0.004s</span>
+<span class="go">sys	0m0.006s</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">seawulf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface] [-b bind_address]</span>
+<span class="go">           [-c cipher_spec] [-D [bind_address:]port] [-E log_file]</span>
+<span class="go">           [-e escape_char] [-F configfile] [-I pkcs11] [-i identity_file]</span>
+<span class="go">           [-J destination] [-L address] [-l login_name] [-m mac_spec]</span>
+<span class="go">           [-O ctl_cmd] [-o option] [-P tag] [-p port] [-R address]</span>
+<span class="go">           [-S ctl_path] [-W host:port] [-w local_tun[:remote_tun]]</span>
+<span class="go">           destination [command [argument ...]]</span>
+<span class="go">       ssh [-Q query_option]</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">i</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">seawulf</span> <span class="n">brownsarahm</span><span class="nd">@seawulf</span><span class="o">.</span><span class="n">uri</span><span class="o">.</span><span class="n">edu</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Last login: Tue Oct 29 12:49:18 2024 from 172.20.105.68</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">interactive</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">salloc: Granted job allocation 27999</span>
+<span class="go">salloc: Waiting for resource configuration</span>
+<span class="go">salloc: Nodes n005 are ready for job</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">ls</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">bash-lesson.tar.gz                           SRR307023_1.fastq  SRR307026_1.fastq  SRR307029_1.fastq</span>
+<span class="go">compilec                                     SRR307023_2.fastq  SRR307026_2.fastq  SRR307029_2.fastq</span>
+<span class="go">dmel-all-r6.19.gtf                           SRR307024_1.fastq  SRR307027_1.fastq  SRR307030_1.fastq</span>
+<span class="go">dmel_unique_protein_isoforms_fb_2016_01.tsv  SRR307024_2.fastq  SRR307027_2.fastq  SRR307030_2.fastq</span>
+<span class="go">example                                      SRR307025_1.fastq  SRR307028_1.fastq</span>
+<span class="go">gene_association.fb                          SRR307025_2.fastq  SRR307028_2.fastq</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">mkdir time</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">cd time/</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">nano sq_sum_threaded.c</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">gcc -pthread -Wall -g -o sqsum sq_sum_threaded.c -lm</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sq_sum_threaded.c: In function ‘square’:</span>
+<span class="go">sq_sum_threaded.c:10:12: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]</span>
+<span class="go">   int xi = (int)x;</span>
+<span class="go">            ^</span>
+<span class="go">sq_sum_threaded.c: In function ‘main’:</span>
+<span class="go">sq_sum_threaded.c:19:43: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]</span>
+<span class="go">     pthread_create(&amp;ths[i], NULL, square, (void*)(i + 1));</span>
+<span class="go">                                           ^</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">./sqsum </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2870</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">./sqsum </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2870</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">./sqsum </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2870</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">./sqsum </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2870</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">./sqsum </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2870</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">./sqsum </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2870</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">./sqsum </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2870</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">./sqsum </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2870</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">./sqsum </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2870</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">for i in {1..1000}</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; do</span>
+<span class="go">&gt; ./sqsum </span>
+<span class="go">&gt; done | sort | uniq -c </span>
+<span class="go">   1000 accum = 2870</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">cat sq</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sqsum              sq_sum_threaded.c  </span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">cat sq_sum_threaded.c </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>include<span class="w"> </span>&lt;stdlib.h&gt;
+<span class="gp">#</span>include<span class="w"> </span>&lt;stdio.h&gt;
+<span class="gp">#</span>include<span class="w"> </span>&lt;pthread.h&gt;
+
+<span class="go">/* single global variable */</span>
+<span class="go">/* shared, accessible, modifiable by all threads */</span>
+<span class="go">int accum = 0;</span>
+
+<span class="go">void* square(void* x) {</span>
+<span class="go">  int xi = (int)x;</span>
+<span class="go">  accum += xi * xi;</span>
+<span class="go">  return NULL; /* nothing to return, prevent warning */</span>
+<span class="go">}</span>
+
+<span class="go">int main(int argc, char** argv) {</span>
+<span class="go">  int i;</span>
+<span class="go">  pthread_t ths[20];</span>
+<span class="go">  for (i = 0; i &lt; 20; i++) {</span>
+<span class="go">    pthread_create(&amp;ths[i], NULL, square, (void*)(i + 1));</span>
+<span class="go">  }</span>
+
+<span class="go">  for (i = 0; i &lt; 20; i++) {</span>
+<span class="go">    void* res;</span>
+<span class="go">    pthread_join(ths[i], &amp;res);</span>
+<span class="go">  }</span>
+
+<span class="go">  printf(&quot;accum = %d\n&quot;, accum);</span>
+<span class="go">  return 0;</span>
+<span class="go">}</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">cp sq_sum_threaded.c sq_sum_locked.c </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">nano sq_sum_locked.c </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">gcc -pthread -Wall -g -o sqsum sq_sum_locked.c -lm</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sq_sum_locked.c: In function ‘square’:</span>
+<span class="go">sq_sum_locked.c:11:14: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]</span>
+<span class="go">     int xi = (int)x;</span>
+<span class="go">              ^</span>
+<span class="go">sq_sum_locked.c: In function ‘main’:</span>
+<span class="go">sq_sum_locked.c:25:43: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]</span>
+<span class="go">     pthread_create(&amp;ths[i], NULL, square, (void*)(i + 1));</span>
+<span class="go">                                           ^</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">gcc -pthread -Wall -g -o sqsuml sq_sum_locked.c -lm</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sq_sum_locked.c: In function ‘square’:</span>
+<span class="go">sq_sum_locked.c:11:14: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]</span>
+<span class="go">     int xi = (int)x;</span>
+<span class="go">              ^</span>
+<span class="go">sq_sum_locked.c: In function ‘main’:</span>
+<span class="go">sq_sum_locked.c:25:43: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]</span>
+<span class="go">     pthread_create(&amp;ths[i], NULL, square, (void*)(i + 1));</span>
+<span class="go">                                           ^</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">gcc -pthread -Wall -g -o sqsum sq_sum_threaded.c -lm</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sq_sum_threaded.c: In function ‘square’:</span>
+<span class="go">sq_sum_threaded.c:10:12: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]</span>
+<span class="go">   int xi = (int)x;</span>
+<span class="go">            ^</span>
+<span class="go">sq_sum_threaded.c: In function ‘main’:</span>
+<span class="go">sq_sum_threaded.c:19:43: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]</span>
+<span class="go">     pthread_create(&amp;ths[i], NULL, square, (void*)(i + 1));</span>
+<span class="go">                                           ^</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">for i in {1..1000}; do ./sqsuml ; done | sort | uniq -c </span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">   1000 accum = 2870</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">exit</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">logout</span>
+<span class="go">salloc: Relinquishing job allocation 27999</span>
+<span class="go">[```</span>
+
+<span class="go">+++{&quot;lesson_part&quot;: &quot;main&quot;}</span>
+
+<span class="go">```{code-cell} bash</span>
+<span class="go">:tags: [&quot;skip-execution&quot;]</span>
+<span class="go">exit</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">logout</span>
+<span class="go">Connection to seawulf.uri.edu closed.</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">..</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nano</span> <span class="n">sq_sum_threaded</span><span class="o">.</span><span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gcc</span> <span class="o">-</span><span class="n">pthread</span> <span class="o">-</span><span class="n">Wall</span> <span class="o">-</span><span class="n">g</span> <span class="o">-</span><span class="n">o</span> <span class="n">sqsum</span> <span class="n">sq_sum_threaded</span><span class="o">.</span><span class="n">c</span> <span class="o">-</span><span class="n">lm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sq_sum_threaded.c:10:12: warning: cast to smaller integer type &#39;int&#39; from &#39;void *&#39; [-Wvoid-pointer-to-int-cast]</span>
+<span class="go">  int xi = (int)x;</span>
+<span class="go">           ^~~~~~</span>
+<span class="go">sq_sum_threaded.c:19:43: warning: cast to &#39;void *&#39; from smaller integer type &#39;int&#39; [-Wint-to-void-pointer-cast]</span>
+<span class="go">    pthread_create(&amp;ths[i], NULL, square, (void*)(i + 1));</span>
+<span class="go">                                          ^~~~~~~~~~~~~~</span>
+<span class="go">2 warnings generated.</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2865</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2870</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2754</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2860</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2861</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2286</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2870</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2796</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">{</span><span class="mf">1..1000</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; &gt; do</span>
+<span class="go">-bash: syntax error near unexpected token `&gt;&#39;</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">{</span><span class="mf">1..1000</span><span class="p">};</span>  <span class="n">do</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; ./sqsum</span>
+<span class="go">&gt; done | sort |uniq -c</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">{</span><span class="mf">1..1000</span><span class="p">};</span>  <span class="n">do</span> <span class="o">./</span><span class="n">sqsum</span><span class="p">;</span> <span class="n">done</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">{</span><span class="mf">1..1000</span><span class="p">};</span>  <span class="n">do</span> <span class="o">./</span><span class="n">sqsum</span><span class="p">;</span> <span class="n">done</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gcc</span> <span class="o">-</span><span class="n">pthread</span> <span class="o">-</span><span class="n">Wall</span> <span class="o">-</span><span class="n">g</span> <span class="o">-</span><span class="n">o</span> <span class="n">sqsum</span> <span class="n">sq_sum_threaded</span><span class="o">.</span><span class="n">c</span> <span class="o">-</span><span class="n">lm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sq_sum_threaded.c:10:12: warning: cast to smaller integer type &#39;int&#39; from &#39;void *&#39; [-Wvoid-pointer-to-int-cast]</span>
+<span class="go">  int xi = (int)x;</span>
+<span class="go">           ^~~~~~</span>
+<span class="go">sq_sum_threaded.c:19:43: warning: cast to &#39;void *&#39; from smaller integer type &#39;int&#39; [-Wint-to-void-pointer-cast]</span>
+<span class="go">    pthread_create(&amp;ths[i], NULL, square, (void*)(i + 1));</span>
+<span class="go">                                          ^~~~~~~~~~~~~~</span>
+<span class="go">2 warnings generated.</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">sqsum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">accum = 2861</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">{</span><span class="mf">1..1000</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; &gt; &gt; do</span>
+<span class="go">-bash: syntax error near unexpected token `&gt;&#39;</span>
+</pre></div>
+</div>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">{</span><span class="mf">1..1000</span><span class="p">};</span>  <span class="n">do</span> <span class="o">./</span><span class="n">sqsum</span><span class="p">;</span> <span class="n">done</span> <span class="o">|</span> <span class="n">sort</span> <span class="o">|</span> <span class="n">uniq</span> <span class="o">-</span><span class="n">c</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">   1 accum = 2325</span>
+<span class="go">   1 accum = 2375</span>
+<span class="go">   1 accum = 2410</span>
+<span class="go">   1 accum = 2465</span>
+<span class="go">   1 accum = 2500</span>
+<span class="go">   1 accum = 2620</span>
+<span class="go">   1 accum = 2645</span>
+<span class="go">   1 accum = 2667</span>
+<span class="go">   1 accum = 2674</span>
+<span class="go">   1 accum = 2720</span>
+<span class="go">   1 accum = 2746</span>
+<span class="go">   1 accum = 2747</span>
+<span class="go">   1 accum = 2749</span>
+<span class="go">   1 accum = 2750</span>
+<span class="go">   1 accum = 2756</span>
+<span class="go">   1 accum = 2760</span>
+<span class="go">   1 accum = 2763</span>
+<span class="go">   1 accum = 2770</span>
+<span class="go">   1 accum = 2784</span>
+<span class="go">   1 accum = 2787</span>
+<span class="go">   3 accum = 2789</span>
+<span class="go">   1 accum = 2792</span>
+<span class="go">   1 accum = 2796</span>
+<span class="go">   1 accum = 2799</span>
+<span class="go">   3 accum = 2804</span>
+<span class="go">   1 accum = 2806</span>
+<span class="go">   2 accum = 2808</span>
+<span class="go">   1 accum = 2815</span>
+<span class="go">   1 accum = 2816</span>
+<span class="go">   1 accum = 2817</span>
+<span class="go">   1 accum = 2819</span>
+<span class="go">   4 accum = 2820</span>
+<span class="go">   1 accum = 2821</span>
+<span class="go">   4 accum = 2824</span>
+<span class="go">   3 accum = 2825</span>
+<span class="go">   1 accum = 2828</span>
+<span class="go">   5 accum = 2829</span>
+<span class="go">   2 accum = 2830</span>
+<span class="go">   3 accum = 2832</span>
+<span class="go">   2 accum = 2833</span>
+<span class="go">   5 accum = 2834</span>
+<span class="go">   2 accum = 2836</span>
+<span class="go">   3 accum = 2840</span>
+<span class="go">   5 accum = 2841</span>
+<span class="go">   6 accum = 2844</span>
+<span class="go">   8 accum = 2845</span>
+<span class="go">   6 accum = 2849</span>
+<span class="go">   2 accum = 2850</span>
+<span class="go">   3 accum = 2853</span>
+<span class="go">  22 accum = 2854</span>
+<span class="go">   5 accum = 2856</span>
+<span class="go">   7 accum = 2857</span>
+<span class="go">   4 accum = 2860</span>
+<span class="go">  17 accum = 2861</span>
+<span class="go">   6 accum = 2865</span>
+<span class="go">  24 accum = 2866</span>
+<span class="go">  40 accum = 2869</span>
+<span class="go"> 774 accum = 2870</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="c1"># Prepare for Next Class </span>
+
+<span class="go">```{include} ../_prepare/2024-12-05.md</span>
+</pre></div>
+</div>
+<section id="badges">
+<h2><span class="section-number">24.1. </span>Badges<a class="headerlink" href="#badges" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Review</label><div class="sd-tab-content docutils">
+<ol class="arabic simple">
+<li><p>Update your KWL chart.</p></li>
+<li><p>Simulate a more computationally intensive program using the <code class="docutils literal notranslate"><span class="pre">sleep</span></code> function in C and compare the time of a threaded vs single threaded (ie serial, no intentional threading) version of the program. Include your two programs and the bash script to show how you tested it with notes on the performance in <span class="target" id="index-0"></span>threaded.md (to better illustrate the impact of the threads)</p></li>
+</ol>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Practice</label><div class="sd-tab-content docutils">
+<ol class="arabic simple">
+<li><p>Update your KWL chart.</p></li>
+<li><p>Simulate a more computationally intensive program using the <code class="docutils literal notranslate"><span class="pre">sleep</span></code> function in C and compare the time of a threaded vs single threaded (ie serial, no intentional threading) version of the program. Include your two programs and the bash script to show how you tested it with notes on the performance in <span class="target" id="index-1"></span>threaded.md (to better illustrate the impact of the threads)</p></li>
+<li><p>Learn about the system libraries in two languages (one can be C/C++ or Python, one must be something else). Find the name(s) of the library or libraries. In <span class="target" id="index-2"></span>systeminteraction.md summarize what types of support are shared or different?  What does that tell you about the language?</p></li>
+<li><p>Research examples of programs using multi-threading besides splitting up a single calculation for time reasons, include three examples in <span class="target" id="index-3"></span>whymultithread.md. You can use any tool to start, but you must include links to high quality sources and have accurate answers.</p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="experience-report-evidence">
+<h2><span class="section-number">24.2. </span>Experience Report Evidence<a class="headerlink" href="#experience-report-evidence" title="Link to this heading">#</a></h2>
+</section>
+<section id="questions-after-todays-class">
+<h2><span class="section-number">24.3. </span>Questions After Today’s Class<a class="headerlink" href="#questions-after-todays-class" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2024-11-26.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">23. </span>How do I choose a Programming Language for a project?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../activities/kwl.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">KWL Chart</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#badges">24.1. Badges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experience-report-evidence">24.2. Experience Report Evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-todays-class">24.3. Questions After Today’s Class</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Professor Sarah M Brown
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  made with [jupyterbook](https://jupyterbook.org/en/stable/intro.html)
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
